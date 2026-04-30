@@ -35,30 +35,6 @@
 #define TEMPLATE_RELEASE "vita_release.zip"
 
 class ExportPluginVita : public EditorExportPlugin {
-
-public:
-	Error _fix_vita_image(String p_source, String p_dest, int p_width, int p_height) {
-		Ref<Image> img;
-		img.instance();
-		Error err = img->load(p_source);
-		if (err != OK) return err;
-
-		// 1. Force Resize to Vita hardware specs
-		if (img->get_width() != p_width || img->get_height() != p_height) {
-			img->resize(p_width, p_height, Image::INTERPOLATE_LANCZOS);
-		}
-
-		// 2. Force 8-bit color depth (Indexed/Quantized)
-		// Note: Godot's Image class doesn't have a direct "PNG8" saver,
-		// but converting to FORMAT_L8 or FORMAT_LA8 and saving as PNG
-		// often satisfies the Vita's 8-bit requirement.
-		if (img->get_format() != Image::FORMAT_L8) {
-			img->convert(Image::FORMAT_L8);
-		}
-
-		return img->save_png(p_dest);
-	}
-
 public:
 	Vector<uint8_t> editor_id_vec;
 
@@ -73,9 +49,29 @@ protected:
 class EditorExportPlatformVita : public EditorExportPlatform {
 	GDCLASS(EditorExportPlatformVita, EditorExportPlatform)
 
+private:
 	Ref<ImageTexture> logo;
-
 	ExportPluginVita *export_plugin;
+
+	// Move the image fixer here so it's a member of the class
+	Error _fix_vita_image(String p_source, String p_dest, int p_width, int p_height) {
+		Ref<Image> img;
+		img.instance();
+		Error err = img->load(p_source);
+		if (err != OK) {
+			return err;
+		}
+
+		if (img->get_width() != p_width || img->get_height() != p_height) {
+			img->resize(p_width, p_height, Image::INTERPOLATE_LANCZOS);
+		}
+
+		if (img->get_format() != Image::FORMAT_L8) {
+			img->convert(Image::FORMAT_L8);
+		}
+
+		return img->save_png(p_dest);
+	}
 
 public:
 	virtual void get_preset_features(const Ref<EditorExportPreset> &p_preset, List<String> *r_features) {
@@ -318,22 +314,10 @@ public:
 
 			print_line("ADDING: " + path);
 
-			String target_file = app_dir.plus_file(path);
-			String target_dir = target_file.get_base_dir();
-
-			DirAccess *da_temp = DirAccess::create_for_path(target_dir);
-			if (!da_temp->dir_exists(target_dir)) {
-				da_temp->make_dir_recursive(target_dir);
-			}
-			memdelete(da_temp);
-
-			FileAccess *fa = FileAccess::open(target_file, FileAccess::WRITE);
-			if (fa) {
-				fa->store_buffer(data.ptr(), data.size());
-				fa->close();
-			} else {
-				print_line("ERR: Could not write file " + target_file);
-			}
+			FileAccess *fa = FileAccess::open(app_dir.plus_file(path), FileAccess::WRITE);
+			fa->store_buffer(data.ptr(), data.size());
+			fa->flush();
+			fa->close();
 
 			ret = unzGoToNextFile(pkg);
 		}
@@ -345,7 +329,15 @@ public:
 
 		err = save_pack(p_preset, game_data_dir.plus_file("game.pck"));
 		mksfoex(sfo, app_dir.plus_file("sce_sys"));
+
 		if (err == OK) {
+			// REMOVE "String" from the start of these lines.
+			// They were already declared at the top of this function.
+			icon = p_preset->get("assets/bubble_icon_128x128");
+			splash = p_preset->get("assets/app_splash_960x544");
+			livearea_bg = p_preset->get("assets/livearea_bg_840x500");
+			livearea_startup_button = p_preset->get("assets/livearea_startup_button_280x158");
+
 			if (icon != String() && FileAccess::exists(icon)) {
 				_fix_vita_image(icon, app_dir.plus_file("sce_sys/icon0.png"), 128, 128);
 			}
@@ -356,7 +348,7 @@ public:
 				_fix_vita_image(livearea_bg, app_dir.plus_file("sce_sys/livearea/contents/bg.png"), 840, 500);
 			}
 			if (livearea_startup_button != String() && FileAccess::exists(livearea_startup_button)) {
-				_fix_vita_image(livearea_startup_button, app_dir.plus_file("sce_sys/livearea/contents/startup.png"), 960, 544);
+				_fix_vita_image(livearea_startup_button, app_dir.plus_file("sce_sys/livearea/contents/startup.png"), 280, 158);
 			}
 		}
 
@@ -388,25 +380,6 @@ public:
 	~EditorExportPlatformVita() {
 	}
 };
-
-void EditorExportPlatformVita::setup_vita_defaults() {
-    // Window size and scaling
-    GLOBAL_DEF("display/window/size/width", 960);
-    GLOBAL_DEF("display/window/size/height", 544);
-    GLOBAL_DEF("display/window/stretch/mode", "2d");
-    GLOBAL_DEF("display/window/stretch/aspect", "keep");
-
-    // Physics Tuning for Vita hardware
-    GLOBAL_DEF("physics/common/physics_fps", 24);
-    GLOBAL_DEF("physics/common/physics_interpolation", true);
-
-    // Force GLES2 Compatibility
-    GLOBAL_DEF("rendering/quality/driver/driver_name", "GLES2");
-    GLOBAL_DEF("rendering/quality/driver/fallback_to_gles2", true);
-
-    // Texture Compression for Mobile/Handheld
-    GLOBAL_DEF("rendering/vram_compression/import_etc", true);
-}
 
 void register_vita_exporter() {
 	Ref<EditorExportPlatformVita> exporter;
