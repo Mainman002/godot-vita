@@ -35,6 +35,30 @@
 #define TEMPLATE_RELEASE "vita_release.zip"
 
 class ExportPluginVita : public EditorExportPlugin {
+
+public:
+	Error _fix_vita_image(String p_source, String p_dest, int p_width, int p_height) {
+		Ref<Image> img;
+		img.instance();
+		Error err = img->load(p_source);
+		if (err != OK) return err;
+
+		// 1. Force Resize to Vita hardware specs
+		if (img->get_width() != p_width || img->get_height() != p_height) {
+			img->resize(p_width, p_height, Image::INTERPOLATE_LANCZOS);
+		}
+
+		// 2. Force 8-bit color depth (Indexed/Quantized)
+		// Note: Godot's Image class doesn't have a direct "PNG8" saver,
+		// but converting to FORMAT_L8 or FORMAT_LA8 and saving as PNG
+		// often satisfies the Vita's 8-bit requirement.
+		if (img->get_format() != Image::FORMAT_L8) {
+			img->convert(Image::FORMAT_L8);
+		}
+
+		return img->save_png(p_dest);
+	}
+
 public:
 	Vector<uint8_t> editor_id_vec;
 
@@ -294,10 +318,22 @@ public:
 
 			print_line("ADDING: " + path);
 
-			FileAccess *fa = FileAccess::open(app_dir.plus_file(path), FileAccess::WRITE);
-			fa->store_buffer(data.ptr(), data.size());
-			fa->flush();
-			fa->close();
+			String target_file = app_dir.plus_file(path);
+			String target_dir = target_file.get_base_dir();
+
+			DirAccess *da_temp = DirAccess::create_for_path(target_dir);
+			if (!da_temp->dir_exists(target_dir)) {
+				da_temp->make_dir_recursive(target_dir);
+			}
+			memdelete(da_temp);
+
+			FileAccess *fa = FileAccess::open(target_file, FileAccess::WRITE);
+			if (fa) {
+				fa->store_buffer(data.ptr(), data.size());
+				fa->close();
+			} else {
+				print_line("ERR: Could not write file " + target_file);
+			}
 
 			ret = unzGoToNextFile(pkg);
 		}
@@ -311,16 +347,16 @@ public:
 		mksfoex(sfo, app_dir.plus_file("sce_sys"));
 		if (err == OK) {
 			if (icon != String() && FileAccess::exists(icon)) {
-				da->copy(icon, app_dir.plus_file("sce_sys/icon0.png"));
+				_fix_vita_image(icon, app_dir.plus_file("sce_sys/icon0.png"), 128, 128);
 			}
 			if (splash != String() && FileAccess::exists(splash)) {
-				da->copy(splash, app_dir.plus_file("sce_sys/pic0.png"));
+				_fix_vita_image(splash, app_dir.plus_file("sce_sys/pic0.png"), 960, 544);
 			}
 			if (livearea_bg != String() && FileAccess::exists(livearea_bg)) {
-				da->copy(livearea_bg, app_dir.plus_file("sce_sys/livearea/contents/bg.png"));
+				_fix_vita_image(livearea_bg, app_dir.plus_file("sce_sys/livearea/contents/bg.png"), 840, 500);
 			}
 			if (livearea_startup_button != String() && FileAccess::exists(livearea_startup_button)) {
-				da->copy(livearea_startup_button, app_dir.plus_file("sce_sys/livearea/contents/startup.png"));
+				_fix_vita_image(livearea_startup_button, app_dir.plus_file("sce_sys/livearea/contents/startup.png"), 960, 544);
 			}
 		}
 
@@ -352,6 +388,25 @@ public:
 	~EditorExportPlatformVita() {
 	}
 };
+
+void EditorExportPlatformVita::setup_vita_defaults() {
+    // Window size and scaling
+    GLOBAL_DEF("display/window/size/width", 960);
+    GLOBAL_DEF("display/window/size/height", 544);
+    GLOBAL_DEF("display/window/stretch/mode", "2d");
+    GLOBAL_DEF("display/window/stretch/aspect", "keep");
+
+    // Physics Tuning for Vita hardware
+    GLOBAL_DEF("physics/common/physics_fps", 24);
+    GLOBAL_DEF("physics/common/physics_interpolation", true);
+
+    // Force GLES2 Compatibility
+    GLOBAL_DEF("rendering/quality/driver/driver_name", "GLES2");
+    GLOBAL_DEF("rendering/quality/driver/fallback_to_gles2", true);
+
+    // Texture Compression for Mobile/Handheld
+    GLOBAL_DEF("rendering/vram_compression/import_etc", true);
+}
 
 void register_vita_exporter() {
 	Ref<EditorExportPlatformVita> exporter;
