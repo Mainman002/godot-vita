@@ -5,7 +5,7 @@ on:
 # Global Settings
 env:
   GODOT_BASE_BRANCH: 3.x
-  SCONSFLAGS: verbose=yes warnings=all werror=no debug_symbols=no
+  SCONSFLAGS: verbose=yes warnings=all werror=no debug_symbols=no x11=no
   VITASDK: /usr/local/vitasdk
   EUID: 1 makepkg
 
@@ -30,7 +30,10 @@ jobs:
 
       - name: Setup VitaSDK
         run: |
-          sudo apt-get install cmake libarchive-tools fakeroot zip -y
+          # Added X11 libraries to the apt-get line
+          sudo apt-get update
+          sudo apt-get install cmake libarchive-tools fakeroot zip libx11-dev libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev -y
+          
           git clone https://github.com/vitasdk/vdpm
           git clone https://github.com/isage/vita-packages-extra
           cd vdpm
