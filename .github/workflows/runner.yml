@@ -75,14 +75,6 @@ jobs:
           name: vita-template
           path: ./artifacts/vita-template
 
-      - name: Unzip All Editor Artifacts
-        run: |
-          for dir in ./artifacts/*/; do
-            cd "$dir"
-            unzip -o *.zip || true
-            cd ../../
-          done
-
       - name: Structure macOS Editor App
         run: |
           mkdir -p Godot.app/Contents/MacOS
@@ -157,23 +149,25 @@ jobs:
           # Debug
           cp artifacts/android-template-debug/android_debug.apk tpz_staging/templates/android_debug.apk || true
 
-          # 7. iOS Template Packaging
+          # 7. iOS Template Packaging (Updated to handle raw .a files)
           mkdir -p ios_template_staging
 
-          # Unzip Release
-          cd artifacts/ios-template-release
-          unzip -o *.zip -d ../../ios_template_staging/ || true
-          cd ../../
+          # Copy Release Library directly
+          if [ -f artifacts/ios-template-release/libgodot.iphone.opt.arm64.a ]; then
+            cp artifacts/ios-template-release/libgodot.iphone.opt.arm64.a ios_template_staging/
+          fi
 
-          # Unzip Debug into the same folder
-          cd artifacts/ios-template-debug
-          unzip -o *.zip -d ../../ios_template_staging/ || true
-          cd ../../
+          # Copy Debug Library directly
+          if [ -f artifacts/ios-template-debug/libgodot.iphone.opt.debug.arm64.a ]; then
+            cp artifacts/ios-template-debug/libgodot.iphone.opt.debug.arm64.a ios_template_staging/
+          fi
 
           # Re-zip into the final iphone.zip for the .tpz
-          cd ios_template_staging
-          zip -ry ../tpz_staging/templates/iphone.zip . -x "*.DS_Store"
-          cd ../
+          if [ "$(ls -A ios_template_staging 2>/dev/null)" ]; then
+            cd ios_template_staging
+            zip -ry ../tpz_staging/templates/iphone.zip . -x "*.DS_Store"
+            cd ../
+          fi
 
           # 8. JavaScript (Web) Template Packaging
           # Release
@@ -181,10 +175,10 @@ jobs:
 
           # 9. Server Template Packaging
           # Release
-          cp artifacts/server-template-release-mono/godot.server.opt.64 tpz_staging/templates/linux_server_64_release || true
+          cp artifacts/server-template-release-mono/godot_server.x11.opt.64.mono tpz_staging/templates/linux_server_64_release || true
 
           # Debug
-          cp artifacts/server-template-debug-mono/godot.server.opt.debug.64 tpz_staging/templates/linux_server_64_debug || true
+          cp artifacts/server-template-debug-mono/godot_server.x11.opt.debug.64.mono tpz_staging/templates/linux_server_64_debug || true
 
           # 10. Create the final TPZ
           cd tpz_staging
@@ -197,5 +191,5 @@ jobs:
           files: |
             godot-vita-templates.tpz
             Godot_macOS_Editor.zip
-            ./artifacts/windows-editor/godot.windows*
-            ./artifacts/linux-editor-mono/godot.x11*
+            ./artifacts/windows-editor/godot.windows.opt.tools.64.exe
+            ./artifacts/linux-editor-mono/godot.x11.opt.tools.64.mono
