@@ -257,12 +257,17 @@ public:
 
 		String cache = EditorSettings::get_singleton()->get_cache_dir();
 		String app_dir = cache.plus_file("app");
+		String livearea_path = app_dir.plus_file("sce_sys/livearea/contents");
 
-		// FIX: If the app directory already exists, remove it to prevent nesting old files
 		if (da->dir_exists(app_dir)) {
-			// Note: You may need a helper to delete recursively depending on your Godot version
 			da->change_dir(app_dir);
 			da->erase_contents_recursive();
+		}
+
+		if (!da->dir_exists(livearea_path)) {
+			da->make_dir_recursive(livearea_path);
+			// Give the OS a tiny moment to sync the filesystem
+			OS::get_singleton()->delay_usec(1000);
 		}
 
 		Error err;
