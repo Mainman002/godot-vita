@@ -70,22 +70,42 @@ jobs:
           name: vita-template
           path: ./artifacts/vita-template
 
+      - name: Unzip All Editor Artifacts
+        run: |
+          for dir in ./artifacts/*/; do
+            cd "$dir"
+            unzip -o *.zip || true
+            cd ../../
+          done
+
       - name: Package Vita Templates
         run: |
           mkdir -p ./tpz_staging
-          # The wildcard handles the actual binary name (e.g. godot.vita.opt.arm)
+
+          # 1. Enter the artifact directory
+          cd ./artifacts/vita-template
+
+          # 2. Unzip the actual artifact content if it's zipped (common in GHA v4)
+          # If the file is just the binary, this will gracefully fail or skip
+          unzip -o *.zip || true
+
+          # 3. Go back and copy the binary using the wildcard
+          cd ../../
           cp ./artifacts/vita-template/godot.vita* ./tpz_staging/vita_release.zip
+
+          # 4. Create the TPZ
           cd ./tpz_staging
           zip -r ../godot-vita-templates.tpz .
-          # Move it back to root for the release upload
           mv ../godot-vita-templates.tpz ..
 
       - name: Structure macOS Editor App
         run: |
-          # Create the standard macOS .app bundle structure
           mkdir -p Godot.app/Contents/MacOS
-          # Move the compiled binary into the bundle and rename to "Godot"
-          cp ./artifacts/macos-editor/godot.osx.opt.tools.64 Godot.app/Contents/MacOS/Godot
+          cd ./artifacts/macos-editor
+          unzip -o *.zip || true
+          cd ../../
+          # Using wildcard to handle the binary name
+          cp ./artifacts/macos-editor/godot.osx* Godot.app/Contents/MacOS/Godot
           chmod +x Godot.app/Contents/MacOS/Godot
           zip -r Godot_macOS_Editor.zip Godot.app
 
@@ -95,9 +115,5 @@ jobs:
           files: |
             godot-vita-templates.tpz
             Godot_macOS_Editor.zip
-            ./artifacts/windows-editor/godot.windows.opt.tools.64.exe
-            ./artifacts/linux-editor/godot.x11.opt.tools.64
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            ./artifacts/windows-editor/godot.windows*
+            ./artifacts/linux-editor/godot.x11*
