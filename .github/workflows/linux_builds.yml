@@ -42,16 +42,32 @@ jobs:
             artifact: false
 
           - name: Template w/ Mono (target=release, tools=no)
-            cache-name: linux-template-mono
+            cache-name: linux-template-release-mono
             target: release
             tools: false
             sconsflags: module_mono_enabled=yes mono_static=yes mono_glue=no debug_symbols=no
             build-mono: false
             artifact: true
 
+          - name: Debug Template w/ Mono (target=release_debug, tools=no)
+            cache-name: linux-template-debug-mono
+            target: release_debug
+            tools: false
+            sconsflags: module_mono_enabled=yes mono_static=yes mono_glue=no
+            build-mono: false
+            artifact: true
+
           - name: Minimal template (target=release, tools=no, everything disabled)
             cache-name: linux-template-minimal
             target: release
+            tools: false
+            sconsflags: modules_enabled_by_default=no disable_3d=yes disable_advanced_gui=yes deprecated=no minizip=no debug_symbols=no
+            build-mono: false
+            artifact: false
+
+          - name: Debug Minimal template (target=release_debug, tools=no, everything disabled)
+            cache-name: linux-template-minimal
+            target: release_debug
             tools: false
             sconsflags: modules_enabled_by_default=no disable_3d=yes disable_advanced_gui=yes deprecated=no minizip=no debug_symbols=no
             build-mono: false

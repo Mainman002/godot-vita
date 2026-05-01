@@ -26,9 +26,14 @@ jobs:
             tools: true
             bin: "./bin/godot.osx.opt.tools.64"
 
-          - name: Template (target=release, tools=no)
-            cache-name: macos-template
+          - name: Release Template (target=release, tools=no)
+            cache-name: macos-template-release
             target: release
+            tools: false
+
+          - name: Debug Template (target=release_debug, tools=no)
+            cache-name: macos-template-debug
+            target: release_debug
             tools: false
 
     steps:

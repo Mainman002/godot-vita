@@ -16,7 +16,18 @@ concurrency:
 jobs:
   javascript-template:
     runs-on: "ubuntu-24.04"
-    name: Template (target=release, tools=no)
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: JavaScript Release Template
+            cache-name: javascript-template-release
+            target: release
+
+          - name: JavaScript Debug Template
+            cache-name: javascript-template-debug
+            target: release_debug
 
     steps:
       - uses: actions/checkout@v4
@@ -27,12 +38,10 @@ jobs:
           version: ${{env.EM_VERSION}}
           no-cache: true
 
-      - name: Verify Emscripten setup
-        run: |
-          emcc -v
-
       - name: Restore Godot build cache
         uses: ./.github/actions/godot-cache-restore
+        with:
+          cache-name: ${{ matrix.cache-name }}
         continue-on-error: true
 
       - name: Setup python and scons
@@ -43,12 +52,16 @@ jobs:
         with:
           sconsflags: ${{ env.SCONSFLAGS }}
           platform: javascript
-          target: release
+          target: ${{ matrix.target }}
           tools: false
 
       - name: Save Godot build cache
         uses: ./.github/actions/godot-cache-save
+        with:
+          cache-name: ${{ matrix.cache-name }}
         continue-on-error: true
 
       - name: Upload artifact
         uses: ./.github/actions/upload-artifact
+        with:
+          name: ${{ matrix.cache-name }}

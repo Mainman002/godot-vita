@@ -120,25 +120,69 @@ jobs:
           cd ../../
 
           # 3. Windows
-          cp artifacts/windows-template/godot.windows.opt.32.exe tpz_staging/templates/windows_32_release.exe || true
-          cp artifacts/windows-template/godot.windows.opt.64.exe tpz_staging/templates/windows_64_release.exe || true
+          cp artifacts/windows-template-release/godot.windows.opt.64.exe tpz_staging/templates/windows_64_release.exe || true
+          cp artifacts/windows-template-debug/godot.windows.opt.debug.64.exe tpz_staging/templates/windows_64_debug.exe || true
 
           # 4. Linux
-          cp artifacts/linux-template-mono/godot.linuxbsd.opt.64 tpz_staging/templates/linux_x11_64_release || true
+          cp artifacts/linux-template-release-mono/godot.linuxbsd.opt.64 tpz_staging/templates/linux_x11_64_release || true
+          cp artifacts/linux-template-debug-mono/godot.linuxbsd.opt.debug.64 tpz_staging/templates/linux_x11_64_debug || true
 
           # 5. macOS Template
-          cp artifacts/macos-template/*.zip tpz_staging/templates/osx.zip || true
+          # Clean up any existing staging area for the macOS zip
+          mkdir -p macos_template_staging
 
-          # 6. Android
-          cp artifacts/android-template/*.apk tpz_staging/templates/android_release.apk || true
+          # Unzip the release template into the staging area
+          cd artifacts/macos-template-release
+          unzip -o *.zip -d ../../macos_template_staging/ || true
+          cd ../../
 
-          # 7. iOS
-          cp artifacts/ios-template/*.zip tpz_staging/templates/iphone.zip || true
+          # Copy the debug binary into the same staging structure
+          # In Godot 3.x templates, the debug binary usually sits alongside the release one
+          cp artifacts/macos-template-debug/*.zip macos_debug.zip || true
+          unzip -o macos_debug.zip -d macos_template_staging/ || true
 
-          # 8. JavaScript (Web)
-          cp artifacts/javascript-template/*.zip tpz_staging/templates/webassembly_release.zip || true
+          # Re-zip them into the final osx.zip expected by the .tpz
+          cd macos_template_staging
+          zip -ry ../tpz_staging/templates/osx.zip . -x "*.DS_Store"
+          cd ../
 
-          # 9. Create the final TPZ
+          # 6. Android Template Packaging
+          # Release
+          cp artifacts/android-template-release/android_release.apk tpz_staging/templates/android_release.apk || true
+
+          # Debug
+          cp artifacts/android-template-debug/android_debug.apk tpz_staging/templates/android_debug.apk || true
+
+          # 7. iOS Template Packaging
+          mkdir -p ios_template_staging
+
+          # Unzip Release
+          cd artifacts/ios-template-release
+          unzip -o *.zip -d ../../ios_template_staging/ || true
+          cd ../../
+
+          # Unzip Debug into the same folder
+          cd artifacts/ios-template-debug
+          unzip -o *.zip -d ../../ios_template_staging/ || true
+          cd ../../
+
+          # Re-zip into the final iphone.zip for the .tpz
+          cd ios_template_staging
+          zip -ry ../tpz_staging/templates/iphone.zip . -x "*.DS_Store"
+          cd ../
+
+          # 8. JavaScript (Web) Template Packaging
+          # Release
+          cp artifacts/javascript-template-release/*.zip tpz_staging/templates/webassembly_release.zip || true
+
+          # 9. Server Template Packaging
+          # Release
+          cp artifacts/server-template-release-mono/godot.server.opt.64 tpz_staging/templates/linux_server_64_release || true
+
+          # Debug
+          cp artifacts/server-template-debug-mono/godot.server.opt.debug.64 tpz_staging/templates/linux_server_64_debug || true
+
+          # 10. Create the final TPZ
           cd tpz_staging
           zip -r ../godot-vita-templates.tpz templates/ -x "*.DS_Store" -x "__MACOSX*" -x "._*"
           cd ../
