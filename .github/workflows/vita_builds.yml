@@ -59,7 +59,7 @@ jobs:
         uses: ./.github/actions/godot-build
         with:
           # -j$(nproc) uses all available CPU cores to speed up the 50-minute build
-          sconsflags: ${{ env.SCONSFLAGS }} -j$(nproc)
+          sconsflags: ${{ env.SCONSFLAGS }} -j2
           platform: vita
           target: release
           tools: false
