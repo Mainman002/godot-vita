@@ -66,8 +66,10 @@ private:
 			img->resize(p_width, p_height, Image::INTERPOLATE_LANCZOS);
 		}
 
-		if (img->get_format() != Image::FORMAT_L8) {
-			img->convert(Image::FORMAT_L8);
+		// FIX: Force RGB8 (or RGBA8) instead of L8 (Grayscale)
+		// The Vita's SceShell requires RGB data to render LiveArea assets correctly.
+		if (img->get_format() != Image::FORMAT_RGB8) {
+			img->convert(Image::FORMAT_RGB8);
 		}
 
 		return img->save_png(p_dest);

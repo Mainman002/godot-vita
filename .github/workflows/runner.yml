@@ -80,33 +80,68 @@ jobs:
             cd ../../
           done
 
-      - name: Package Vita Templates
-        run: |
-          mkdir -p ./tpz_staging/
-
-          # 1. Go to the artifact directory and ensure it's unzipped
-          cd ./artifacts/vita-template
-          unzip -o *.zip || true
-
-          # 2. Copy the REQUIRED files/folders for the Vita template to staging
-          # We need eboot.bin, the modules, and the system files
-          cp -r eboot.bin module sce_sys ../../tpz_staging/
-
-          # 3. Create the TPZ from the staging directory
-          cd ../../tpz_staging
-          # The Vita export template expects these files at the root of its zip
-          zip -r ../godot-vita-templates.tpz .
-
       - name: Structure macOS Editor App
         run: |
           mkdir -p Godot.app/Contents/MacOS
+
+          # 1. Create the self-contained marker and the data folder
+          touch Godot.app/Contents/MacOS/_sc_
+          mkdir -p Godot.app/Contents/MacOS/editor_data
+
+          # 2. Extract and copy binary
           cd ./artifacts/macos-editor
           unzip -o *.zip || true
           cd ../../
-          # Using wildcard to handle the binary name
           cp ./artifacts/macos-editor/godot.osx* Godot.app/Contents/MacOS/Godot
+
+          # 3. Explicitly set permissions BEFORE zipping
           chmod +x Godot.app/Contents/MacOS/Godot
-          zip -r Godot_macOS_Editor.zip Godot.app
+          # Ensure every directory in the bundle has the 'executable' bit for traversal
+          find Godot.app -type d -exec chmod 755 {} +
+          # Ensure files are writable
+          find Godot.app -type f -exec chmod 644 {} +
+          chmod 755 Godot.app/Contents/MacOS/Godot
+
+          # 4. Use 'zip -ry' to preserve symlinks and attributes
+          zip -ry Godot_macOS_Editor.zip Godot.app
+
+      - name: Package Godot Templates (.tpz)
+        run: |
+          mkdir -p tpz_staging/templates
+
+          # 1. Create the version.txt (Godot needs this to identify the template version)
+          # Replace '3.7.dev' with your specific version if different
+          echo "3.7.dev" > tpz_staging/templates/version.txt
+
+          # 2. Vita (Special handling: must be a zip within the tpz)
+          cd artifacts/vita-template
+          unzip -o *.zip || true
+          zip -r ../../tpz_staging/templates/vita_release.zip eboot.bin module sce_sys -x "*.DS_Store" -x "__MACOSX*" -x "._*"
+          cd ../../
+
+          # 3. Windows
+          cp artifacts/windows-template/godot.windows.opt.32.exe tpz_staging/templates/windows_32_release.exe || true
+          cp artifacts/windows-template/godot.windows.opt.64.exe tpz_staging/templates/windows_64_release.exe || true
+
+          # 4. Linux
+          cp artifacts/linux-template-mono/godot.linuxbsd.opt.64 tpz_staging/templates/linux_x11_64_release || true
+
+          # 5. macOS Template
+          cp artifacts/macos-template/*.zip tpz_staging/templates/osx.zip || true
+
+          # 6. Android
+          cp artifacts/android-template/*.apk tpz_staging/templates/android_release.apk || true
+
+          # 7. iOS
+          cp artifacts/ios-template/*.zip tpz_staging/templates/iphone.zip || true
+
+          # 8. JavaScript (Web)
+          cp artifacts/javascript-template/*.zip tpz_staging/templates/webassembly_release.zip || true
+
+          # 9. Create the final TPZ
+          cd tpz_staging
+          zip -r ../godot-vita-templates.tpz templates/ -x "*.DS_Store" -x "__MACOSX*" -x "._*"
+          cd ../
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
