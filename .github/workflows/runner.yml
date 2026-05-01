@@ -49,3 +49,47 @@ jobs:
     name: 🎮 PSVita
     needs: static-checks
     uses: ./.github/workflows/vita_builds.yml
+  
+  release:
+    name: 🚀 Release and Package
+    # This triggers on ANY tag push (e.g., 0.1.0, 1.0.0, etc.)
+    if: startsWith(github.ref, 'refs/tags/') 
+    needs: [android-build, ios-build, javascript-build, linux-build, macos-build, windows-build, vita-build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+
+      - name: Package Export Templates (.tpz)
+        run: |
+          mkdir -p ./tpz_staging
+          # Renaming the vita-template to vita_release.zip so Godot recognizes it internally
+          cp ./artifacts/vita-template/vita-template.zip ./tpz_staging/vita_release.zip
+          cd ./tpz_staging
+          zip -r ../godot-vita-templates.tpz .
+      
+      - name: Structure macOS Editor App
+        run: |
+          # Create the standard macOS .app bundle structure[cite: 17]
+          mkdir -p Godot.app/Contents/MacOS
+          # Move the compiled binary into the bundle and rename to "Godot"[cite: 17]
+          cp ./artifacts/macos-editor/godot.osx.opt.tools.64 Godot.app/Contents/MacOS/Godot
+          chmod +x Godot.app/Contents/MacOS/Godot
+          zip -r Godot_macOS_Editor.zip Godot.app
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            godot-vita-templates.tpz
+            Godot_macOS_Editor.zip
+            ./artifacts/windows-editor/godot.windows.opt.tools.64.exe
+            ./artifacts/linux-editor/godot.x11.opt.tools.64
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}[cite: 17]

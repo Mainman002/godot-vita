@@ -253,6 +253,16 @@ public:
 
 		DirAccess *da = DirAccess::create(DirAccess::ACCESS_FILESYSTEM);
 
+		String cache = EditorSettings::get_singleton()->get_cache_dir();
+		String app_dir = cache.plus_file("app");
+
+		// FIX: If the app directory already exists, remove it to prevent nesting old files
+		if (da->dir_exists(app_dir)) {
+			// Note: You may need a helper to delete recursively depending on your Godot version
+			da->change_dir(app_dir);
+			da->erase_contents_recursive(); 
+		}
+
 		Error err;
 		// update nro icon/title/author/version
 		ParamSFOStruct *sfo = memnew(ParamSFOStruct);
@@ -267,9 +277,6 @@ public:
 		String livearea_bg = p_preset->get("assets/livearea_bg_840x500");
 		String livearea_startup_button = p_preset->get("assets/livearea_startup_button_280x158");
 
-		String cache = EditorSettings::get_singleton()->get_cache_dir();
-		String app_dir = cache.plus_file("app");
-		da->make_dir(app_dir);
 		String game_data_dir = app_dir.plus_file("game_data");
 		da->make_dir(game_data_dir);
 		da->make_dir(app_dir.plus_file("module"));
@@ -314,11 +321,16 @@ public:
 
 			print_line("ADDING: " + path);
 
-			FileAccess *fa = FileAccess::open(app_dir.plus_file(path), FileAccess::WRITE);
-			fa->store_buffer(data.ptr(), data.size());
-			fa->flush();
-			fa->close();
+			String target_file = app_dir.plus_file(path);
+			// FIX: Ensure the sub-directory exists for the file we are about to extract
+			da->make_dir_recursive(target_file.get_base_dir());
 
+			FileAccess *fa = FileAccess::open(target_file, FileAccess::WRITE);
+			if (fa) {
+				fa->store_buffer(data.ptr(), data.size());
+				fa->flush();
+				fa->close();
+			}
 			ret = unzGoToNextFile(pkg);
 		}
 
