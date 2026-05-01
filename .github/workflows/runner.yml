@@ -80,23 +80,20 @@ jobs:
 
       - name: Package Vita Templates
         run: |
-          mkdir -p ./tpz_staging
+          mkdir -p ./tpz_staging/
 
-          # 1. Enter the artifact directory
+          # 1. Go to the artifact directory and ensure it's unzipped
           cd ./artifacts/vita-template
-
-          # 2. Unzip the actual artifact content if it's zipped (common in GHA v4)
-          # If the file is just the binary, this will gracefully fail or skip
           unzip -o *.zip || true
 
-          # 3. Go back and copy the binary using the wildcard
-          cd ../../
-          cp ./artifacts/vita-template/godot.vita* ./tpz_staging/vita_release.zip
+          # 2. Copy the REQUIRED files/folders for the Vita template to staging
+          # We need eboot.bin, the modules, and the system files
+          cp -r eboot.bin module sce_sys ../../tpz_staging/
 
-          # 4. Create the TPZ
-          cd ./tpz_staging
+          # 3. Create the TPZ from the staging directory
+          cd ../../tpz_staging
+          # The Vita export template expects these files at the root of its zip
           zip -r ../godot-vita-templates.tpz .
-          mv ../godot-vita-templates.tpz ..
 
       - name: Structure macOS Editor App
         run: |
