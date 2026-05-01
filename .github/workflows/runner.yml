@@ -52,7 +52,6 @@ jobs:
 
   release:
     name: 🚀 Release and Package
-    # This triggers on ANY tag push (e.g., 0.1.0, 1.0.0, etc.)
     if: startsWith(github.ref, 'refs/tags/')
     needs: [android-build, ios-build, javascript-build, linux-build, macos-build, windows-build, vita-build]
     runs-on: ubuntu-latest
@@ -64,13 +63,22 @@ jobs:
         with:
           path: ./artifacts
 
-      - name: Package Export Templates (.tpz)
+      # This specific download ensures the Vita files are in the right sub-folder
+      - name: Download Vita artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: vita-template
+          path: ./artifacts/vita-template
+
+      - name: Package Vita Templates
         run: |
           mkdir -p ./tpz_staging
-          # Renaming the vita-template to vita_release.zip so Godot recognizes it internally
-          cp ./artifacts/vita-template/vita-template.zip ./tpz_staging/vita_release.zip
+          # The wildcard handles the actual binary name (e.g. godot.vita.opt.arm)
+          cp ./artifacts/vita-template/godot.vita* ./tpz_staging/vita_release.zip
           cd ./tpz_staging
           zip -r ../godot-vita-templates.tpz .
+          # Move it back to root for the release upload
+          mv ../godot-vita-templates.tpz ..
 
       - name: Structure macOS Editor App
         run: |
