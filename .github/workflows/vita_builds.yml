@@ -63,6 +63,7 @@ jobs:
           platform: vita
           target: release
           tools: false
+          scons-cache-limit: 3072 # Reduce to 3GB
 
       - name: Save Godot build cache
         uses: ./.github/actions/godot-cache-save
