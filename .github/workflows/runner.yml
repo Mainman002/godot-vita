@@ -5,6 +5,9 @@ concurrency:
   group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-runner
   cancel-in-progress: true
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   static-checks:
     name: 📊 Static
@@ -107,6 +110,10 @@ jobs:
 
       - name: Package Godot Templates (.tpz)
         run: |
+          echo "===== ARTIFACT TREE ====="
+          find artifacts -maxdepth 3 -type f
+          echo "========================="
+
           mkdir -p tpz_staging/templates
 
           # 1. Create the version.txt (Godot needs this to identify the template version)
@@ -123,28 +130,25 @@ jobs:
           cp artifacts/windows-template-release/godot.windows.opt.64.exe tpz_staging/templates/windows_64_release.exe || true
           cp artifacts/windows-template-debug/godot.windows.opt.debug.64.exe tpz_staging/templates/windows_64_debug.exe || true
 
-          # 4. Linux
-          cp artifacts/linux-template-release-mono/godot.linuxbsd.opt.64 tpz_staging/templates/linux_x11_64_release || true
-          cp artifacts/linux-template-debug-mono/godot.linuxbsd.opt.debug.64 tpz_staging/templates/linux_x11_64_debug || true
+          # 4. Linux (Updated for Mono naming)
+          if [ -f artifacts/linux-template-release-mono/godot.x11.opt.64.mono ]; then
+            cp artifacts/linux-template-release-mono/godot.x11.opt.64.mono tpz_staging/templates/linux_x11_64_release
+          fi
+          if [ -f artifacts/linux-template-debug-mono/godot.x11.opt.debug.64.mono ]; then
+            cp artifacts/linux-template-debug-mono/godot.x11.opt.debug.64.mono tpz_staging/templates/linux_x11_64_debug
+          fi
 
-          # 5. macOS Template
-          # Clean up any existing staging area for the macOS zip
+          # 5. macOS Template (Direct copy instead of unzip)
           mkdir -p macos_template_staging
+          # Copy binaries directly if they aren't zipped in the artifact
+          cp artifacts/macos-template-release/godot.osx.opt.64 macos_template_staging/ || true
+          cp artifacts/macos-template-debug/godot.osx.opt.debug.64 macos_template_staging/ || true
 
-          # Unzip the release template into the staging area
-          cd artifacts/macos-template-release
-          unzip -o *.zip -d ../../macos_template_staging/ || true
-          cd ../../
-
-          # Copy the debug binary into the same staging structure
-          # In Godot 3.x templates, the debug binary usually sits alongside the release one
-          cp artifacts/macos-template-debug/*.zip macos_debug.zip || true
-          unzip -o macos_debug.zip -d macos_template_staging/ || true
-
-          # Re-zip them into the final osx.zip expected by the .tpz
-          cd macos_template_staging
-          zip -ry ../tpz_staging/templates/osx.zip . -x "*.DS_Store"
-          cd ../
+          if [ "$(ls -A macos_template_staging 2>/dev/null)" ]; then
+            cd macos_template_staging
+            zip -ry ../tpz_staging/templates/osx.zip . -x "*.DS_Store"
+            cd ../
+          fi
 
           # 6. Android Template Packaging
           # Release

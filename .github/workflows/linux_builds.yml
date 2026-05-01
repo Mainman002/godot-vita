@@ -4,6 +4,7 @@ on:
 
 # Global Settings
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   # Only used for the cache key. Increment version to force clean build.
   GODOT_BASE_BRANCH: 3.x
   SCONSFLAGS: verbose=yes warnings=all werror=yes

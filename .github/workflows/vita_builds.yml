@@ -4,6 +4,7 @@ on:
 
 # Global Settings
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   GODOT_BASE_BRANCH: 3.x
   # warnings=no silences the signedness noise to speed up log processing
   SCONSFLAGS: verbose=yes warnings=no werror=no debug_symbols=no x11=no alsa=no pulseaudio=no CXXFLAGS="-Drestrict=__restrict"
