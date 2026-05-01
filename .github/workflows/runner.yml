@@ -74,9 +74,9 @@ jobs:
 
       - name: Structure macOS Editor App
         run: |
-          # Create the standard macOS .app bundle structure[cite: 17]
+          # Create the standard macOS .app bundle structure
           mkdir -p Godot.app/Contents/MacOS
-          # Move the compiled binary into the bundle and rename to "Godot"[cite: 17]
+          # Move the compiled binary into the bundle and rename to "Godot"
           cp ./artifacts/macos-editor/godot.osx.opt.tools.64 Godot.app/Contents/MacOS/Godot
           chmod +x Godot.app/Contents/MacOS/Godot
           zip -r Godot_macOS_Editor.zip Godot.app
