@@ -49,11 +49,11 @@ jobs:
     name: 🎮 PSVita
     needs: static-checks
     uses: ./.github/workflows/vita_builds.yml
-  
+
   release:
     name: 🚀 Release and Package
     # This triggers on ANY tag push (e.g., 0.1.0, 1.0.0, etc.)
-    if: startsWith(github.ref, 'refs/tags/') 
+    if: startsWith(github.ref, 'refs/tags/')
     needs: [android-build, ios-build, javascript-build, linux-build, macos-build, windows-build, vita-build]
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +71,7 @@ jobs:
           cp ./artifacts/vita-template/vita-template.zip ./tpz_staging/vita_release.zip
           cd ./tpz_staging
           zip -r ../godot-vita-templates.tpz .
-      
+
       - name: Structure macOS Editor App
         run: |
           # Create the standard macOS .app bundle structure[cite: 17]
@@ -92,4 +92,4 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}[cite: 17]
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

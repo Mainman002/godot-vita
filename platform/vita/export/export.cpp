@@ -260,7 +260,7 @@ public:
 		if (da->dir_exists(app_dir)) {
 			// Note: You may need a helper to delete recursively depending on your Godot version
 			da->change_dir(app_dir);
-			da->erase_contents_recursive(); 
+			da->erase_contents_recursive();
 		}
 
 		Error err;
