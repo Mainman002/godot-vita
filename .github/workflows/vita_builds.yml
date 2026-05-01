@@ -5,7 +5,8 @@ on:
 # Global Settings
 env:
   GODOT_BASE_BRANCH: 3.x
-  SCONSFLAGS: verbose=yes warnings=all werror=no debug_symbols=no x11=no alsa=no pulseaudio=no CXXFLAGS="-Drestrict=__restrict"
+  # warnings=no silences the signedness noise to speed up log processing
+  SCONSFLAGS: verbose=yes warnings=no werror=no debug_symbols=no x11=no alsa=no pulseaudio=no CXXFLAGS="-Drestrict=__restrict"
   VITASDK: /usr/local/vitasdk
   EUID: 1 makepkg
 
@@ -19,7 +20,7 @@ jobs:
     name: Template (target=release, tools=no)
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Restore Godot build cache
         uses: ./.github/actions/godot-cache-restore
@@ -28,12 +29,18 @@ jobs:
       - name: Setup python and scons
         uses: ./.github/actions/godot-deps
 
+      - name: Cache VitaSDK
+        id: cache-vitasdk
+        uses: actions/cache@v3
+        with:
+          path: /usr/local/vitasdk
+          key: ${{ runner.os }}-vitasdk-v1
+
       - name: Setup VitaSDK
+        if: steps.cache-vitasdk.outputs.cache-hit != 'true'
         run: |
-          # Added X11 libraries to the apt-get line
           sudo apt-get update
           sudo apt-get install cmake libarchive-tools fakeroot zip libx11-dev libxcursor-dev libxinerama-dev libxrandr-dev libxi-dev -y
-
           git clone https://github.com/vitasdk/vdpm
           git clone https://github.com/isage/vita-packages-extra
           cd vdpm
@@ -45,10 +52,14 @@ jobs:
           vita-makepkg
           vdpm *-arm.tar.xz
 
+      - name: Add VitaSDK to PATH
+        run: echo "/usr/local/vitasdk/bin" >> $GITHUB_PATH
+
       - name: Compilation
         uses: ./.github/actions/godot-build
         with:
-          sconsflags: ${{ env.SCONSFLAGS }}
+          # -j$(nproc) uses all available CPU cores to speed up the 50-minute build
+          sconsflags: ${{ env.SCONSFLAGS }} -j$(nproc)
           platform: vita
           target: release
           tools: false
@@ -56,7 +67,7 @@ jobs:
       - name: Save Godot build cache
         uses: ./.github/actions/godot-cache-save
         with:
-          cache-name: ${{ matrix.cache-name }}
+          cache-name: vita-template
         continue-on-error: true
 
       - name: Upload artifact
