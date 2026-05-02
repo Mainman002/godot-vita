@@ -1,4 +1,12 @@
-# Godot Engine
+# Godot-Vita
+
+## Vita Addons
+* [VPK Fixer](https://github.com/Mainman002/VPK-Fixer)
+
+## Stable Build
+* [0.1.1](https://github.com/Mainman002/godot-vita/releases/tag/0.1.1)
+
+---
 
 <p align="center">
   <a href="https://godotengine.org">
