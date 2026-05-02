@@ -348,26 +348,19 @@ public:
 
 		err = save_pack(p_preset, game_data_dir.plus_file("game.pck"));
 		mksfoex(sfo, app_dir.plus_file("sce_sys"));
-
+		
 		if (err == OK) {
-			// REMOVE "String" from the start of these lines.
-			// They were already declared at the top of this function.
-			icon = p_preset->get("assets/bubble_icon_128x128");
-			splash = p_preset->get("assets/app_splash_960x544");
-			livearea_bg = p_preset->get("assets/livearea_bg_840x500");
-			livearea_startup_button = p_preset->get("assets/livearea_startup_button_280x158");
-
 			if (icon != String() && FileAccess::exists(icon)) {
-				_fix_vita_image(icon, app_dir.plus_file("sce_sys/icon0.png"), 128, 128);
+				da->copy(icon, app_dir.plus_file("sce_sys/icon0.png"));
 			}
 			if (splash != String() && FileAccess::exists(splash)) {
-				_fix_vita_image(splash, app_dir.plus_file("sce_sys/pic0.png"), 960, 544);
+				da->copy(splash, app_dir.plus_file("sce_sys/pic0.png"));
 			}
 			if (livearea_bg != String() && FileAccess::exists(livearea_bg)) {
-				_fix_vita_image(livearea_bg, app_dir.plus_file("sce_sys/livearea/contents/bg.png"), 840, 500);
+				da->copy(livearea_bg, app_dir.plus_file("sce_sys/livearea/contents/bg.png"));
 			}
 			if (livearea_startup_button != String() && FileAccess::exists(livearea_startup_button)) {
-				_fix_vita_image(livearea_startup_button, app_dir.plus_file("sce_sys/livearea/contents/startup.png"), 280, 158);
+				da->copy(livearea_startup_button, app_dir.plus_file("sce_sys/livearea/contents/startup.png"));
 			}
 		}
 
