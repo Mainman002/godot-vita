@@ -348,7 +348,7 @@ public:
 
 		err = save_pack(p_preset, game_data_dir.plus_file("game.pck"));
 		mksfoex(sfo, app_dir.plus_file("sce_sys"));
-		
+
 		if (err == OK) {
 			if (icon != String() && FileAccess::exists(icon)) {
 				da->copy(icon, app_dir.plus_file("sce_sys/icon0.png"));
