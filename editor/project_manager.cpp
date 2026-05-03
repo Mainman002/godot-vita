@@ -867,9 +867,10 @@ public:
 		rs_button->set_button_group(rasterizer_button_group);
 		rs_button->set_text(TTR("OpenGL ES 3.0"));
 		rs_button->set_meta("driver_name", "GLES3");
+		rs_button->set_pressed(false);
 		rvb->add_child(rs_button);
 		if (gles3_viable) {
-			rs_button->set_pressed(true);
+			rs_button->set_pressed(false);
 		} else {
 			// If GLES3 can't be used, don't let users shoot themselves in the foot.
 			rs_button->set_disabled(true);
@@ -890,7 +891,7 @@ public:
 		rs_button->set_button_group(rasterizer_button_group);
 		rs_button->set_text(TTR("OpenGL ES 2.0"));
 		rs_button->set_meta("driver_name", "GLES2");
-		rs_button->set_pressed(!gles3_viable);
+		rs_button->set_pressed(true);
 		rvb->add_child(rs_button);
 		l = memnew(Label);
 		l->set_text(TTR("Lower visual quality\nSome features not available\nWorks on most hardware\nRecommended for web games"));

@@ -45,7 +45,7 @@ class ExportTemplateManager : public AcceptDialog {
 	GDCLASS(ExportTemplateManager, AcceptDialog);
 
 	bool current_version_exists = false;
-	bool downloads_available = true;
+	bool downloads_available = false;
 	bool mirrors_available = false;
 	bool is_refreshing_mirrors = false;
 	bool is_downloading_templates = false;

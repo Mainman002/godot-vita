@@ -134,6 +134,7 @@ name is available.
     Joan Fons Sanchez (JFonS)
     Johan Manuel (29jm)
     Johannes Witt (HaSa1002)
+    Johnathan Mueller (Mainman002)
     Jonathan Nicholl (jtnicholl)
     Jordan Schidlowsky (winterpixelgames)
     Josh Jones (DarkKilauea)
