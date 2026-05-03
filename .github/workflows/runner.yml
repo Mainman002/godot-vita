@@ -128,14 +128,13 @@ jobs:
             cp artifacts/linux-template-release-mono/godot.x11.opt.64.mono tpz_staging/templates/linux_x11_64_release
           fi
 
-          # 5. macOS Template (Direct copy instead of unzip)
+          # 5. macOS Template (Direct copy, DO NOT strip on Linux)
           mkdir -p macos_template_staging
           if [ -f artifacts/macos-template-release/godot.osx.opt.64 ]; then
-            strip artifacts/macos-template-release/godot.osx.opt.64
+            # Removed strip command as it's incompatible with Linux runners
             cp artifacts/macos-template-release/godot.osx.opt.64 macos_template_staging/
           fi
           if [ -f artifacts/macos-template-debug/godot.osx.opt.debug.64 ]; then
-            strip artifacts/macos-template-debug/godot.osx.opt.debug.64
             cp artifacts/macos-template-debug/godot.osx.opt.debug.64 macos_template_staging/
           fi
 
