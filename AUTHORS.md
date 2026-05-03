@@ -246,6 +246,7 @@ name is available.
     Simon Wenner (swenner)
     smix8
     snailrhymer
+    SonicMastr (godot-vita)
     Stijn Hinlopen (hinlopen)
     Swarnim Arun (minraws)
     TC (floppyhammer)
