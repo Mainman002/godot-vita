@@ -131,7 +131,6 @@ jobs:
           # 5. macOS Template (Direct copy, DO NOT strip on Linux)
           mkdir -p macos_template_staging
           if [ -f artifacts/macos-template-release/godot.osx.opt.64 ]; then
-            # Removed strip command as it's incompatible with Linux runners
             cp artifacts/macos-template-release/godot.osx.opt.64 macos_template_staging/
           fi
           if [ -f artifacts/macos-template-debug/godot.osx.opt.debug.64 ]; then
