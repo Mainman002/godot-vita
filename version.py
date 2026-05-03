@@ -5,6 +5,6 @@ minor = 7
 patch = 0
 status = "dev"
 module_config = ""
-year = 2024
+year = 2026
 website = "https://godotengine.org"
 docs = "3.6"

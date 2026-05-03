@@ -81,17 +81,17 @@ void ExportTemplateManager::_update_template_status() {
 		current_version_exists = false;
 	}
 
-	if (is_downloading_templates) {
-		install_options_vb->hide();
-		download_progress_hb->show();
-	} else {
-		download_progress_hb->hide();
-		install_options_vb->show();
+	// if (is_downloading_templates) {
+	// 	install_options_vb->hide();
+	// 	download_progress_hb->show();
+	// } else {
+	// 	download_progress_hb->hide();
+	// 	install_options_vb->show();
 
-		if (templates.has(current_version)) {
-			current_installed_path->set_text(templates_dir.plus_file(current_version));
-		}
-	}
+	// 	if (templates.has(current_version)) {
+	// 		current_installed_path->set_text(templates_dir.plus_file(current_version));
+	// 	}
+	// }
 
 	// Update the list of other installed versions.
 	installed_table->clear();
@@ -620,7 +620,7 @@ void ExportTemplateManager::_open_template_folder(const String &p_version) {
 
 void ExportTemplateManager::popup_manager() {
 	_update_template_status();
-	_refresh_mirrors();
+	// _refresh_mirrors();
 	popup_centered(Size2(720, 280) * EDSCALE);
 }
 
@@ -805,13 +805,13 @@ void ExportTemplateManager::_bind_methods() {
 	ClassDB::bind_method("_hide_dialog", &ExportTemplateManager::_hide_dialog);
 	ClassDB::bind_method("_open_template_folder", &ExportTemplateManager::_open_template_folder);
 
-	ClassDB::bind_method("_refresh_mirrors_completed", &ExportTemplateManager::_refresh_mirrors_completed);
-	ClassDB::bind_method("_mirror_options_button_cbk", &ExportTemplateManager::_mirror_options_button_cbk);
+	// ClassDB::bind_method("_refresh_mirrors_completed", &ExportTemplateManager::_refresh_mirrors_completed);
+	// ClassDB::bind_method("_mirror_options_button_cbk", &ExportTemplateManager::_mirror_options_button_cbk);
 
-	ClassDB::bind_method("_download_template", &ExportTemplateManager::_download_template);
-	ClassDB::bind_method("_download_current", &ExportTemplateManager::_download_current);
-	ClassDB::bind_method("_cancel_template_download", &ExportTemplateManager::_cancel_template_download);
-	ClassDB::bind_method("_download_template_completed", &ExportTemplateManager::_download_template_completed);
+	// ClassDB::bind_method("_download_template", &ExportTemplateManager::_download_template);
+	// ClassDB::bind_method("_download_current", &ExportTemplateManager::_download_current);
+	// ClassDB::bind_method("_cancel_template_download", &ExportTemplateManager::_cancel_template_download);
+	// ClassDB::bind_method("_download_template_completed", &ExportTemplateManager::_download_template_completed);
 
 	ClassDB::bind_method("_uninstall_template", &ExportTemplateManager::_uninstall_template);
 	ClassDB::bind_method("_uninstall_template_confirmed", &ExportTemplateManager::_uninstall_template_confirmed);
@@ -887,7 +887,7 @@ ExportTemplateManager::ExportTemplateManager() {
 	current_installed_hb->add_child(current_uninstall_button);
 	current_uninstall_button->connect("pressed", this, "_uninstall_template", varray(VERSION_FULL_CONFIG));
 
-	main_vb->add_child(memnew(HSeparator));
+	// main_vb->add_child(memnew(HSeparator));
 
 	// Download and install section.
 	HBoxContainer *install_templates_hb = memnew(HBoxContainer);
@@ -937,6 +937,8 @@ ExportTemplateManager::ExportTemplateManager() {
 	HBoxContainer *install_file_hb = memnew(HBoxContainer);
 	install_file_hb->set_alignment(BoxContainer::ALIGN_END);
 	install_options_vb->add_child(install_file_hb);
+	download_install_hb->hide();
+	install_file_hb->show();
 
 	install_file_button = memnew(Button);
 	install_file_button->set_text(TTR("Install from File"));

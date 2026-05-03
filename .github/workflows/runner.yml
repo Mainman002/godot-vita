@@ -118,23 +118,24 @@ jobs:
           zip -r ../../tpz_staging/templates/vita_release.zip eboot.bin module sce_sys -x "*.DS_Store" -x "__MACOSX*" -x "._*"
           cd ../../
 
-          # 3. Windows
+          # 3. Windows (Skip strip, rely on SCONSFLAGS debug_symbols=no)
           cp artifacts/windows-template-release/godot.windows.opt.64.exe tpz_staging/templates/windows_64_release.exe || true
           cp artifacts/windows-template-debug/godot.windows.opt.debug.64.exe tpz_staging/templates/windows_64_debug.exe || true
 
-          # 4. Linux (Updated for Mono naming)
+          # 4. Linux (Added existence check and strip)
           if [ -f artifacts/linux-template-release-mono/godot.x11.opt.64.mono ]; then
+            strip --strip-all artifacts/linux-template-release-mono/godot.x11.opt.64.mono
             cp artifacts/linux-template-release-mono/godot.x11.opt.64.mono tpz_staging/templates/linux_x11_64_release
-          fi
-          if [ -f artifacts/linux-template-debug-mono/godot.x11.opt.debug.64.mono ]; then
-            cp artifacts/linux-template-debug-mono/godot.x11.opt.debug.64.mono tpz_staging/templates/linux_x11_64_debug
           fi
 
           # 5. macOS Template (Direct copy instead of unzip)
           mkdir -p macos_template_staging
-          # Copy binaries directly if they aren't zipped in the artifact
-          cp artifacts/macos-template-release/godot.osx.opt.64 macos_template_staging/ || true
-          cp artifacts/macos-template-debug/godot.osx.opt.debug.64 macos_template_staging/ || true
+          if [ -f artifacts/macos-template-release/godot.osx.opt.64 ]; then
+            cp artifacts/macos-template-release/godot.osx.opt.64 macos_template_staging/
+          fi
+          if [ -f artifacts/macos-template-debug/godot.osx.opt.debug.64 ]; then
+            cp artifacts/macos-template-debug/godot.osx.opt.debug.64 macos_template_staging/
+          fi
 
           if [ "$(ls -A macos_template_staging 2>/dev/null)" ]; then
             cd macos_template_staging
@@ -175,15 +176,27 @@ jobs:
 
           # 9. Server Template Packaging
           # Release
-          cp artifacts/server-template-release-mono/godot_server.x11.opt.64.mono tpz_staging/templates/linux_server_64_release || true
+          if [ -f artifacts/server-template-release-mono/godot_server.x11.opt.64.mono ]; then
+            strip --strip-all artifacts/server-template-release-mono/godot_server.x11.opt.64.mono
+            cp artifacts/server-template-release-mono/godot_server.x11.opt.64.mono tpz_staging/templates/linux_server_64_release
+          fi
 
           # Debug
-          cp artifacts/server-template-debug-mono/godot_server.x11.opt.debug.64.mono tpz_staging/templates/linux_server_64_debug || true
+          if [ -f artifacts/server-template-debug-mono/godot_server.x11.opt.debug.64.mono ]; then
+            strip --strip-all artifacts/server-template-debug-mono/godot_server.x11.opt.debug.64.mono
+            cp artifacts/server-template-debug-mono/godot_server.x11.opt.debug.64.mono tpz_staging/templates/linux_server_64_debug || true
+          fi
 
           # 10. Create the final TPZ
           cd tpz_staging
           zip -r ../godot-vita-templates.tpz templates/ -x "*.DS_Store" -x "__MACOSX*" -x "._*"
           cd ../
+
+      - name: Final Strip for Linux Editor
+        run: |
+          if [ -f ./artifacts/linux-editor-mono/godot.x11.opt.tools.64.mono ]; then
+            strip --strip-all ./artifacts/linux-editor-mono/godot.x11.opt.tools.64.mono
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
