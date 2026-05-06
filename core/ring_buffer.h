@@ -216,7 +216,7 @@ public:
 		write_pos = 0;
 		resize(p_power);
 	};
-	~RingBuffer(){};
+	~RingBuffer() {};
 };
 
 #endif // RING_BUFFER_H

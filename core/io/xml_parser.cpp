@@ -129,8 +129,8 @@ bool XMLParser::_parse_cdata() {
 	// find end of CDATA
 	while (*P && !cDataEnd) {
 		if (*P == '>' &&
-				(*(P - 1) == ']') &&
-				(*(P - 2) == ']')) {
+			(*(P - 1) == ']') &&
+			(*(P - 2) == ']')) {
 			cDataEnd = P - 2;
 		}
 
@@ -259,10 +259,10 @@ void XMLParser::_parse_opening_xml_element() {
 
 				Attribute attr;
 				attr.name = String::utf8(attributeNameBegin,
-						(int)(attributeNameEnd - attributeNameBegin));
+										 (int)(attributeNameEnd - attributeNameBegin));
 
 				String s = String::utf8(attributeValueBegin,
-						(int)(attributeValueEnd - attributeValueBegin));
+										(int)(attributeValueEnd - attributeValueBegin));
 
 				attr.value = s.xml_unescape();
 				attributes.push_back(attr);
@@ -354,9 +354,9 @@ void XMLParser::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_node_offset"), &XMLParser::get_node_offset);
 	ClassDB::bind_method(D_METHOD("get_attribute_count"), &XMLParser::get_attribute_count);
 	ClassDB::bind_method(D_METHOD("get_attribute_name", "idx"), &XMLParser::get_attribute_name);
-	ClassDB::bind_method(D_METHOD("get_attribute_value", "idx"), (String(XMLParser::*)(int) const) & XMLParser::get_attribute_value);
+	ClassDB::bind_method(D_METHOD("get_attribute_value", "idx"), (String (XMLParser::*)(int) const) & XMLParser::get_attribute_value);
 	ClassDB::bind_method(D_METHOD("has_attribute", "name"), &XMLParser::has_attribute);
-	ClassDB::bind_method(D_METHOD("get_named_attribute_value", "name"), (String(XMLParser::*)(const String &) const) & XMLParser::get_attribute_value);
+	ClassDB::bind_method(D_METHOD("get_named_attribute_value", "name"), (String (XMLParser::*)(const String &) const) & XMLParser::get_attribute_value);
 	ClassDB::bind_method(D_METHOD("get_named_attribute_value_safe", "name"), &XMLParser::get_attribute_value_safe);
 	ClassDB::bind_method(D_METHOD("is_empty"), &XMLParser::is_empty);
 	ClassDB::bind_method(D_METHOD("get_current_line"), &XMLParser::get_current_line);
@@ -497,7 +497,7 @@ void XMLParser::skip_section() {
 
 	while (tagcount && read() == OK) {
 		if (get_node_type() == XMLParser::NODE_ELEMENT &&
-				!is_empty()) {
+			!is_empty()) {
 			++tagcount;
 		} else if (get_node_type() == XMLParser::NODE_ELEMENT_END) {
 			--tagcount;

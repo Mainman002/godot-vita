@@ -105,7 +105,7 @@ Error get_assembly_dependencies(GDMonoAssembly *p_assembly, MonoAssemblyName *re
 }
 
 Error get_exported_assembly_dependencies(const Dictionary &p_initial_assemblies,
-		const String &p_build_config, const String &p_custom_bcl_dir, Dictionary &r_assembly_dependencies) {
+										 const String &p_build_config, const String &p_custom_bcl_dir, Dictionary &r_assembly_dependencies) {
 	MonoDomain *export_domain = GDMonoUtils::create_domain("GodotEngine.Domain.ProjectExport");
 	ERR_FAIL_NULL_V(export_domain, FAILED);
 	_GDMONO_SCOPE_EXIT_DOMAIN_UNLOAD_(export_domain);

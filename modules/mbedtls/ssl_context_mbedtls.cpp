@@ -31,8 +31,8 @@
 #include "ssl_context_mbedtls.h"
 
 static void my_debug(void *ctx, int level,
-		const char *file, int line,
-		const char *str) {
+					 const char *file, int line,
+					 const char *str) {
 	printf("%s:%04d: %s", file, line, str);
 	fflush(stdout);
 }

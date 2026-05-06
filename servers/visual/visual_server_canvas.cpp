@@ -78,10 +78,10 @@ void _collect_ysort_children(VisualServerCanvas::Item *p_canvas_item, Transform2
 
 			if (child_items[i]->sort_y) {
 				_collect_ysort_children(child_items[i],
-						p_transform * child_items[i]->xform_curr,
-						child_items[i]->use_parent_material ? p_material_owner : child_items[i],
-						p_modulate * child_items[i]->modulate,
-						r_items, r_index);
+										p_transform * child_items[i]->xform_curr,
+										child_items[i]->use_parent_material ? p_material_owner : child_items[i],
+										p_modulate * child_items[i]->modulate,
+										r_items, r_index);
 			}
 		}
 	}

@@ -636,9 +636,9 @@ protected:
 	TransformMode _find_transform_mode(const Transform2D &p_tr) const {
 		// decided whether to do translate only for software transform
 		if ((p_tr.elements[0].x == 1.0f) &&
-				(p_tr.elements[0].y == 0.0f) &&
-				(p_tr.elements[1].x == 0.0f) &&
-				(p_tr.elements[1].y == 1.0f)) {
+			(p_tr.elements[0].y == 0.0f) &&
+			(p_tr.elements[1].x == 0.0f) &&
+			(p_tr.elements[1].y == 1.0f)) {
 			return TM_TRANSLATE;
 		}
 
@@ -818,8 +818,8 @@ PREAMBLE(void)::batch_canvas_render_items_end() {
 
 	// batching render is deferred until after going through all the z_indices, joining all the items
 	get_this()->canvas_render_items_implementation(nullptr, 0, _render_item_state.item_group_modulate,
-			_render_item_state.item_group_light,
-			_render_item_state.item_group_base_transform);
+												   _render_item_state.item_group_light,
+												   _render_item_state.item_group_base_transform);
 
 	bdata.items_joined.reset();
 	bdata.item_refs.reset();

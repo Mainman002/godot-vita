@@ -37,7 +37,7 @@ namespace mkldnn {
 /// @{
 
 /// A class that provides the destructor for an Intel(R) MKL-DNN C handle
-template <typename T> class handle_traits {};
+template <typename T> class handle_traits{};
 
 /// A class for wrapping an Intel(R) MKL-DNN handle. It is used as the base
 /// class for primitive (#mkldnn_primitive_t), engine (#mkldnn_engine_t), and

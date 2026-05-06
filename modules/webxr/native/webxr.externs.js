@@ -6,7 +6,7 @@ Navigator.prototype.xr;
 /**
  * @constructor
  */
-function XRSessionInit() {};
+function XRSessionInit(){};
 
 /**
  * @type {Array<string>}
@@ -33,7 +33,7 @@ XR.prototype.ondevicechanged;
  *
  * @return {!Promise<boolean>}
  */
-XR.prototype.isSessionSupported = function(mode) {};
+XR.prototype.isSessionSupported = function(mode){};
 
 /**
  * @param {string} mode
@@ -41,7 +41,7 @@ XR.prototype.isSessionSupported = function(mode) {};
  *
  * @return {!Promise<XRSession>}
  */
-XR.prototype.requestSession = function(mode, options) {};
+XR.prototype.requestSession = function(mode, options){};
 
 /**
  * @constructor
@@ -112,30 +112,30 @@ XRSession.prototype.onvisibilitychange;
  * @param {XRRenderStateInit} state
  * @return {void}
  */
-XRSession.prototype.updateRenderState = function (state) {};
+XRSession.prototype.updateRenderState = function (state){};
 
 /**
  * @param {XRFrameRequestCallback} callback
  * @return {number}
  */
-XRSession.prototype.requestAnimationFrame = function (callback) {};
+XRSession.prototype.requestAnimationFrame = function (callback){};
 
 /**
  * @param {number} handle
  * @return {void}
  */
-XRSession.prototype.cancelAnimationFrame = function (handle) {};
+XRSession.prototype.cancelAnimationFrame = function (handle){};
 
 /**
  * @return {Promise<void>}
  */
-XRSession.prototype.end = function () {};
+XRSession.prototype.end = function (){};
 
 /**
  * @param {string} referenceSpaceType
  * @return {Promise<XRReferenceSpace>}
  */
-XRSession.prototype.requestReferenceSpace = function (referenceSpaceType) {};
+XRSession.prototype.requestReferenceSpace = function (referenceSpaceType){};
 
 /**
  * @typedef {function(number, XRFrame): undefined}
@@ -170,7 +170,7 @@ XRRenderStateInit.prototype.baseLayer;
 /**
  * @constructor
  */
-function XRRenderState() {};
+function XRRenderState(){};
 
 /**
  * @type {number}
@@ -206,7 +206,7 @@ XRFrame.prototype.session;
  * @param {XRReferenceSpace} referenceSpace
  * @return {?XRViewerPose}
  */
-XRFrame.prototype.getViewerPose = function (referenceSpace) {};
+XRFrame.prototype.getViewerPose = function (referenceSpace){};
 
 /**
  *
@@ -214,12 +214,12 @@ XRFrame.prototype.getViewerPose = function (referenceSpace) {};
  * @param {XRSpace} baseSpace
  * @return {XRPose}
  */
-XRFrame.prototype.getPose = function (space, baseSpace) {};
+XRFrame.prototype.getPose = function (space, baseSpace){};
 
 /**
  * @constructor
  */
-function XRReferenceSpace() {};
+function XRReferenceSpace(){};
 
 /**
  * @type {Array<DOMPointReadOnly>}
@@ -230,7 +230,7 @@ XRReferenceSpace.prototype.boundsGeometry;
  * @param {XRRigidTransform} originOffset
  * @return {XRReferenceSpace}
  */
-XRReferenceSpace.prototype.getOffsetReferenceSpace = function(originOffset) {};
+XRReferenceSpace.prototype.getOffsetReferenceSpace = function(originOffset){};
 
 /**
  * @type {?function (Event)}
@@ -240,7 +240,7 @@ XRReferenceSpace.prototype.onreset;
 /**
  * @constructor
  */
-function XRRigidTransform() {};
+function XRRigidTransform(){};
 
 /**
  * @type {DOMPointReadOnly}
@@ -320,7 +320,7 @@ XRViewport.prototype.height;
 /**
  * @constructor
  */
-function XRWebGLLayerInit() {};
+function XRWebGLLayerInit(){};
 
 /**
  * @type {boolean}
@@ -395,28 +395,28 @@ XRWebGLLayer.prototype.framebuffer;
  * @param {XRView} view
  * @return {?XRViewport}
  */
-XRWebGLLayer.prototype.getViewport = function(view) {};
+XRWebGLLayer.prototype.getViewport = function(view){};
 
 /**
  * @param {XRSession} session
  * @return {number}
  */
-XRWebGLLayer.prototype.getNativeFramebufferScaleFactor = function (session) {};
+XRWebGLLayer.prototype.getNativeFramebufferScaleFactor = function (session){};
 
 /**
  * @constructor
  */
-function WebGLRenderingContextBase() {};
+function WebGLRenderingContextBase(){};
 
 /**
  * @return {Promise<void>}
  */
-WebGLRenderingContextBase.prototype.makeXRCompatible = function () {};
+WebGLRenderingContextBase.prototype.makeXRCompatible = function (){};
 
 /**
  * @constructor
  */
-function XRInputSourcesChangeEvent() {};
+function XRInputSourcesChangeEvent(){};
 
 /**
  * @type {Array<XRInputSource>}
@@ -431,7 +431,7 @@ XRInputSourcesChangeEvent.prototype.removed;
 /**
  * @constructor
  */
-function XRInputSourceEvent() {};
+function XRInputSourceEvent(){};
 
 /**
  * @type {XRFrame}
@@ -446,7 +446,7 @@ XRInputSourceEvent.prototype.inputSource;
 /**
  * @constructor
  */
-function XRInputSource() {};
+function XRInputSource(){};
 
 /**
  * @type {Gamepad}
@@ -481,12 +481,12 @@ XRInputSource.prototype.targetRaySpace;
 /**
  * @constructor
  */
-function XRSpace() {};
+function XRSpace(){};
 
 /**
  * @constructor
  */
-function XRPose() {};
+function XRPose(){};
 
 /**
  * @type {XRRigidTransform}

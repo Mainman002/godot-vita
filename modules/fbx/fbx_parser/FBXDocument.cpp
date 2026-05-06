@@ -598,9 +598,9 @@ std::vector<const Connection *> Document::GetConnectionsSequenced(uint64_t id, c
 
 // ------------------------------------------------------------------------------------------------
 std::vector<const Connection *> Document::GetConnectionsSequenced(uint64_t id, bool is_src,
-		const ConnectionMap &conns,
-		const char *const *classnames,
-		size_t count) const
+																  const ConnectionMap &conns,
+																  const char *const *classnames,
+																  size_t count) const
 
 {
 	size_t lengths[MAX_CLASSNAMES];
@@ -652,13 +652,13 @@ std::vector<const Connection *> Document::GetConnectionsBySourceSequenced(uint64
 
 // ------------------------------------------------------------------------------------------------
 std::vector<const Connection *> Document::GetConnectionsBySourceSequenced(uint64_t source,
-		const char *const *classnames, size_t count) const {
+																		  const char *const *classnames, size_t count) const {
 	return GetConnectionsSequenced(source, true, ConnectionsBySource(), classnames, count);
 }
 
 // ------------------------------------------------------------------------------------------------
 std::vector<const Connection *> Document::GetConnectionsByDestinationSequenced(uint64_t dest,
-		const char *classname) const {
+																			   const char *classname) const {
 	const char *arr[] = { classname };
 	return GetConnectionsByDestinationSequenced(dest, arr, 1);
 }
@@ -670,13 +670,13 @@ std::vector<const Connection *> Document::GetConnectionsByDestinationSequenced(u
 
 // ------------------------------------------------------------------------------------------------
 std::vector<const Connection *> Document::GetConnectionsByDestinationSequenced(uint64_t dest,
-		const char *const *classnames, size_t count) const {
+																			   const char *const *classnames, size_t count) const {
 	return GetConnectionsSequenced(dest, false, ConnectionsByDestination(), classnames, count);
 }
 
 // ------------------------------------------------------------------------------------------------
 Connection::Connection(uint64_t insertionOrder, uint64_t src, uint64_t dest, const std::string &prop,
-		const Document &doc) :
+					   const Document &doc) :
 		insertionOrder(insertionOrder), prop(prop), src(src), dest(dest), doc(doc) {
 }
 

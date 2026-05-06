@@ -249,8 +249,8 @@ Vector3 TransformInterpolator::_basis_orthonormalize(Basis &r_basis) {
 TransformInterpolator::Method TransformInterpolator::_test_basis(Basis p_basis, bool r_needed_normalize, Quat &r_quat) {
 	// axis lengths
 	Vector3 al = Vector3(p_basis.get_axis(0).length_squared(),
-			p_basis.get_axis(1).length_squared(),
-			p_basis.get_axis(2).length_squared());
+						 p_basis.get_axis(1).length_squared(),
+						 p_basis.get_axis(2).length_squared());
 
 	// non unit scale?
 	if (r_needed_normalize || !al.is_equal_approx(Vector3(1.0, 1.0, 1.0), (real_t)0.001f)) {
@@ -261,8 +261,8 @@ TransformInterpolator::Method TransformInterpolator::_test_basis(Basis p_basis, 
 		// if any of the axes are really small, it is unlikely to be a valid rotation, or is scaled too small to deal with float error
 		const real_t sl_epsilon = 0.00001f;
 		if ((al.x < sl_epsilon) ||
-				(al.y < sl_epsilon) ||
-				(al.z < sl_epsilon)) {
+			(al.y < sl_epsilon) ||
+			(al.z < sl_epsilon)) {
 			return INTERP_LERP;
 		}
 

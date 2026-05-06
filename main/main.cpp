@@ -450,9 +450,9 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 	engine->add_singleton(Engine::Singleton("Performance", performance));
 
 	GLOBAL_DEF("debug/settings/crash_handler/message",
-			String("Please include this when reporting the bug to the project developer."));
+			   String("Please include this when reporting the bug to the project developer."));
 	GLOBAL_DEF("debug/settings/crash_handler/message.editor",
-			String("Please include this when reporting the bug on: https://github.com/godotengine/godot/issues"));
+			   String("Please include this when reporting the bug on: https://github.com/godotengine/godot/issues"));
 
 	MAIN_PRINT("Main: Parse CMDLine");
 
@@ -534,13 +534,13 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 
 #ifdef TOOLS_ENABLED
 		if (I->get() == "--debug" ||
-				I->get() == "--verbose" ||
-				I->get() == "--disable-crash-handler") {
+			I->get() == "--verbose" ||
+			I->get() == "--disable-crash-handler") {
 			forwardable_cli_arguments[CLI_SCOPE_TOOL].push_back(I->get());
 			forwardable_cli_arguments[CLI_SCOPE_PROJECT].push_back(I->get());
 		}
 		if (I->get() == "--audio-driver" ||
-				I->get() == "--video-driver") {
+			I->get() == "--video-driver") {
 			if (I->next()) {
 				forwardable_cli_arguments[CLI_SCOPE_TOOL].push_back(I->get());
 				forwardable_cli_arguments[CLI_SCOPE_TOOL].push_back(I->next()->get());
@@ -1533,7 +1533,7 @@ Error Main::setup2(Thread::ID p_main_tid_override) {
 #if defined(TOOLS_ENABLED) && !defined(NO_EDITOR_SPLASH)
 		const Color boot_bg_color =
 				GLOBAL_DEF("application/boot_splash/bg_color",
-						(editor || project_manager) ? boot_splash_editor_bg_color : boot_splash_bg_color);
+						   (editor || project_manager) ? boot_splash_editor_bg_color : boot_splash_bg_color);
 #else
 		const Color boot_bg_color = GLOBAL_DEF("application/boot_splash/bg_color", boot_splash_bg_color);
 #endif
@@ -1570,8 +1570,8 @@ Error Main::setup2(Thread::ID p_main_tid_override) {
 
 	GLOBAL_DEF("application/config/icon", String());
 	ProjectSettings::get_singleton()->set_custom_property_info("application/config/icon",
-			PropertyInfo(Variant::STRING, "application/config/icon",
-					PROPERTY_HINT_FILE, "*.png,*.webp,*.svg"));
+															   PropertyInfo(Variant::STRING, "application/config/icon",
+																			PROPERTY_HINT_FILE, "*.png,*.webp,*.svg"));
 
 	GLOBAL_DEF("application/config/macos_native_icon", String());
 	ProjectSettings::get_singleton()->set_custom_property_info("application/config/macos_native_icon", PropertyInfo(Variant::STRING, "application/config/macos_native_icon", PROPERTY_HINT_FILE, "*.icns"));
@@ -1597,9 +1597,9 @@ Error Main::setup2(Thread::ID p_main_tid_override) {
 	GLOBAL_DEF("input_devices/pointing/android/enable_pan_and_scale_gestures", false);
 	GLOBAL_DEF("input_devices/pointing/android/rotary_input_scroll_axis", 1);
 	ProjectSettings::get_singleton()->set_custom_property_info("input_devices/pointing/android/rotary_input_scroll_axis",
-			PropertyInfo(Variant::INT,
-					"input_devices/pointing/android/rotary_input_scroll_axis",
-					PROPERTY_HINT_ENUM, "Horizontal,Vertical"));
+															   PropertyInfo(Variant::INT,
+																			"input_devices/pointing/android/rotary_input_scroll_axis",
+																			PROPERTY_HINT_ENUM, "Horizontal,Vertical"));
 
 	MAIN_PRINT("Main: Load Translations and Remaps");
 
@@ -1716,10 +1716,10 @@ bool Main::start() {
 			positional_arg = args[i];
 
 			if (args[i].ends_with(".scn") ||
-					args[i].ends_with(".tscn") ||
-					args[i].ends_with(".escn") ||
-					args[i].ends_with(".res") ||
-					args[i].ends_with(".tres")) {
+				args[i].ends_with(".tscn") ||
+				args[i].ends_with(".escn") ||
+				args[i].ends_with(".res") ||
+				args[i].ends_with(".tres")) {
 				// Only consider the positional argument to be a scene path if it ends with
 				// a file extension associated with Godot scenes. This makes it possible
 				// for projects to parse command-line arguments for custom CLI arguments
@@ -1771,10 +1771,10 @@ bool Main::start() {
 
 	uint64_t minimum_time_msec = GLOBAL_DEF("application/boot_splash/minimum_display_time", 0);
 	ProjectSettings::get_singleton()->set_custom_property_info("application/boot_splash/minimum_display_time",
-			PropertyInfo(Variant::INT,
-					"application/boot_splash/minimum_display_time",
-					PROPERTY_HINT_RANGE,
-					"0,100,1,or_greater")); // No negative numbers.
+															   PropertyInfo(Variant::INT,
+																			"application/boot_splash/minimum_display_time",
+																			PROPERTY_HINT_RANGE,
+																			"0,100,1,or_greater")); // No negative numbers.
 
 #ifdef TOOLS_ENABLED
 	if (doc_tool_path != "") {

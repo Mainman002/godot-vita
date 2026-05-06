@@ -663,10 +663,10 @@ uint32_t TileSet::_score_bitmask_difference(uint32_t p_bitmask, uint32_t p_ref_b
 	// This fixes some edge cases for certain common incomplete tilesheet layouts.
 	// (We only care about the truthiness of the bit tests, not their exact value, hence the bool casts.)
 	if ((p_ref_bitmask == 511 || p_ref_bitmask == TileSet::BIND_CENTER) &&
-			(bool(p_bitmask & TileSet::BIND_LEFT) != bool(p_bitmask & TileSet::BIND_RIGHT) ||
-					bool(p_bitmask & TileSet::BIND_TOP) != bool(p_bitmask & TileSet::BIND_BOTTOM) ||
-					bool(p_bitmask & TileSet::BIND_TOPRIGHT) != bool(p_bitmask & TileSet::BIND_BOTTOMLEFT) ||
-					bool(p_bitmask & TileSet::BIND_TOPLEFT) != bool(p_bitmask & TileSet::BIND_BOTTOMRIGHT))) {
+		(bool(p_bitmask & TileSet::BIND_LEFT) != bool(p_bitmask & TileSet::BIND_RIGHT) ||
+		 bool(p_bitmask & TileSet::BIND_TOP) != bool(p_bitmask & TileSet::BIND_BOTTOM) ||
+		 bool(p_bitmask & TileSet::BIND_TOPRIGHT) != bool(p_bitmask & TileSet::BIND_BOTTOMLEFT) ||
+		 bool(p_bitmask & TileSet::BIND_TOPLEFT) != bool(p_bitmask & TileSet::BIND_BOTTOMRIGHT))) {
 		ret += 16;
 	}
 	return ret;

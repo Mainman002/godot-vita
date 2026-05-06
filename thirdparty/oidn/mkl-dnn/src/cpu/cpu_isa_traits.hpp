@@ -51,7 +51,7 @@ typedef enum {
     avx512_mic_4ops,
 } cpu_isa_t;
 
-template <cpu_isa_t> struct cpu_isa_traits {}; /* ::vlen -> 32 (for avx2) */
+template <cpu_isa_t> struct cpu_isa_traits{}; /* ::vlen -> 32 (for avx2) */
 
 template <> struct cpu_isa_traits<sse42> {
     typedef Xbyak::Xmm Vmm;
@@ -66,7 +66,7 @@ template <> struct cpu_isa_traits<avx> {
     static constexpr int n_vregs = 16;
 };
 template <> struct cpu_isa_traits<avx2>:
-    public cpu_isa_traits<avx> {};
+    public cpu_isa_traits<avx>{};
 
 template <> struct cpu_isa_traits<avx512_common> {
     typedef Xbyak::Zmm Vmm;
@@ -75,13 +75,13 @@ template <> struct cpu_isa_traits<avx512_common> {
     static constexpr int n_vregs = 32;
 };
 template <> struct cpu_isa_traits<avx512_core>:
-    public cpu_isa_traits<avx512_common> {};
+    public cpu_isa_traits<avx512_common>{};
 
 template <> struct cpu_isa_traits<avx512_mic>:
-    public cpu_isa_traits<avx512_common> {};
+    public cpu_isa_traits<avx512_common>{};
 
 template <> struct cpu_isa_traits<avx512_mic_4ops>:
-    public cpu_isa_traits<avx512_common> {};
+    public cpu_isa_traits<avx512_common>{};
 
 namespace {
 

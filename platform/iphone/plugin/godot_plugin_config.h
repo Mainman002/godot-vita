@@ -215,7 +215,7 @@ static inline bool validate_plugin(PluginConfigIOS &plugin_config) {
 	String plugin_extension = plugin_config.binary.get_extension().to_lower();
 
 	if ((plugin_extension == "a" && FileAccess::exists(plugin_config.binary)) ||
-			(plugin_extension == "xcframework" && DirAccess::exists(plugin_config.binary))) {
+		(plugin_extension == "xcframework" && DirAccess::exists(plugin_config.binary))) {
 		plugin_config.valid_config = true;
 		plugin_config.supports_targets = false;
 	} else {
@@ -226,7 +226,7 @@ static inline bool validate_plugin(PluginConfigIOS &plugin_config) {
 		String debug_file_name = file_path.plus_file(file_name + ".debug." + file_extension);
 
 		if ((plugin_extension == "a" && FileAccess::exists(release_file_name) && FileAccess::exists(debug_file_name)) ||
-				(plugin_extension == "xcframework" && DirAccess::exists(release_file_name) && DirAccess::exists(debug_file_name))) {
+			(plugin_extension == "xcframework" && DirAccess::exists(release_file_name) && DirAccess::exists(debug_file_name))) {
 			plugin_config.valid_config = true;
 			plugin_config.supports_targets = true;
 		}

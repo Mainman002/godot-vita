@@ -563,8 +563,8 @@ bool EditorExportPlatformWindows::has_valid_project_configuration(const Ref<Edit
 	if (!file_version.empty()) {
 		Vector<String> version_array = file_version.split(".", false);
 		if (version_array.size() != 4 || !version_array[0].is_valid_integer() ||
-				!version_array[1].is_valid_integer() || !version_array[2].is_valid_integer() ||
-				!version_array[3].is_valid_integer() || file_version.find("-") > -1) {
+			!version_array[1].is_valid_integer() || !version_array[2].is_valid_integer() ||
+			!version_array[3].is_valid_integer() || file_version.find("-") > -1) {
 			err += TTR("Invalid file version:") + " " + file_version + "\n";
 		}
 	}
@@ -573,8 +573,8 @@ bool EditorExportPlatformWindows::has_valid_project_configuration(const Ref<Edit
 	if (!product_version.empty()) {
 		Vector<String> version_array = product_version.split(".", false);
 		if (version_array.size() != 4 || !version_array[0].is_valid_integer() ||
-				!version_array[1].is_valid_integer() || !version_array[2].is_valid_integer() ||
-				!version_array[3].is_valid_integer() || product_version.find("-") > -1) {
+			!version_array[1].is_valid_integer() || !version_array[2].is_valid_integer() ||
+			!version_array[3].is_valid_integer() || product_version.find("-") > -1) {
 			err += TTR("Invalid product version:") + " " + product_version + "\n";
 		}
 	}

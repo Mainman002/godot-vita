@@ -76,9 +76,9 @@ public:
 
 	Quat operator*(const Vector3 &p_v) const {
 		return Quat(w * p_v.x + y * p_v.z - z * p_v.y,
-				w * p_v.y + z * p_v.x - x * p_v.z,
-				w * p_v.z + x * p_v.y - y * p_v.x,
-				-x * p_v.x - y * p_v.y - z * p_v.z);
+					w * p_v.y + z * p_v.x - x * p_v.z,
+					w * p_v.z + x * p_v.y - y * p_v.x,
+					-x * p_v.x - y * p_v.y - z * p_v.z);
 	}
 
 	_FORCE_INLINE_ Vector3 xform(const Vector3 &p_v) const {

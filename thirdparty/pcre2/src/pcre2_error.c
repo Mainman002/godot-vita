@@ -320,7 +320,7 @@ else                                /* Invalid error number */
 
 for (; n > 0; n--)
   {
-  while (*message++ != CHAR_NUL) {};
+  while (*message++ != CHAR_NUL){};
   if (*message == CHAR_NUL) return PCRE2_ERROR_BADDATA;
   }
 

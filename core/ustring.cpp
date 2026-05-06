@@ -3506,9 +3506,9 @@ String String::http_escape() const {
 	for (int i = 0; i < temp.length(); ++i) {
 		uint8_t ord = temp[i];
 		if (ord == '.' || ord == '-' || ord == '_' || ord == '~' ||
-				(ord >= 'a' && ord <= 'z') ||
-				(ord >= 'A' && ord <= 'Z') ||
-				(ord >= '0' && ord <= '9')) {
+			(ord >= 'a' && ord <= 'z') ||
+			(ord >= 'A' && ord <= 'Z') ||
+			(ord >= '0' && ord <= '9')) {
 			res += ord;
 		} else {
 			char p[4] = { '%', 0, 0, 0 };

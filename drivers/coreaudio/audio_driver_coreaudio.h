@@ -63,25 +63,25 @@ class AudioDriverCoreAudio : public AudioDriver {
 	void _set_device(const String &device, bool capture = false);
 
 	static OSStatus input_device_address_cb(AudioObjectID inObjectID,
-			UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
-			void *inClientData);
+											UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
+											void *inClientData);
 
 	static OSStatus output_device_address_cb(AudioObjectID inObjectID,
-			UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
-			void *inClientData);
+											 UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
+											 void *inClientData);
 #endif
 
 	static OSStatus output_callback(void *inRefCon,
-			AudioUnitRenderActionFlags *ioActionFlags,
-			const AudioTimeStamp *inTimeStamp,
-			UInt32 inBusNumber, UInt32 inNumberFrames,
-			AudioBufferList *ioData);
+									AudioUnitRenderActionFlags *ioActionFlags,
+									const AudioTimeStamp *inTimeStamp,
+									UInt32 inBusNumber, UInt32 inNumberFrames,
+									AudioBufferList *ioData);
 
 	static OSStatus input_callback(void *inRefCon,
-			AudioUnitRenderActionFlags *ioActionFlags,
-			const AudioTimeStamp *inTimeStamp,
-			UInt32 inBusNumber, UInt32 inNumberFrames,
-			AudioBufferList *ioData);
+								   AudioUnitRenderActionFlags *ioActionFlags,
+								   const AudioTimeStamp *inTimeStamp,
+								   UInt32 inBusNumber, UInt32 inNumberFrames,
+								   AudioBufferList *ioData);
 
 	Error capture_init();
 	void capture_finish();

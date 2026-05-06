@@ -111,7 +111,7 @@ Model::~Model() {
 }
 
 ModelLimbNode::ModelLimbNode(uint64_t id, const ElementPtr element, const Document &doc, const std::string &name) :
-		Model(id, element, doc, name){
+		Model(id, element, doc, name) {
 
 		};
 

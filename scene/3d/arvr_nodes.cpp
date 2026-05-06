@@ -183,7 +183,7 @@ ARVRCamera::ARVRCamera() {
 	set_physics_interpolation_mode(Node::PHYSICS_INTERPOLATION_MODE_OFF);
 };
 
-ARVRCamera::~ARVRCamera(){
+ARVRCamera::~ARVRCamera() {
 	// nothing to do here yet for now..
 };
 
@@ -415,7 +415,7 @@ ARVRController::ARVRController() {
 	set_physics_interpolation_mode(Node::PHYSICS_INTERPOLATION_MODE_OFF);
 };
 
-ARVRController::~ARVRController(){
+ARVRController::~ARVRController() {
 	// nothing to do here yet for now..
 };
 
@@ -570,7 +570,7 @@ ARVRAnchor::ARVRAnchor() {
 	set_physics_interpolation_mode(Node::PHYSICS_INTERPOLATION_MODE_OFF);
 };
 
-ARVRAnchor::~ARVRAnchor(){
+ARVRAnchor::~ARVRAnchor() {
 	// nothing to do here yet for now..
 };
 
@@ -667,6 +667,6 @@ ARVROrigin::ARVROrigin() {
 	tracked_camera = nullptr;
 };
 
-ARVROrigin::~ARVROrigin(){
+ARVROrigin::~ARVROrigin() {
 	// nothing to do here yet for now..
 };

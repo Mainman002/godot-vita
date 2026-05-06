@@ -33,10 +33,10 @@
 #include "core/io/file_access_memory.h"
 
 Error ImageLoaderBMP::convert_to_image(Ref<Image> p_image,
-		const uint8_t *p_buffer,
-		const uint8_t *p_color_buffer,
-		const uint32_t color_table_size,
-		const bmp_header_s &p_header) {
+									   const uint8_t *p_buffer,
+									   const uint8_t *p_color_buffer,
+									   const uint32_t color_table_size,
+									   const bmp_header_s &p_header) {
 	Error err = OK;
 
 	if (p_buffer == nullptr) {
@@ -54,16 +54,16 @@ Error ImageLoaderBMP::convert_to_image(Ref<Image> p_image,
 		if (bits_per_pixel == 1) {
 			// Requires bit unpacking...
 			ERR_FAIL_COND_V_MSG(width % 8 != 0, ERR_UNAVAILABLE,
-					vformat("1-bpp BMP images must have a width that is a multiple of 8, but the imported BMP is %d pixels wide.", int(width)));
+								vformat("1-bpp BMP images must have a width that is a multiple of 8, but the imported BMP is %d pixels wide.", int(width)));
 			ERR_FAIL_COND_V_MSG(height % 8 != 0, ERR_UNAVAILABLE,
-					vformat("1-bpp BMP images must have a height that is a multiple of 8, but the imported BMP is %d pixels tall.", int(height)));
+								vformat("1-bpp BMP images must have a height that is a multiple of 8, but the imported BMP is %d pixels tall.", int(height)));
 
 		} else if (bits_per_pixel == 4) {
 			// Requires bit unpacking...
 			ERR_FAIL_COND_V_MSG(width % 2 != 0, ERR_UNAVAILABLE,
-					vformat("4-bpp BMP images must have a width that is a multiple of 2, but the imported BMP is %d pixels wide.", int(width)));
+								vformat("4-bpp BMP images must have a width that is a multiple of 2, but the imported BMP is %d pixels wide.", int(width)));
 			ERR_FAIL_COND_V_MSG(height % 2 != 0, ERR_UNAVAILABLE,
-					vformat("4-bpp BMP images must have a height that is a multiple of 2, but the imported BMP is %d pixels tall.", int(height)));
+								vformat("4-bpp BMP images must have a height that is a multiple of 2, but the imported BMP is %d pixels tall.", int(height)));
 
 		} else if (bits_per_pixel == 16) {
 			ERR_FAIL_V_MSG(ERR_UNAVAILABLE, "16-bpp BMP images are not supported.");
@@ -201,7 +201,7 @@ Error ImageLoaderBMP::convert_to_image(Ref<Image> p_image,
 }
 
 Error ImageLoaderBMP::load_image(Ref<Image> p_image, FileAccess *f,
-		bool p_force_linear, float p_scale) {
+								 bool p_force_linear, float p_scale) {
 	bmp_header_s bmp_header;
 	Error err = ERR_INVALID_DATA;
 
@@ -218,14 +218,14 @@ Error ImageLoaderBMP::load_image(Ref<Image> p_image, FileAccess *f,
 			// Info Header
 			bmp_header.bmp_info_header.bmp_header_size = f->get_32();
 			ERR_FAIL_COND_V_MSG(bmp_header.bmp_info_header.bmp_header_size < BITMAP_INFO_HEADER_MIN_SIZE, ERR_FILE_CORRUPT,
-					vformat("Couldn't parse the BMP info header. The file is likely corrupt: %s", f->get_path()));
+								vformat("Couldn't parse the BMP info header. The file is likely corrupt: %s", f->get_path()));
 
 			bmp_header.bmp_info_header.bmp_width = f->get_32();
 			bmp_header.bmp_info_header.bmp_height = f->get_32();
 
 			bmp_header.bmp_info_header.bmp_planes = f->get_16();
 			ERR_FAIL_COND_V_MSG(bmp_header.bmp_info_header.bmp_planes != 1, ERR_FILE_CORRUPT,
-					vformat("Couldn't parse the BMP planes. The file is likely corrupt: %s", f->get_path()));
+								vformat("Couldn't parse the BMP planes. The file is likely corrupt: %s", f->get_path()));
 
 			bmp_header.bmp_info_header.bmp_bit_count = f->get_16();
 			bmp_header.bmp_info_header.bmp_compression = f->get_32();
@@ -243,7 +243,7 @@ Error ImageLoaderBMP::load_image(Ref<Image> p_image, FileAccess *f,
 					// Stop parsing.
 					f->close();
 					ERR_FAIL_V_MSG(ERR_UNAVAILABLE,
-							vformat("Compressed BMP files are not supported: %s", f->get_path()));
+								   vformat("Compressed BMP files are not supported: %s", f->get_path()));
 				} break;
 			}
 			// Don't rely on sizeof(bmp_file_header) as structure padding
@@ -259,7 +259,7 @@ Error ImageLoaderBMP::load_image(Ref<Image> p_image, FileAccess *f,
 				// Support 256 colors max
 				color_table_size = 1 << bmp_header.bmp_info_header.bmp_bit_count;
 				ERR_FAIL_COND_V_MSG(color_table_size == 0, ERR_BUG,
-						vformat("Couldn't parse the BMP color table: %s", f->get_path()));
+									vformat("Couldn't parse the BMP color table: %s", f->get_path()));
 			}
 
 			PoolVector<uint8_t> bmp_color_table;
@@ -281,7 +281,7 @@ Error ImageLoaderBMP::load_image(Ref<Image> p_image, FileAccess *f,
 				PoolVector<uint8_t>::Read bmp_buffer_r = bmp_buffer.read();
 				PoolVector<uint8_t>::Read bmp_color_table_r = bmp_color_table.read();
 				err = convert_to_image(p_image, bmp_buffer_r.ptr(),
-						bmp_color_table_r.ptr(), color_table_size, bmp_header);
+									   bmp_color_table_r.ptr(), color_table_size, bmp_header);
 			}
 			f->close();
 		}

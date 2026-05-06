@@ -107,17 +107,17 @@ private:
 	}
 
 	void BuildDocumentBones(Ref<FBXBone> p_parent_bone,
-			ImportState &state, const FBXDocParser::Document *p_doc,
-			uint64_t p_id);
+							ImportState &state, const FBXDocParser::Document *p_doc,
+							uint64_t p_id);
 
 	void BuildDocumentNodes(Ref<PivotTransform> parent_transform, ImportState &state, const FBXDocParser::Document *doc, uint64_t id, Ref<FBXNode> fbx_parent);
 
 	Spatial *_generate_scene(const String &p_path, const FBXDocParser::Document *p_document,
-			const uint32_t p_flags,
-			int p_bake_fps,
-			const uint32_t p_compress_flags,
-			const int32_t p_max_bone_weights,
-			bool p_is_blender_fbx);
+							 const uint32_t p_flags,
+							 int p_bake_fps,
+							 const uint32_t p_compress_flags,
+							 const int32_t p_max_bone_weights,
+							 bool p_is_blender_fbx);
 
 	template <class T>
 	T _interpolate_track(const Vector<float> &p_times, const Vector<T> &p_values, float p_time, AssetImportAnimation::Interpolation p_interp);

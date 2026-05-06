@@ -42,9 +42,9 @@ namespace TestAStar {
 class ABCX : public AStar {
 public:
 	enum { A,
-		B,
-		C,
-		X };
+		   B,
+		   C,
+		   X };
 
 	ABCX() {
 		add_point(A, Vector3(0, 0, 0));
@@ -343,7 +343,7 @@ bool test_solutions() {
 						for (int i = 1; i < route.size(); i++) {
 							if (!adj[route[i - 1]][route[i]]) {
 								printf("From %d to %d: edge (%d, %d) does not exist\n",
-										u, v, route[i - 1], route[i]);
+									   u, v, route[i - 1], route[i]);
 								match = false;
 								goto exit;
 							}
@@ -351,7 +351,7 @@ bool test_solutions() {
 						}
 						if (!Math::is_equal_approx(astar_dist, d[u][v])) {
 							printf("From %d to %d: Floyd-Warshall gives %.6f, A* gives %.6f\n",
-									u, v, d[u][v], astar_dist);
+								   u, v, d[u][v], astar_dist);
 							match = false;
 							goto exit;
 						}

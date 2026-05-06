@@ -120,7 +120,7 @@ struct jit_uni_i8i8_pooling_fwd_ker_t: public jit_generator {
     void init_tmp_reg();
     void init_mask();
 
-    void load_vreg_mask_q(int ll) {};
+    void load_vreg_mask_q(int ll){};
 
     void load_src_max_op(int jj, int ll, size_t offset, bool masked, uint64_t msk);
     void load_src_avg_op(int jj, int ll, size_t offset, bool masked, uint64_t msk);

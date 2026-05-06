@@ -112,9 +112,9 @@ void AnimationTrackEditColor::draw_key_link(int p_index, float p_pixels_sec, int
 
 	if (get_animation()->track_get_type(get_track()) == Animation::TYPE_VALUE) {
 		if (get_animation()->track_get_interpolation_type(get_track()) != Animation::INTERPOLATION_NEAREST &&
-				(get_animation()->value_track_get_update_mode(get_track()) == Animation::UPDATE_CONTINUOUS ||
-						get_animation()->value_track_get_update_mode(get_track()) == Animation::UPDATE_CAPTURE) &&
-				!Math::is_zero_approx(get_animation()->track_get_key_transition(get_track(), p_index))) {
+			(get_animation()->value_track_get_update_mode(get_track()) == Animation::UPDATE_CONTINUOUS ||
+			 get_animation()->value_track_get_update_mode(get_track()) == Animation::UPDATE_CAPTURE) &&
+			!Math::is_zero_approx(get_animation()->track_get_key_transition(get_track(), p_index))) {
 			float start_time = get_animation()->track_get_key_time(get_track(), p_index);
 			float end_time = get_animation()->track_get_key_time(get_track(), p_index + 1);
 

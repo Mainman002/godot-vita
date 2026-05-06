@@ -1501,10 +1501,10 @@ Node *Node::get_node(const NodePath &p_path) const {
 
 		if (p_path.is_absolute()) {
 			ERR_FAIL_V_MSG(nullptr,
-					vformat("(Node not found: \"%s\" (absolute path attempted from \"%s\").)", p_path, desc));
+						   vformat("(Node not found: \"%s\" (absolute path attempted from \"%s\").)", p_path, desc));
 		} else {
 			ERR_FAIL_V_MSG(nullptr,
-					vformat("(Node not found: \"%s\" (relative to \"%s\").)", p_path, desc));
+						   vformat("(Node not found: \"%s\" (relative to \"%s\").)", p_path, desc));
 		}
 	}
 
@@ -3005,7 +3005,7 @@ void Node::clear_internal_tree_resource_paths() {
 
 String Node::get_configuration_warning() const {
 	if (get_script_instance() && get_script_instance()->get_script().is_valid() &&
-			get_script_instance()->get_script()->is_tool() && get_script_instance()->has_method("_get_configuration_warning")) {
+		get_script_instance()->get_script()->is_tool() && get_script_instance()->has_method("_get_configuration_warning")) {
 		return get_script_instance()->call("_get_configuration_warning");
 	}
 	return String();

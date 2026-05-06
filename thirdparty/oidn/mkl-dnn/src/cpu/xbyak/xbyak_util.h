@@ -131,7 +131,7 @@ class Cpu {
 	}
 	void setFamily()
 	{
-		unsigned int data[4] = {};
+		unsigned int data[4] ={};
 		getCpuid(1, data);
 		stepping = data[0] & mask(4);
 		model = (data[0] >> 4) & mask(4);
@@ -158,7 +158,7 @@ class Cpu {
 	{
 		if ((type_ & tINTEL) == 0) return;
 
-		unsigned int data[4] = {};
+		unsigned int data[4] ={};
 
 		 /* CAUTION: These numbers are configuration as shipped by Intel. */
 		getCpuidEx(0x0, 0, data);
@@ -196,7 +196,7 @@ class Cpu {
 		const unsigned int UNIFIED_CACHE = 3;
 		unsigned int smt_width = 0;
 		unsigned int logical_cores = 0;
-		unsigned int data[4] = {};
+		unsigned int data[4] ={};
 
 		if (x2APIC_supported_) {
 			smt_width = numCores_[0];
@@ -386,7 +386,7 @@ public:
 		, coresSharignDataCache_()
 		, dataCacheLevels_(0)
 	{
-		unsigned int data[4] = {};
+		unsigned int data[4] ={};
 		const unsigned int& EAX = data[0];
 		const unsigned int& EBX = data[1];
 		const unsigned int& ECX = data[2];

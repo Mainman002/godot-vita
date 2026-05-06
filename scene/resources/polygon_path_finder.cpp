@@ -252,9 +252,9 @@ Vector<Vector2> PolygonPathFinder::find_path(const Vector2 &p_from, const Vector
 
 			if (valid_a) {
 				if (e.points[0] != ignore_from_edge.points[1] &&
-						e.points[1] != ignore_from_edge.points[1] &&
-						e.points[0] != ignore_from_edge.points[0] &&
-						e.points[1] != ignore_from_edge.points[0]) {
+					e.points[1] != ignore_from_edge.points[1] &&
+					e.points[0] != ignore_from_edge.points[0] &&
+					e.points[1] != ignore_from_edge.points[0]) {
 					if (Geometry::segment_intersects_segment_2d(a, b, from, points[i].pos, nullptr)) {
 						valid_a = false;
 					}
@@ -263,9 +263,9 @@ Vector<Vector2> PolygonPathFinder::find_path(const Vector2 &p_from, const Vector
 
 			if (valid_b) {
 				if (e.points[0] != ignore_to_edge.points[1] &&
-						e.points[1] != ignore_to_edge.points[1] &&
-						e.points[0] != ignore_to_edge.points[0] &&
-						e.points[1] != ignore_to_edge.points[0]) {
+					e.points[1] != ignore_to_edge.points[1] &&
+					e.points[0] != ignore_to_edge.points[0] &&
+					e.points[1] != ignore_to_edge.points[0]) {
 					if (Geometry::segment_intersects_segment_2d(a, b, to, points[i].pos, nullptr)) {
 						valid_b = false;
 					}

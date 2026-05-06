@@ -29,10 +29,10 @@
 namespace mkldnn {
 namespace impl {
 
-template <data_type_t> struct prec_traits {}; /* ::type -> float */
-template <typename> struct data_traits {}; /* ::data_type -> f32 */
-template <int> struct typesize_traits {}; /* ::data_type_size -> f32 */
-template <primitive_kind_t> struct pkind_traits {}; /* ::desc_type, ::query_d */
+template <data_type_t> struct prec_traits{}; /* ::type -> float */
+template <typename> struct data_traits{}; /* ::data_type -> f32 */
+template <int> struct typesize_traits{}; /* ::data_type_size -> f32 */
+template <primitive_kind_t> struct pkind_traits{}; /* ::desc_type, ::query_d */
 
 template <> struct prec_traits<data_type::f32> { typedef float type; };
 template <> struct prec_traits<data_type::s32> { typedef int32_t type; };

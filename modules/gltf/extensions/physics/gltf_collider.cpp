@@ -195,7 +195,7 @@ Ref<GLTFCollider> GLTFCollider::from_node(const CollisionShape *p_collider_node)
 		collider->set_array_mesh(array_mesh);
 	} else {
 		ERR_PRINT("Tried to create a GLTFCollider from a CollisionShape node, but the given node's shape '" + String(Variant(shape)) +
-				"' had an unsupported shape type. Only BoxShape, CapsuleShape, CylinderShape, SphereShape, ConcavePolygonShape, and ConvexPolygonShape are supported.");
+				  "' had an unsupported shape type. Only BoxShape, CapsuleShape, CylinderShape, SphereShape, ConcavePolygonShape, and ConvexPolygonShape are supported.");
 	}
 	return collider;
 }

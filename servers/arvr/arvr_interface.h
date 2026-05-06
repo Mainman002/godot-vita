@@ -53,11 +53,11 @@ class ARVRInterface : public Reference {
 
 public:
 	enum Capabilities { /* purely meta data, provides some info about what this interface supports */
-		ARVR_NONE = 0, /* no capabilities */
-		ARVR_MONO = 1, /* can be used with mono output */
-		ARVR_STEREO = 2, /* can be used with stereo output */
-		ARVR_AR = 4, /* offers a camera feed for AR */
-		ARVR_EXTERNAL = 8 /* renders to external device */
+						ARVR_NONE = 0, /* no capabilities */
+						ARVR_MONO = 1, /* can be used with mono output */
+						ARVR_STEREO = 2, /* can be used with stereo output */
+						ARVR_AR = 4, /* offers a camera feed for AR */
+						ARVR_EXTERNAL = 8 /* renders to external device */
 	};
 
 	enum Eyes {
@@ -67,11 +67,11 @@ public:
 	};
 
 	enum Tracking_status { /* tracking status currently based on AR but we can start doing more with this for VR as well */
-		ARVR_NORMAL_TRACKING,
-		ARVR_EXCESSIVE_MOTION,
-		ARVR_INSUFFICIENT_FEATURES,
-		ARVR_UNKNOWN_TRACKING,
-		ARVR_NOT_TRACKING
+						   ARVR_NORMAL_TRACKING,
+						   ARVR_EXCESSIVE_MOTION,
+						   ARVR_INSUFFICIENT_FEATURES,
+						   ARVR_UNKNOWN_TRACKING,
+						   ARVR_NOT_TRACKING
 	};
 
 protected:

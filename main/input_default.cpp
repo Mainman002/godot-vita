@@ -205,9 +205,9 @@ Vector2 Input::get_vector(const StringName &p_negative_x, const StringName &p_po
 		// If the deadzone isn't specified, get it from the average of the actions.
 		p_deadzone = 0.25 *
 				(InputMap::get_singleton()->action_get_deadzone(p_positive_x) +
-						InputMap::get_singleton()->action_get_deadzone(p_negative_x) +
-						InputMap::get_singleton()->action_get_deadzone(p_positive_y) +
-						InputMap::get_singleton()->action_get_deadzone(p_negative_y));
+				 InputMap::get_singleton()->action_get_deadzone(p_negative_x) +
+				 InputMap::get_singleton()->action_get_deadzone(p_positive_y) +
+				 InputMap::get_singleton()->action_get_deadzone(p_negative_y));
 	}
 
 	// Circular length limiting and deadzone.
@@ -1112,8 +1112,8 @@ InputDefault::JoyEvent InputDefault::_get_mapped_axis_event(const JoyDeviceMappi
 				value = -value;
 			}
 			if (binding.input.axis.range == FULL_AXIS ||
-					(binding.input.axis.range == POSITIVE_HALF_AXIS && value >= 0) ||
-					(binding.input.axis.range == NEGATIVE_HALF_AXIS && value < 0)) {
+				(binding.input.axis.range == POSITIVE_HALF_AXIS && value >= 0) ||
+				(binding.input.axis.range == NEGATIVE_HALF_AXIS && value < 0)) {
 				event.type = binding.outputType;
 				float shifted_positive_value = 0;
 				switch (binding.input.axis.range) {
@@ -1267,7 +1267,7 @@ void InputDefault::parse_mapping(String p_mapping) {
 		String output = entry[idx].get_slice(":", 0).replace(" ", "");
 		String input = entry[idx].get_slice(":", 1).replace(" ", "");
 		ERR_CONTINUE_MSG(output.length() < 1 || input.length() < 2,
-				vformat("Invalid device mapping entry \"%s\" in mapping:\n%s", entry[idx], p_mapping));
+						 vformat("Invalid device mapping entry \"%s\" in mapping:\n%s", entry[idx], p_mapping));
 
 		if (output == "platform" || output == "hint") {
 			continue;
@@ -1276,7 +1276,7 @@ void InputDefault::parse_mapping(String p_mapping) {
 		JoyAxisRange output_range = FULL_AXIS;
 		if (output[0] == '+' || output[0] == '-') {
 			ERR_CONTINUE_MSG(output.length() < 2,
-					vformat("Invalid output entry \"%s\" in mapping:\n%s", entry[idx], p_mapping));
+							 vformat("Invalid output entry \"%s\" in mapping:\n%s", entry[idx], p_mapping));
 			if (output[0] == '+') {
 				output_range = POSITIVE_HALF_AXIS;
 			} else if (output[0] == '-') {
@@ -1305,7 +1305,7 @@ void InputDefault::parse_mapping(String p_mapping) {
 			print_verbose(vformat("Unrecognized output string \"%s\" in mapping:\n%s", output, p_mapping));
 		}
 		ERR_CONTINUE_MSG(output_button != JOY_INVALID_OPTION && output_axis != JOY_INVALID_OPTION,
-				vformat("Output string \"%s\" matched both button and axis in mapping:\n%s", output, p_mapping));
+						 vformat("Output string \"%s\" matched both button and axis in mapping:\n%s", output, p_mapping));
 
 		JoyBinding binding;
 		if (output_button != JOY_INVALID_OPTION) {
@@ -1330,7 +1330,7 @@ void InputDefault::parse_mapping(String p_mapping) {
 				break;
 			case 'h':
 				ERR_CONTINUE_MSG(input.length() != 4 || input[2] != '.',
-						vformat("Invalid had input \"%s\" in mapping:\n%s", input, p_mapping));
+								 vformat("Invalid had input \"%s\" in mapping:\n%s", input, p_mapping));
 				binding.inputType = TYPE_HAT;
 				binding.input.hat.hat = input.substr(1, 1).to_int();
 				binding.input.hat.hat_mask = static_cast<HatMask>(input.right(3).to_int());

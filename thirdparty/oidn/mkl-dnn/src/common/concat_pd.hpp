@@ -95,7 +95,7 @@ protected:
         int current_concat_dim_offset = 0;
         for (int i = 0; i < n_; ++i) {
             const int dim = src_mds_[i].dims[concat_dim_];
-            dims_t dims, offsets = {};
+            dims_t dims, offsets ={};
             utils::array_copy(dims, dst_md_.dims, ndims);
             dims[concat_dim_] = dim;
             offsets[concat_dim_] = current_concat_dim_offset;
@@ -139,7 +139,7 @@ protected:
             int current_concat_dim_offset = 0;
             for (int i = 0; i < n_; ++i) {
                 const int dim = src_mds_[i].dims[concat_dim_];
-                dims_t dims, offsets = {};
+                dims_t dims, offsets ={};
                 utils::array_copy(dims, dst_md_.dims, ndims);
                 dims[concat_dim_] = dim;
                 offsets[concat_dim_] = current_concat_dim_offset;

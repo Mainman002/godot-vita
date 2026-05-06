@@ -192,7 +192,7 @@ Dictionary GDScriptLanguageProtocol::initialize(const Dictionary &p_params) {
 		Dictionary request = make_notification("gdscript_client/changeWorkspace", params);
 
 		ERR_FAIL_COND_V_MSG(!clients.has(latest_client_id), ret.to_json(),
-				vformat("GDScriptLanguageProtocol: Can't initialize invalid peer '%d'.", latest_client_id));
+							vformat("GDScriptLanguageProtocol: Can't initialize invalid peer '%d'.", latest_client_id));
 		Ref<LSPeer> peer = clients.get(latest_client_id);
 		if (peer != nullptr) {
 			String msg = JSON::print(request);
@@ -282,7 +282,7 @@ void GDScriptLanguageProtocol::stop() {
 void GDScriptLanguageProtocol::notify_client(const String &p_method, const Variant &p_params, int p_client_id) {
 	if (p_client_id == -1) {
 		ERR_FAIL_COND_MSG(latest_client_id == -1,
-				"GDScript LSP: Can't notify client as none was connected.");
+						  "GDScript LSP: Can't notify client as none was connected.");
 		p_client_id = latest_client_id;
 	}
 	ERR_FAIL_COND(!clients.has(p_client_id));
@@ -298,7 +298,7 @@ void GDScriptLanguageProtocol::notify_client(const String &p_method, const Varia
 void GDScriptLanguageProtocol::request_client(const String &p_method, const Variant &p_params, int p_client_id) {
 	if (p_client_id == -1) {
 		ERR_FAIL_COND_MSG(latest_client_id == -1,
-				"GDScript LSP: Can't notify client as none was connected.");
+						  "GDScript LSP: Can't notify client as none was connected.");
 		p_client_id = latest_client_id;
 	}
 	ERR_FAIL_COND(!clients.has(p_client_id));

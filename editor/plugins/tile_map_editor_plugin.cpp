@@ -1970,8 +1970,8 @@ void TileMapEditor::_rotate(int steps) {
 		// Odd number of flags activated = mirrored rotation
 		for (int i = 0; i < 4; i++) {
 			if (transpose == mirrored_rotation_matrix[i][0] &&
-					flip_h == mirrored_rotation_matrix[i][1] &&
-					flip_v == mirrored_rotation_matrix[i][2]) {
+				flip_h == mirrored_rotation_matrix[i][1] &&
+				flip_v == mirrored_rotation_matrix[i][2]) {
 				int new_id = Math::wrapi(i + steps, 0, 4);
 				transpose = mirrored_rotation_matrix[new_id][0];
 				flip_h = mirrored_rotation_matrix[new_id][1];
@@ -1983,8 +1983,8 @@ void TileMapEditor::_rotate(int steps) {
 		// Even number of flags activated = normal rotation
 		for (int i = 0; i < 4; i++) {
 			if (transpose == normal_rotation_matrix[i][0] &&
-					flip_h == normal_rotation_matrix[i][1] &&
-					flip_v == normal_rotation_matrix[i][2]) {
+				flip_h == normal_rotation_matrix[i][1] &&
+				flip_v == normal_rotation_matrix[i][2]) {
 				int new_id = Math::wrapi(i + steps, 0, 4);
 				transpose = normal_rotation_matrix[new_id][0];
 				flip_h = normal_rotation_matrix[new_id][1];

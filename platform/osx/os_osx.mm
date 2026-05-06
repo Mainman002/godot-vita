@@ -1189,15 +1189,15 @@ static int remapKey(unsigned int key, unsigned int state) {
 	UniCharCount realLength;
 
 	OSStatus err = UCKeyTranslate(keyboardLayout,
-			key,
-			kUCKeyActionDisplay,
-			(state >> 8) & 0xFF,
-			LMGetKbdType(),
-			kUCKeyTranslateNoDeadKeysBit,
-			&keysDown,
-			sizeof(chars) / sizeof(chars[0]),
-			&realLength,
-			chars);
+								  key,
+								  kUCKeyActionDisplay,
+								  (state >> 8) & 0xFF,
+								  LMGetKbdType(),
+								  kUCKeyTranslateNoDeadKeysBit,
+								  &keysDown,
+								  sizeof(chars) / sizeof(chars[0]),
+								  &realLength,
+								  chars);
 
 	if (err != noErr) {
 		return translateKey(key);
@@ -1626,9 +1626,9 @@ Error OS_OSX::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 
 	// Register to be notified on keyboard layout changes
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDistributedCenter(),
-			NULL, keyboard_layout_changed,
-			kTISNotifySelectedKeyboardInputSourceChanged, NULL,
-			CFNotificationSuspensionBehaviorDeliverImmediately);
+									NULL, keyboard_layout_changed,
+									kTISNotifySelectedKeyboardInputSourceChanged, NULL,
+									CFNotificationSuspensionBehaviorDeliverImmediately);
 
 	// Register to be notified on displays arrangement changes
 	CGDisplayRegisterReconfigurationCallback(displays_arrangement_changed, NULL);
@@ -1698,8 +1698,10 @@ Error OS_OSX::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 
 	// Fail if a robustness strategy was requested
 
-#define ADD_ATTR(x) \
-	{ attributes[attributeCount++] = x; }
+#define ADD_ATTR(x)                       \
+	{                                     \
+		attributes[attributeCount++] = x; \
+	}
 #define ADD_ATTR2(x, y) \
 	{                   \
 		ADD_ATTR(x);    \
@@ -1831,7 +1833,7 @@ Error OS_OSX::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 	if (gl_initialization_error) {
 		OS::get_singleton()->alert("Your video card driver does not support any of the supported OpenGL versions.\n"
 								   "Please update your drivers or if you have a very old or integrated GPU, upgrade it.",
-				"Unable to initialize Video driver");
+								   "Unable to initialize Video driver");
 		return ERR_UNAVAILABLE;
 	}
 
@@ -1918,8 +1920,8 @@ public:
 			case ERR_WARNING:
 				if (NSAppKitVersionNumber >= NSAppKitVersionNumber10_12) {
 					os_log_info(OS_LOG_DEFAULT,
-							"WARNING: %{public}s\nat: %{public}s (%{public}s:%i)",
-							err_details, p_function, p_file, p_line);
+								"WARNING: %{public}s\nat: %{public}s (%{public}s:%i)",
+								err_details, p_function, p_file, p_line);
 				}
 				logf_error("\E[1;33mWARNING:\E[0;93m %s\n", err_details);
 				logf_error("\E[0;90m     at: %s (%s:%i)\E[0m\n", p_function, p_file, p_line);
@@ -1927,8 +1929,8 @@ public:
 			case ERR_SCRIPT:
 				if (NSAppKitVersionNumber >= NSAppKitVersionNumber10_12) {
 					os_log_error(OS_LOG_DEFAULT,
-							"SCRIPT ERROR: %{public}s\nat: %{public}s (%{public}s:%i)",
-							err_details, p_function, p_file, p_line);
+								 "SCRIPT ERROR: %{public}s\nat: %{public}s (%{public}s:%i)",
+								 err_details, p_function, p_file, p_line);
 				}
 				logf_error("\E[1;35mSCRIPT ERROR:\E[0;95m %s\n", err_details);
 				logf_error("\E[0;90m          at: %s (%s:%i)\E[0m\n", p_function, p_file, p_line);
@@ -1936,8 +1938,8 @@ public:
 			case ERR_SHADER:
 				if (NSAppKitVersionNumber >= NSAppKitVersionNumber10_12) {
 					os_log_error(OS_LOG_DEFAULT,
-							"SHADER ERROR: %{public}s\nat: %{public}s (%{public}s:%i)",
-							err_details, p_function, p_file, p_line);
+								 "SHADER ERROR: %{public}s\nat: %{public}s (%{public}s:%i)",
+								 err_details, p_function, p_file, p_line);
 				}
 				logf_error("\E[1;36mSHADER ERROR:\E[0;96m %s\n", err_details);
 				logf_error("\E[0;90m          at: %s (%s:%i)\E[0m\n", p_function, p_file, p_line);
@@ -1946,8 +1948,8 @@ public:
 			default:
 				if (NSAppKitVersionNumber >= NSAppKitVersionNumber10_12) {
 					os_log_error(OS_LOG_DEFAULT,
-							"ERROR: %{public}s\nat: %{public}s (%{public}s:%i)",
-							err_details, p_function, p_file, p_line);
+								 "ERROR: %{public}s\nat: %{public}s (%{public}s:%i)",
+								 err_details, p_function, p_file, p_line);
 				}
 				logf_error("\E[1;31mERROR:\E[0;91m %s\n", err_details);
 				logf_error("\E[0;90m   at: %s (%s:%i)\E[0m\n", p_function, p_file, p_line);
@@ -2163,7 +2165,7 @@ void OS_OSX::set_custom_mouse_cursor(const RES &p_cursor, CursorShape p_shape, c
 			uint8_t alpha = (color >> 24) & 0xFF;
 			pixels[i * 4 + 0] = ((color >> 16) & 0xFF) * alpha / 255;
 			pixels[i * 4 + 1] = ((color >> 8) & 0xFF) * alpha / 255;
-			pixels[i * 4 + 2] = ((color)&0xFF) * alpha / 255;
+			pixels[i * 4 + 2] = ((color) & 0xFF) * alpha / 255;
 			pixels[i * 4 + 3] = alpha;
 		}
 
@@ -2666,7 +2668,7 @@ void OS_OSX::_update_window() {
 
 		// Check if our window covers up the screen
 		if (frameRect.origin.x <= screenRect.origin.x && frameRect.origin.y <= frameRect.origin.y &&
-				frameRect.size.width >= screenRect.size.width && frameRect.size.height >= screenRect.size.height) {
+			frameRect.size.width >= screenRect.size.width && frameRect.size.height >= screenRect.size.height) {
 			borderless_full = true;
 		}
 	}
@@ -3145,15 +3147,15 @@ static NSString *createStringForKeys(const CGKeyCode *keyCode, int length) {
 		UniCharCount realLength;
 
 		err = UCKeyTranslate(keyboardLayout,
-				keyCode[i],
-				kUCKeyActionDisplay,
-				0,
-				LMGetKbdType(),
-				kUCKeyTranslateNoDeadKeysBit,
-				&keysDown,
-				sizeof(chars) / sizeof(chars[0]),
-				&realLength,
-				chars);
+							 keyCode[i],
+							 kUCKeyActionDisplay,
+							 0,
+							 LMGetKbdType(),
+							 kUCKeyTranslateNoDeadKeysBit,
+							 &keysDown,
+							 sizeof(chars) / sizeof(chars[0]),
+							 &realLength,
+							 chars);
 
 		if (err != noErr) {
 			CFRelease(output);

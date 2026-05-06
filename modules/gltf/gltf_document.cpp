@@ -840,7 +840,7 @@ Error GLTFDocument::_parse_buffers(Ref<GLTFState> p_state, const String &p_base_
 				if (uri.begins_with("data:")) { // Embedded data using base64.
 					// Validate data MIME types and throw an error if it's one we don't know/support.
 					if (!uri.begins_with("data:application/octet-stream;base64") &&
-							!uri.begins_with("data:application/gltf-buffer;base64")) {
+						!uri.begins_with("data:application/gltf-buffer;base64")) {
 						ERR_PRINT("glTF: Got buffer with an unknown URI data type: " + uri);
 					}
 					buffer_data = _parse_base64_uri(uri);
@@ -3091,9 +3091,9 @@ Error GLTFDocument::_parse_images(Ref<GLTFState> p_state, const String &p_base_p
 			if (uri.begins_with("data:")) { // Embedded data using base64.
 				// Validate data MIME types and throw a warning if it's one we don't know/support.
 				if (!uri.begins_with("data:application/octet-stream;base64") &&
-						!uri.begins_with("data:application/gltf-buffer;base64") &&
-						!uri.begins_with("data:image/png;base64") &&
-						!uri.begins_with("data:image/jpeg;base64")) {
+					!uri.begins_with("data:application/gltf-buffer;base64") &&
+					!uri.begins_with("data:image/png;base64") &&
+					!uri.begins_with("data:image/jpeg;base64")) {
 					WARN_PRINT(vformat("glTF: Image index '%d' uses an unsupported URI data type: %s. Skipping it.", i, uri));
 					p_state->images.push_back(Ref<Image>()); // Placeholder to keep count.
 					continue;
@@ -3143,7 +3143,7 @@ Error GLTFDocument::_parse_images(Ref<GLTFState> p_state, const String &p_base_p
 		} else if (d.has("bufferView")) {
 			// Handles the third bullet point from the spec (bufferView).
 			ERR_FAIL_COND_V_MSG(mimetype.empty(), ERR_FILE_CORRUPT,
-					vformat("glTF: Image index '%d' specifies 'bufferView' but no 'mimeType', which is invalid.", i));
+								vformat("glTF: Image index '%d' specifies 'bufferView' but no 'mimeType', which is invalid.", i));
 
 			const GLTFBufferViewIndex bvi = d["bufferView"];
 
@@ -4931,9 +4931,9 @@ Error GLTFDocument::_serialize_animations(Ref<GLTFState> p_state) {
 					Vector<real_t> weight_track;
 					while (true) {
 						float weight = _interpolate_track<float>(track.weight_tracks[track_idx].times,
-								track.weight_tracks[track_idx].values,
-								time,
-								track.weight_tracks[track_idx].interpolation);
+																 track.weight_tracks[track_idx].values,
+																 time,
+																 track.weight_tracks[track_idx].interpolation);
 						weight_track.push_back(weight);
 						if (last) {
 							break;
@@ -5410,7 +5410,7 @@ void GLTFDocument::_convert_csg_shape_to_gltf(CSGShape *p_current, GLTFNodeIndex
 #endif // MODULE_CSG_ENABLED
 
 void GLTFDocument::_create_gltf_node(Ref<GLTFState> p_state, Node *p_scene_parent, GLTFNodeIndex current_node_i,
-		GLTFNodeIndex p_parent_node_index, GLTFNodeIndex p_root_gltf_node, Ref<GLTFNode> p_gltf_node) {
+									 GLTFNodeIndex p_parent_node_index, GLTFNodeIndex p_root_gltf_node, Ref<GLTFNode> p_gltf_node) {
 	p_state->scene_nodes.insert(current_node_i, p_scene_parent);
 	p_state->nodes.push_back(p_gltf_node);
 	ERR_FAIL_COND(current_node_i == p_parent_node_index);
@@ -5471,8 +5471,8 @@ void GLTFDocument::_convert_grid_map_to_gltf(GridMap *p_grid_map, GLTFNodeIndex 
 				p_grid_map->get_cell_item_orientation(
 						cell_location.x, cell_location.y, cell_location.z));
 		cell_xform.basis.scale(Vector3(p_grid_map->get_cell_scale(),
-				p_grid_map->get_cell_scale(),
-				p_grid_map->get_cell_scale()));
+									   p_grid_map->get_cell_scale(),
+									   p_grid_map->get_cell_scale()));
 		cell_xform.set_origin(p_grid_map->map_to_world(
 				cell_location.x, cell_location.y, cell_location.z));
 		Ref<GLTFMesh> gltf_mesh;
@@ -5490,7 +5490,7 @@ void GLTFDocument::_convert_multi_mesh_instance_to_gltf(MultiMeshInstance *p_mul
 	Ref<MultiMesh> multi_mesh = p_multi_mesh_instance->get_multimesh();
 	if (multi_mesh.is_valid()) {
 		for (int32_t instance_i = 0; instance_i < multi_mesh->get_instance_count();
-				instance_i++) {
+			 instance_i++) {
 			GLTFNode *new_gltf_node = memnew(GLTFNode);
 			Transform transform;
 			if (multi_mesh->get_transform_format() == MultiMesh::TRANSFORM_2D) {
@@ -5501,7 +5501,7 @@ void GLTFDocument::_convert_multi_mesh_instance_to_gltf(MultiMeshInstance *p_mul
 				Quat quat(Vector3(0, 1, 0), rotation);
 				Size2 scale = xform_2d.get_scale();
 				transform.basis.set_quat_scale(quat,
-						Vector3(scale.x, 0, scale.y));
+											   Vector3(scale.x, 0, scale.y));
 				transform =
 						p_multi_mesh_instance->get_transform() * transform;
 			} else if (multi_mesh->get_transform_format() == MultiMesh::TRANSFORM_3D) {

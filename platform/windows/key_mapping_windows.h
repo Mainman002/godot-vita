@@ -38,7 +38,7 @@
 #include <winuser.h>
 
 class KeyMappingWindows {
-	KeyMappingWindows(){};
+	KeyMappingWindows() {};
 
 public:
 	static unsigned int get_keysym(unsigned int p_code);

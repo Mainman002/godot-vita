@@ -26,7 +26,7 @@ namespace gemm_utils {
 typedef ptrdiff_t dim_t;
 
 template <typename T, bool isTransA, bool isTransB>
-struct gemm_traits {};
+struct gemm_traits{};
 
 template <bool isTransA, bool isTransB>
 struct gemm_traits<double, isTransA, isTransB> {

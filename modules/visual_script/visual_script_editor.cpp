@@ -2188,14 +2188,14 @@ bool VisualScriptEditor::can_drop_data_fw(const Point2 &p_point, const Variant &
 	if (p_from == graph) {
 		Dictionary d = p_data;
 		if (d.has("type") &&
-				(String(d["type"]) == "visual_script_node_drag" ||
-						String(d["type"]) == "visual_script_function_drag" ||
-						String(d["type"]) == "visual_script_variable_drag" ||
-						String(d["type"]) == "visual_script_signal_drag" ||
-						String(d["type"]) == "obj_property" ||
-						String(d["type"]) == "resource" ||
-						String(d["type"]) == "files" ||
-						String(d["type"]) == "nodes")) {
+			(String(d["type"]) == "visual_script_node_drag" ||
+			 String(d["type"]) == "visual_script_function_drag" ||
+			 String(d["type"]) == "visual_script_variable_drag" ||
+			 String(d["type"]) == "visual_script_signal_drag" ||
+			 String(d["type"]) == "obj_property" ||
+			 String(d["type"]) == "resource" ||
+			 String(d["type"]) == "files" ||
+			 String(d["type"]) == "nodes")) {
 			if (String(d["type"]) == "obj_property") {
 #ifdef OSX_ENABLED
 				const_cast<VisualScriptEditor *>(this)->_show_hint(vformat(TTR("Hold %s to drop a Getter. Hold Shift to drop a generic signature."), find_keycode_name(KEY_META)));
@@ -3985,11 +3985,11 @@ void VisualScriptEditor::connect_seq(Ref<VisualScriptNode> vnode_old, Ref<Visual
 	int pass_port = -vnode_old->get_output_sequence_port_count() + 1;
 	int return_port = port_action_output - 1;
 	if (vnode_old->get_output_value_port_info(port_action_output).name == String("pass") &&
-			!script->get_output_sequence_ports_connected(func, port_action_node).has(pass_port)) {
+		!script->get_output_sequence_ports_connected(func, port_action_node).has(pass_port)) {
 		undo_redo->add_do_method(script.ptr(), "sequence_connect", func, port_action_node, pass_port, new_id);
 		undo_redo->add_undo_method(script.ptr(), "sequence_disconnect", func, port_action_node, pass_port, new_id);
 	} else if (vnode_old->get_output_value_port_info(port_action_output).name == String("return") &&
-			!script->get_output_sequence_ports_connected(func, port_action_node).has(return_port)) {
+			   !script->get_output_sequence_ports_connected(func, port_action_node).has(return_port)) {
 		undo_redo->add_do_method(script.ptr(), "sequence_connect", func, port_action_node, return_port, new_id);
 		undo_redo->add_undo_method(script.ptr(), "sequence_disconnect", func, port_action_node, return_port, new_id);
 	} else {

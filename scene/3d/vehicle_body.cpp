@@ -594,7 +594,7 @@ void VehicleBody::_update_suspension(PhysicsDirectBodyState *s) {
 
 //bilateral constraint between two dynamic objects
 void VehicleBody::_resolve_single_bilateral(PhysicsDirectBodyState *s, const Vector3 &pos1,
-		PhysicsBody *body2, const Vector3 &pos2, const Vector3 &normal, real_t &impulse, const real_t p_rollInfluence) {
+											PhysicsBody *body2, const Vector3 &pos2, const Vector3 &normal, real_t &impulse, const real_t p_rollInfluence) {
 	real_t normalLenSqr = normal.length_squared();
 	//ERR_FAIL_COND( normalLenSqr < real_t(1.1));
 
@@ -633,14 +633,14 @@ void VehicleBody::_resolve_single_bilateral(PhysicsDirectBodyState *s, const Vec
 	}
 
 	btVehicleJacobianEntry jac(s->get_transform().basis.transposed(),
-			b2trans,
-			rel_pos1,
-			rel_pos2,
-			normal,
-			s->get_inverse_inertia_tensor().get_main_diagonal(),
-			1.0 / mass,
-			b2invinertia,
-			b2invmass);
+							   b2trans,
+							   rel_pos1,
+							   rel_pos2,
+							   normal,
+							   s->get_inverse_inertia_tensor().get_main_diagonal(),
+							   1.0 / mass,
+							   b2invinertia,
+							   b2invmass);
 
 	// FIXME: rel_vel assignment here is overwritten by the following assignment.
 	// What seems to be intended in the next next assignment is: rel_vel = normal.dot(rel_vel);
@@ -773,8 +773,8 @@ void VehicleBody::_update_friction(PhysicsDirectBodyState *s) {
 				m_forwardWS.write[i].normalize();
 
 				_resolve_single_bilateral(s, wheelInfo.m_raycastInfo.m_contactPointWS,
-						wheelInfo.m_raycastInfo.m_groundObject, wheelInfo.m_raycastInfo.m_contactPointWS,
-						m_axle[i], m_sideImpulse.write[i], wheelInfo.m_rollInfluence);
+										  wheelInfo.m_raycastInfo.m_groundObject, wheelInfo.m_raycastInfo.m_contactPointWS,
+										  m_axle[i], m_sideImpulse.write[i], wheelInfo.m_rollInfluence);
 
 				m_sideImpulse.write[i] *= sideFrictionStiffness2;
 			}

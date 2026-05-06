@@ -387,7 +387,7 @@ public class Godot extends Fragment implements SensorEventListener, IDownloaderC
 		// GodotEditText layout
 		GodotEditText edittext = new GodotEditText(activity);
 		edittext.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
-				(int)getResources().getDimension(R.dimen.text_edit_height)));
+															(int)getResources().getDimension(R.dimen.text_edit_height)));
 		// Prevent GodotEditText from showing on splash screen on devices with Android 14 or newer.
 		edittext.setBackgroundColor(Color.TRANSPARENT);
 		// ...add to FrameLayout
@@ -754,7 +754,7 @@ public class Godot extends Fragment implements SensorEventListener, IDownloaderC
 			} else if (has_extra && command_line[i].equals("--apk_expansion_key")) {
 				main_pack_key = command_line[i + 1];
 				SharedPreferences prefs = activity.getSharedPreferences("app_data_keys",
-						MODE_PRIVATE);
+																		MODE_PRIVATE);
 				Editor editor = prefs.edit();
 				editor.putString("store_public_key", main_pack_key);
 
@@ -816,7 +816,7 @@ public class Godot extends Fragment implements SensorEventListener, IDownloaderC
 				notifierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 				PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0,
-						notifierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+																		notifierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 				int startResult;
 				try {
@@ -829,7 +829,7 @@ public class Godot extends Fragment implements SensorEventListener, IDownloaderC
 						// This is where you do set up to display the download
 						// progress (next step in onCreateView)
 						mDownloaderClientStub = DownloaderClientMarshaller.CreateStub(this,
-								GodotDownloaderService.class);
+																					  GodotDownloaderService.class);
 
 						return;
 					}
@@ -1272,15 +1272,15 @@ public class Godot extends Fragment implements SensorEventListener, IDownloaderC
 	@Override
 	public void onDownloadProgress(DownloadProgressInfo progress) {
 		mAverageSpeed.setText(getString(R.string.kilobytes_per_second,
-				Helpers.getSpeedString(progress.mCurrentSpeed)));
+										Helpers.getSpeedString(progress.mCurrentSpeed)));
 		mTimeRemaining.setText(getString(R.string.time_remaining,
-				Helpers.getTimeRemaining(progress.mTimeRemaining)));
+										 Helpers.getTimeRemaining(progress.mTimeRemaining)));
 
 		mPB.setMax((int)(progress.mOverallTotal >> 8));
 		mPB.setProgress((int)(progress.mOverallProgress >> 8));
 		mProgressPercent.setText(String.format(Locale.ENGLISH, "%d %%", progress.mOverallProgress * 100 / progress.mOverallTotal));
 		mProgressFraction.setText(Helpers.getDownloadProgressString(progress.mOverallProgress,
-				progress.mOverallTotal));
+																	progress.mOverallTotal));
 	}
 
 	public void initInputDevices() {

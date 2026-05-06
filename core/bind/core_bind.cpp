@@ -1093,9 +1093,9 @@ void _OS::print_all_textures_by_size() {
 
 	for (List<_OSCoreBindImg>::Element *E = imgs.front(); E; E = E->next()) {
 		print_line(vformat("%s - %s %s",
-				E->get().path,
-				String::humanize_size(E->get().vram),
-				E->get().size));
+						   E->get().path,
+						   String::humanize_size(E->get().vram),
+						   E->get().size));
 	}
 
 	print_line(vformat("Total VRAM usage: %s.", String::humanize_size(total)));
@@ -1103,7 +1103,7 @@ void _OS::print_all_textures_by_size() {
 
 void _OS::print_resources_by_type(const Vector<String> &p_types) {
 	ERR_FAIL_COND_MSG(p_types.size() == 0,
-			"At least one type should be provided to print resources by type.");
+					  "At least one type should be provided to print resources by type.");
 
 	print_line(vformat("Resources currently in use for the following types: %s", p_types));
 

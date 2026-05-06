@@ -1374,7 +1374,7 @@ godot_string GDAPI godot_string_rstrip(const godot_string *p_self, const godot_s
 }
 
 godot_pool_string_array GDAPI godot_string_rsplit(const godot_string *p_self, const godot_string *p_divisor,
-		const godot_bool p_allow_empty, const godot_int p_maxsplit) {
+												  const godot_bool p_allow_empty, const godot_int p_maxsplit) {
 	const String *self = (const String *)p_self;
 	String *divisor = (String *)p_divisor;
 

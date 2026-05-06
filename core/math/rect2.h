@@ -197,9 +197,9 @@ struct _NO_DISCARD_CLASS_ Rect2 {
 	inline Rect2 grow_margin(Margin p_margin, real_t p_amount) const {
 		Rect2 g = *this;
 		g = g.grow_individual((MARGIN_LEFT == p_margin) ? p_amount : 0,
-				(MARGIN_TOP == p_margin) ? p_amount : 0,
-				(MARGIN_RIGHT == p_margin) ? p_amount : 0,
-				(MARGIN_BOTTOM == p_margin) ? p_amount : 0);
+							  (MARGIN_TOP == p_margin) ? p_amount : 0,
+							  (MARGIN_RIGHT == p_margin) ? p_amount : 0,
+							  (MARGIN_BOTTOM == p_margin) ? p_amount : 0);
 		return g;
 	}
 
@@ -365,9 +365,9 @@ struct _NO_DISCARD_CLASS_ Rect2i {
 	inline Rect2i grow_margin(Margin p_margin, int p_amount) const {
 		Rect2i g = *this;
 		g = g.grow_individual((MARGIN_LEFT == p_margin) ? p_amount : 0,
-				(MARGIN_TOP == p_margin) ? p_amount : 0,
-				(MARGIN_RIGHT == p_margin) ? p_amount : 0,
-				(MARGIN_BOTTOM == p_margin) ? p_amount : 0);
+							  (MARGIN_TOP == p_margin) ? p_amount : 0,
+							  (MARGIN_RIGHT == p_margin) ? p_amount : 0,
+							  (MARGIN_BOTTOM == p_margin) ? p_amount : 0);
 		return g;
 	}
 

@@ -38,7 +38,7 @@
 
 void AudioStreamPlayer2D::_mix_audio() {
 	if (!stream_playback.is_valid() || !active.is_set() ||
-			(stream_paused && !stream_paused_fade_out)) {
+		(stream_paused && !stream_paused_fade_out)) {
 		return;
 	}
 

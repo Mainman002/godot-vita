@@ -82,7 +82,7 @@ size_t MIDIDriverALSAMidi::msg_expected_data(uint8_t status_byte) {
 }
 
 void MIDIDriverALSAMidi::InputConnection::parse_byte(uint8_t byte, MIDIDriverALSAMidi &driver,
-		uint64_t timestamp) {
+													 uint64_t timestamp) {
 	switch (msg_category(byte)) {
 		case MessageCategory::RealTime:
 			// Real-Time messages are single byte messages that can

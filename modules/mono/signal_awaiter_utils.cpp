@@ -51,8 +51,8 @@ Error connect_signal_awaiter(Object *p_source, const String &p_signal, Object *p
 	binds.push_back(sa_con);
 
 	Error err = p_source->connect(p_signal, sa_con.ptr(),
-			CSharpLanguage::get_singleton()->get_string_names()._signal_callback,
-			binds, Object::CONNECT_ONESHOT);
+								  CSharpLanguage::get_singleton()->get_string_names()._signal_callback,
+								  binds, Object::CONNECT_ONESHOT);
 
 	if (err != OK) {
 		// Set it as completed to prevent it from calling the failure callback when released.
@@ -67,7 +67,7 @@ Error connect_signal_awaiter(Object *p_source, const String &p_signal, Object *p
 Variant SignalAwaiterHandle::_signal_callback(const Variant **p_args, int p_argcount, Variant::CallError &r_error) {
 #ifdef DEBUG_ENABLED
 	ERR_FAIL_COND_V_MSG(conn_target_id && !ObjectDB::get_instance(conn_target_id), Variant(),
-			"Resumed after await, but class instance is gone.");
+						"Resumed after await, but class instance is gone.");
 #endif
 
 	if (p_argcount < 1) {

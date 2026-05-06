@@ -572,9 +572,9 @@ bool NativeScriptInstance::set(const StringName &p_name, const Variant &p_value)
 		OrderedHashMap<StringName, NativeScriptDesc::Property>::Element P = script_data->properties.find(p_name);
 		if (P) {
 			P.get().setter.set_func((godot_object *)owner,
-					P.get().setter.method_data,
-					userdata,
-					(godot_variant *)&p_value);
+									P.get().setter.method_data,
+									userdata,
+									(godot_variant *)&p_value);
 			return true;
 		}
 
@@ -585,10 +585,10 @@ bool NativeScriptInstance::set(const StringName &p_name, const Variant &p_value)
 
 			godot_variant result;
 			result = E->get().method.method((godot_object *)owner,
-					E->get().method.method_data,
-					userdata,
-					2,
-					(godot_variant **)args);
+											E->get().method.method_data,
+											userdata,
+											2,
+											(godot_variant **)args);
 			bool handled = *(Variant *)&result;
 			godot_variant_destroy(&result);
 			if (handled) {
@@ -608,8 +608,8 @@ bool NativeScriptInstance::get(const StringName &p_name, Variant &r_ret) const {
 		if (P) {
 			godot_variant value;
 			value = P.get().getter.get_func((godot_object *)owner,
-					P.get().getter.method_data,
-					userdata);
+											P.get().getter.method_data,
+											userdata);
 			r_ret = *(Variant *)&value;
 			godot_variant_destroy(&value);
 			return true;
@@ -622,10 +622,10 @@ bool NativeScriptInstance::get(const StringName &p_name, Variant &r_ret) const {
 
 			godot_variant result;
 			result = E->get().method.method((godot_object *)owner,
-					E->get().method.method_data,
-					userdata,
-					1,
-					(godot_variant **)args);
+											E->get().method.method_data,
+											userdata,
+											1,
+											(godot_variant **)args);
 			r_ret = *(Variant *)&result;
 			godot_variant_destroy(&result);
 			if (r_ret.get_type() != Variant::NIL) {
@@ -648,10 +648,10 @@ void NativeScriptInstance::get_property_list(List<PropertyInfo> *p_properties) c
 		if (E) {
 			godot_variant result;
 			result = E->get().method.method((godot_object *)owner,
-					E->get().method.method_data,
-					userdata,
-					0,
-					nullptr);
+											E->get().method.method_data,
+											userdata,
+											0,
+											nullptr);
 			Variant res = *(Variant *)&result;
 			godot_variant_destroy(&result);
 
@@ -729,10 +729,10 @@ Variant NativeScriptInstance::call(const StringName &p_method, const Variant **p
 #endif
 
 			result = E->get().method.method((godot_object *)owner,
-					E->get().method.method_data,
-					userdata,
-					p_argcount,
-					(godot_variant **)p_args);
+											E->get().method.method_data,
+											userdata,
+											p_argcount,
+											(godot_variant **)p_args);
 
 #ifdef DEBUG_ENABLED
 			current_method_call = "";
@@ -890,10 +890,10 @@ void NativeScriptInstance::call_multilevel(const StringName &p_method, const Var
 		Map<StringName, NativeScriptDesc::Method>::Element *E = script_data->methods.find(p_method);
 		if (E) {
 			godot_variant res = E->get().method.method((godot_object *)owner,
-					E->get().method.method_data,
-					userdata,
-					p_argcount,
-					(godot_variant **)p_args);
+													   E->get().method.method_data,
+													   userdata,
+													   p_argcount,
+													   (godot_variant **)p_args);
 			godot_variant_destroy(&res);
 		}
 		script_data = script_data->base_data;

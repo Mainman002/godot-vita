@@ -123,7 +123,7 @@ ARVRInterface::ARVRInterface() {
 	tracking_state = ARVR_UNKNOWN_TRACKING;
 };
 
-ARVRInterface::~ARVRInterface(){};
+ARVRInterface::~ARVRInterface() {};
 
 // optional render to external texture which enhances performance on those platforms that require us to submit our end result into special textures.
 unsigned int ARVRInterface::get_external_texture_for_eye(ARVRInterface::Eyes p_eye) {
@@ -140,7 +140,7 @@ bool ARVRInterface::get_anchor_detection_is_enabled() const {
 	return false;
 };
 
-void ARVRInterface::set_anchor_detection_is_enabled(bool p_enable){
+void ARVRInterface::set_anchor_detection_is_enabled(bool p_enable) {
 	// don't do anything here, this needs to be implemented on AR interface to enable/disable things like plane detection etc.
 };
 

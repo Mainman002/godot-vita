@@ -3944,15 +3944,15 @@ AnimationTrackEditor::TrackIndices AnimationTrackEditor::_confirm_insert(InsertD
 			animation->remove_track(animation->get_track_count() - 1); // Hack.
 
 			if (h.type == Variant::REAL ||
-					h.type == Variant::VECTOR2 ||
-					h.type == Variant::RECT2 ||
-					h.type == Variant::VECTOR3 ||
-					h.type == Variant::AABB ||
-					h.type == Variant::QUAT ||
-					h.type == Variant::COLOR ||
-					h.type == Variant::PLANE ||
-					h.type == Variant::TRANSFORM2D ||
-					h.type == Variant::TRANSFORM) {
+				h.type == Variant::VECTOR2 ||
+				h.type == Variant::RECT2 ||
+				h.type == Variant::VECTOR3 ||
+				h.type == Variant::AABB ||
+				h.type == Variant::QUAT ||
+				h.type == Variant::COLOR ||
+				h.type == Variant::PLANE ||
+				h.type == Variant::TRANSFORM2D ||
+				h.type == Variant::TRANSFORM) {
 				update_mode = Animation::UPDATE_CONTINUOUS;
 			}
 
@@ -4520,15 +4520,15 @@ void AnimationTrackEditor::_new_track_property_selected(String p_name) {
 			PropertyInfo h = _find_hint_for_track(animation->get_track_count() - 1, np);
 			animation->remove_track(animation->get_track_count() - 1); //hack
 			if (h.type == Variant::REAL ||
-					h.type == Variant::VECTOR2 ||
-					h.type == Variant::RECT2 ||
-					h.type == Variant::VECTOR3 ||
-					h.type == Variant::AABB ||
-					h.type == Variant::QUAT ||
-					h.type == Variant::COLOR ||
-					h.type == Variant::PLANE ||
-					h.type == Variant::TRANSFORM2D ||
-					h.type == Variant::TRANSFORM) {
+				h.type == Variant::VECTOR2 ||
+				h.type == Variant::RECT2 ||
+				h.type == Variant::VECTOR3 ||
+				h.type == Variant::AABB ||
+				h.type == Variant::QUAT ||
+				h.type == Variant::COLOR ||
+				h.type == Variant::PLANE ||
+				h.type == Variant::TRANSFORM2D ||
+				h.type == Variant::TRANSFORM) {
 				update_mode = Animation::UPDATE_CONTINUOUS;
 			}
 
@@ -5752,7 +5752,7 @@ float AnimationTrackEditor::snap_time(float p_value, bool p_relative) {
 void AnimationTrackEditor::_show_imported_anim_warning() const {
 	// It looks terrible on a single line but the TTR extractor doesn't support line breaks yet.
 	EditorNode::get_singleton()->show_warning(TTR("This animation belongs to an imported scene, so changes to imported tracks will not be saved.\n\nTo enable the ability to add custom tracks, navigate to the scene's import settings and set\n\"Animation > Storage\" to \"Files\", enable \"Animation > Keep Custom Tracks\", then re-import.\nAlternatively, use an import preset that imports animations to separate files."),
-			TTR("Warning: Editing imported animation"));
+											  TTR("Warning: Editing imported animation"));
 }
 
 void AnimationTrackEditor::_select_all_tracks_for_copy() {

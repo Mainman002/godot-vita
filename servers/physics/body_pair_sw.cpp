@@ -72,7 +72,7 @@ void BodyPairSW::contact_added_callback(const Vector3 &p_point_A, const Vector3 
 	for (int i = 0; i < contact_count; i++) {
 		Contact &c = contacts[i];
 		if (c.local_A.distance_squared_to(local_A) < (contact_recycle_radius * contact_recycle_radius) &&
-				c.local_B.distance_squared_to(local_B) < (contact_recycle_radius * contact_recycle_radius)) {
+			c.local_B.distance_squared_to(local_B) < (contact_recycle_radius * contact_recycle_radius)) {
 			contact.acc_normal_impulse = c.acc_normal_impulse;
 			contact.acc_bias_impulse = c.acc_bias_impulse;
 			contact.acc_bias_impulse_center_of_mass = c.acc_bias_impulse_center_of_mass;

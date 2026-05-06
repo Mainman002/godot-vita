@@ -232,6 +232,6 @@ ARVRPositionalTracker::ARVRPositionalTracker() {
 	rumble = 0.0;
 };
 
-ARVRPositionalTracker::~ARVRPositionalTracker(){
+ARVRPositionalTracker::~ARVRPositionalTracker() {
 
 };

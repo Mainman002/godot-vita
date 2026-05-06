@@ -175,8 +175,9 @@ bool AABB::intersects_ray(const Vector3 &p_from, const Vector3 &p_dir, Vector3 *
 		*r_clip = c1;
 	}
 	if (r_normal) {
-		*r_normal = Vector3();
-		(*r_normal)[axis] = p_dir[axis] ? -1 : 1;
+		Vector3 normal;
+		normal[axis] = (p_dir[axis] > 0) ? -1 : 1;
+		*r_normal = normal;
 	}
 
 	return true;

@@ -2318,7 +2318,7 @@ void ScriptEditorDebugger::_item_menu_id_pressed(int p_option) {
 			// If the commit hash is available, use it for greater accuracy. Otherwise fall back to tagged release.
 			String git_ref = String(VERSION_HASH).empty() ? String(VERSION_NUMBER) + "-stable" : String(VERSION_HASH);
 			OS::get_singleton()->shell_open(vformat("https://github.com/godotengine/godot/blob/%s/%s#L%d",
-					git_ref, file, line_number));
+													git_ref, file, line_number));
 		} break;
 	}
 }

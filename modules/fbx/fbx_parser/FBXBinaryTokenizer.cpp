@@ -163,7 +163,7 @@ uint8_t ReadByte(const char *input, const char *&cursor, const char *end) {
 
 // ------------------------------------------------------------------------------------------------
 unsigned int ReadString(const char *&sbegin_out, const char *&send_out, const char *input,
-		const char *&cursor, const char *end, bool long_length = false, bool allow_null = false) {
+						const char *&cursor, const char *end, bool long_length = false, bool allow_null = false) {
 	const uint32_t len_len = long_length ? 4 : 1;
 	if (Offset(cursor, end) < len_len) {
 		TokenizeError("cannot ReadString, out of bounds reading length", input, cursor);

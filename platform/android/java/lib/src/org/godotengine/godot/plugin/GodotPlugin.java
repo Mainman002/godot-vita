@@ -111,7 +111,7 @@ public abstract class GodotPlugin {
 	public final void onRegisterPluginWithGodotNative() {
 		registeredSignals.putAll(
 				registerPluginWithGodotNative(this, getPluginName(), getPluginMethods(), getPluginSignals(),
-						getPluginGDNativeLibrariesPaths()));
+											  getPluginGDNativeLibrariesPaths()));
 	}
 
 	/**
@@ -120,18 +120,18 @@ public abstract class GodotPlugin {
 	 * This method must be invoked on the render thread.
 	 */
 	public static void registerPluginWithGodotNative(Object pluginObject,
-			GodotPluginInfoProvider pluginInfoProvider) {
+													 GodotPluginInfoProvider pluginInfoProvider) {
 		registerPluginWithGodotNative(pluginObject, pluginInfoProvider.getPluginName(),
-				Collections.emptyList(), pluginInfoProvider.getPluginSignals(),
-				pluginInfoProvider.getPluginGDNativeLibrariesPaths());
+									  Collections.emptyList(), pluginInfoProvider.getPluginSignals(),
+									  pluginInfoProvider.getPluginGDNativeLibrariesPaths());
 
 		// Notify that registration is complete.
 		pluginInfoProvider.onPluginRegistered();
 	}
 
 	private static Map<String, SignalInfo> registerPluginWithGodotNative(Object pluginObject,
-			String pluginName, List<String> pluginMethods, Set<SignalInfo> pluginSignals,
-			Set<String> pluginGDNativeLibrariesPaths) {
+																		 String pluginName, List<String> pluginMethods, Set<SignalInfo> pluginSignals,
+																		 Set<String> pluginGDNativeLibrariesPaths) {
 		nativeRegisterSingleton(pluginName, pluginObject);
 
 		Set<Method> filteredMethods = new HashSet<>();

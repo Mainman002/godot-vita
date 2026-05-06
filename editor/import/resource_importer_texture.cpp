@@ -424,10 +424,10 @@ Error ResourceImporterTexture::import(const String &p_source_file, const String 
 			// without artifacts (due to upscaling to the nearest power of 2).
 			if (GLOBAL_GET_CACHED(bool, "rendering/quality/driver/fallback_to_gles2")) {
 				WARN_PRINT(vformat("%s: Imported a repeating texture with a size of %dx%d, but the project is configured to allow falling back to GLES2.\nNon-power-of-2 repeating textures may not display correctly on some platforms such as HTML5. This is because GLES2 does not mandate support for non-power-of-2 repeating textures.",
-						p_source_file, image->get_width(), image->get_height()));
+								   p_source_file, image->get_width(), image->get_height()));
 			} else {
 				WARN_PRINT(vformat("%s: Imported a repeating texture with a size of %dx%d, but the project is configured to use GLES2.\nNon-power-of-2 repeating textures may not display correctly on some platforms such as HTML5. This is because GLES2 does not mandate support for non-power-of-2 repeating textures.",
-						p_source_file, image->get_width(), image->get_height()));
+								   p_source_file, image->get_width(), image->get_height()));
 			}
 		}
 	}

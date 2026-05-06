@@ -129,8 +129,8 @@ String CollisionShape::get_configuration_warning() const {
 		}
 
 		if (Object::cast_to<RigidBody>(get_parent()) &&
-				Object::cast_to<ConcavePolygonShape>(*shape) &&
-				Object::cast_to<RigidBody>(get_parent())->get_mode() != RigidBody::MODE_STATIC) {
+			Object::cast_to<ConcavePolygonShape>(*shape) &&
+			Object::cast_to<RigidBody>(get_parent())->get_mode() != RigidBody::MODE_STATIC) {
 			if (warning != String()) {
 				warning += "\n\n";
 			}

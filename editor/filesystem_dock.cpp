@@ -93,8 +93,8 @@ bool FileSystemDock::_create_tree(TreeItem *p_parent, EditorFileSystemDirectory 
 	// Create items for all subdirectories.
 	bool reversed = file_sort == FILE_SORT_NAME_REVERSE;
 	for (int i = reversed ? p_dir->get_subdir_count() - 1 : 0;
-			reversed ? i >= 0 : i < p_dir->get_subdir_count();
-			reversed ? i-- : i++) {
+		 reversed ? i >= 0 : i < p_dir->get_subdir_count();
+		 reversed ? i-- : i++) {
 		parent_should_expand = (_create_tree(subdirectory_item, p_dir->get_subdir(i), uncollapsed_paths, p_select_in_favorites, p_unfold_path) || parent_should_expand);
 	}
 
@@ -832,8 +832,8 @@ void FileSystemDock::_update_file_list(bool p_keep_selection) {
 
 				bool reversed = file_sort == FILE_SORT_NAME_REVERSE;
 				for (int i = reversed ? efd->get_subdir_count() - 1 : 0;
-						reversed ? i >= 0 : i < efd->get_subdir_count();
-						reversed ? i-- : i++) {
+					 reversed ? i >= 0 : i < efd->get_subdir_count();
+					 reversed ? i-- : i++) {
 					String dname = efd->get_subdir(i)->get_name();
 
 					files->add_item(dname, folder_icon, true);
@@ -1111,7 +1111,7 @@ void FileSystemDock::_find_remaps(EditorFileSystemDirectory *efsd, const Map<Str
 }
 
 void FileSystemDock::_try_move_item(const FileOrFolder &p_item, const String &p_new_path,
-		Map<String, String> &p_file_renames, Map<String, String> &p_folder_renames) {
+									Map<String, String> &p_file_renames, Map<String, String> &p_folder_renames) {
 	// Ensure folder paths end with "/".
 	String old_path = (p_item.is_file || p_item.path.ends_with("/")) ? p_item.path : (p_item.path + "/");
 	String new_path = (p_item.is_file || p_new_path.ends_with("/")) ? p_new_path : (p_new_path + "/");
@@ -1504,7 +1504,7 @@ Vector<String> FileSystemDock::_check_existing() {
 		String new_path = (p_item.is_file || p_new_path.ends_with("/")) ? p_new_path : (p_new_path + "/");
 
 		if ((p_item.is_file && FileAccess::exists(new_path)) ||
-				(!p_item.is_file && DirAccess::exists(new_path))) {
+			(!p_item.is_file && DirAccess::exists(new_path))) {
 			conflicting_items.push_back(old_path);
 		}
 	}

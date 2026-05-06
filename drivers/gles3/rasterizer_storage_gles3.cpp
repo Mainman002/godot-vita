@@ -653,15 +653,15 @@ void RasterizerStorageGLES3::texture_allocate(RID p_texture, int p_width, int p_
 
 		Image::Format real_format;
 		_get_gl_image_and_format(Ref<Image>(),
-				texture->format,
-				texture->flags,
-				real_format,
-				format,
-				internal_format,
-				type,
-				compressed,
-				srgb,
-				texture->is_npot_repeat_mipmap);
+								 texture->format,
+								 texture->flags,
+								 real_format,
+								 format,
+								 internal_format,
+								 type,
+								 compressed,
+								 srgb,
+								 texture->is_npot_repeat_mipmap);
 
 		texture->alloc_width = texture->width;
 		texture->alloc_height = texture->height;
@@ -3204,7 +3204,7 @@ void RasterizerStorageGLES3::_update_material(Material *material) {
 
 		if (material->shader && material->shader->mode == VS::SHADER_SPATIAL) {
 			if (material->shader->spatial.blend_mode == Shader::Spatial::BLEND_MODE_MIX &&
-					(!(material->shader->spatial.uses_alpha && !material->shader->spatial.uses_alpha_scissor) || material->shader->spatial.depth_draw_mode == Shader::Spatial::DEPTH_DRAW_ALPHA_PREPASS)) {
+				(!(material->shader->spatial.uses_alpha && !material->shader->spatial.uses_alpha_scissor) || material->shader->spatial.depth_draw_mode == Shader::Spatial::DEPTH_DRAW_ALPHA_PREPASS)) {
 				can_cast_shadow = true;
 			}
 
@@ -7053,7 +7053,7 @@ void RasterizerStorageGLES3::_render_target_allocate(RenderTarget *rt) {
 		glGenTextures(1, &rt->depth);
 		glBindTexture(GL_TEXTURE_2D, rt->depth);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, rt->width, rt->height, 0,
-				GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, nullptr);
+					 GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, nullptr);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -7062,11 +7062,11 @@ void RasterizerStorageGLES3::_render_target_allocate(RenderTarget *rt) {
 
 		if (rt->external.depth == 0) {
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-					GL_TEXTURE_2D, rt->depth, 0);
+								   GL_TEXTURE_2D, rt->depth, 0);
 		} else {
 			// Use our external depth texture instead.
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-					GL_TEXTURE_2D, rt->external.depth, 0);
+								   GL_TEXTURE_2D, rt->external.depth, 0);
 		}
 
 		glGenTextures(1, &rt->color);
@@ -7198,13 +7198,13 @@ void RasterizerStorageGLES3::_render_target_allocate(RenderTarget *rt) {
 			glGenTextures(1, &rt->buffers.effect);
 			glBindTexture(GL_TEXTURE_2D, rt->buffers.effect);
 			glTexImage2D(GL_TEXTURE_2D, 0, color_internal_format, rt->width, rt->height, 0,
-					color_format, color_type, nullptr);
+						 color_format, color_type, nullptr);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-					GL_TEXTURE_2D, rt->buffers.effect, 0);
+								   GL_TEXTURE_2D, rt->buffers.effect, 0);
 
 			status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 			glBindFramebuffer(GL_FRAMEBUFFER, RasterizerStorageGLES3::system_fbo);
@@ -7222,7 +7222,7 @@ void RasterizerStorageGLES3::_render_target_allocate(RenderTarget *rt) {
 				glGenFramebuffers(1, &rt->effects.ssao.blur_fbo[i]);
 				glBindFramebuffer(GL_FRAMEBUFFER, rt->effects.ssao.blur_fbo[i]);
 				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-						GL_TEXTURE_2D, rt->depth, 0);
+									   GL_TEXTURE_2D, rt->depth, 0);
 
 				glGenTextures(1, &rt->effects.ssao.blur_red[i]);
 				glBindTexture(GL_TEXTURE_2D, rt->effects.ssao.blur_red[i]);

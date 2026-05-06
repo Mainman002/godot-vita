@@ -99,7 +99,7 @@ HingeJointSW::HingeJointSW(BodySW *rbA, BodySW *rbB, const Transform &frameA, co
 }
 
 HingeJointSW::HingeJointSW(BodySW *rbA, BodySW *rbB, const Vector3 &pivotInA, const Vector3 &pivotInB,
-		const Vector3 &axisInA, const Vector3 &axisInB) :
+						   const Vector3 &axisInA, const Vector3 &axisInB) :
 		JointSW(_arr, 2) {
 	A = rbA;
 	B = rbB;
@@ -123,8 +123,8 @@ HingeJointSW::HingeJointSW(BodySW *rbA, BodySW *rbB, const Vector3 &pivotInA, co
 	}
 
 	m_rbAFrame.basis = Basis(rbAxisA1.x, rbAxisA2.x, axisInA.x,
-			rbAxisA1.y, rbAxisA2.y, axisInA.y,
-			rbAxisA1.z, rbAxisA2.z, axisInA.z);
+							 rbAxisA1.y, rbAxisA2.y, axisInA.y,
+							 rbAxisA1.z, rbAxisA2.z, axisInA.z);
 
 	Quat rotationArc = Quat(axisInA, axisInB);
 	Vector3 rbAxisB1 = rotationArc.xform(rbAxisA1);
@@ -132,8 +132,8 @@ HingeJointSW::HingeJointSW(BodySW *rbA, BodySW *rbB, const Vector3 &pivotInA, co
 
 	m_rbBFrame.origin = pivotInB;
 	m_rbBFrame.basis = Basis(rbAxisB1.x, rbAxisB2.x, -axisInB.x,
-			rbAxisB1.y, rbAxisB2.y, -axisInB.y,
-			rbAxisB1.z, rbAxisB2.z, -axisInB.z);
+							 rbAxisB1.y, rbAxisB2.y, -axisInB.y,
+							 rbAxisB1.z, rbAxisB2.z, -axisInB.z);
 
 	//start with free
 	m_lowerLimit = Math_PI;

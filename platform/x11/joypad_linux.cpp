@@ -46,7 +46,7 @@
 
 #define LONG_BITS (sizeof(long) * 8)
 #define test_bit(nr, addr) (((1UL << ((nr) % LONG_BITS)) & ((addr)[(nr) / LONG_BITS])) != 0)
-#define NBITS(x) ((((x)-1) / LONG_BITS) + 1)
+#define NBITS(x) ((((x) - 1) / LONG_BITS) + 1)
 
 #ifdef UDEV_ENABLED
 static const char *ignore_str = "/dev/input/js";
@@ -305,7 +305,7 @@ void JoypadLinux::setup_joypad_properties(Joypad &p_joypad) {
 	int num_axes = 0;
 
 	if ((ioctl(p_joypad.fd, EVIOCGBIT(EV_KEY, sizeof(keybit)), keybit) < 0) ||
-			(ioctl(p_joypad.fd, EVIOCGBIT(EV_ABS, sizeof(absbit)), absbit) < 0)) {
+		(ioctl(p_joypad.fd, EVIOCGBIT(EV_ABS, sizeof(absbit)), absbit) < 0)) {
 		return;
 	}
 	for (int i = BTN_JOYSTICK; i < KEY_MAX; ++i) {
@@ -356,8 +356,8 @@ void JoypadLinux::open_joypad(const char *p_path) {
 		attached_devices.push_back(String(p_path));
 
 		if ((ioctl(fd, EVIOCGBIT(0, sizeof(evbit)), evbit) < 0) ||
-				(ioctl(fd, EVIOCGBIT(EV_KEY, sizeof(keybit)), keybit) < 0) ||
-				(ioctl(fd, EVIOCGBIT(EV_ABS, sizeof(absbit)), absbit) < 0)) {
+			(ioctl(fd, EVIOCGBIT(EV_KEY, sizeof(keybit)), keybit) < 0) ||
+			(ioctl(fd, EVIOCGBIT(EV_ABS, sizeof(absbit)), absbit) < 0)) {
 			close(fd);
 			return;
 		}
@@ -365,13 +365,13 @@ void JoypadLinux::open_joypad(const char *p_path) {
 		//check if the device supports basic gamepad events, prevents certain keyboards from
 		//being detected as joypads
 		if (!(test_bit(EV_KEY, evbit) && test_bit(EV_ABS, evbit) &&
-					(test_bit(ABS_X, absbit) || test_bit(ABS_Y, absbit) || test_bit(ABS_HAT0X, absbit) ||
-							test_bit(ABS_GAS, absbit) || test_bit(ABS_RUDDER, absbit)) &&
-					(test_bit(BTN_A, keybit) || test_bit(BTN_THUMBL, keybit) ||
-							test_bit(BTN_TRIGGER, keybit) || test_bit(BTN_1, keybit))) &&
-				!(test_bit(EV_ABS, evbit) &&
-						test_bit(ABS_X, absbit) && test_bit(ABS_Y, absbit) &&
-						test_bit(ABS_RX, absbit) && test_bit(ABS_RY, absbit))) {
+			  (test_bit(ABS_X, absbit) || test_bit(ABS_Y, absbit) || test_bit(ABS_HAT0X, absbit) ||
+			   test_bit(ABS_GAS, absbit) || test_bit(ABS_RUDDER, absbit)) &&
+			  (test_bit(BTN_A, keybit) || test_bit(BTN_THUMBL, keybit) ||
+			   test_bit(BTN_TRIGGER, keybit) || test_bit(BTN_1, keybit))) &&
+			!(test_bit(EV_ABS, evbit) &&
+			  test_bit(ABS_X, absbit) && test_bit(ABS_Y, absbit) &&
+			  test_bit(ABS_RX, absbit) && test_bit(ABS_RY, absbit))) {
 			close(fd);
 			return;
 		}

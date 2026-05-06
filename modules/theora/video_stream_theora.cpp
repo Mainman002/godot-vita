@@ -322,7 +322,7 @@ void VideoStreamPlaybackTheora::set_file(const String &p_file) {
 				break;
 		}
 		th_decode_ctl(td, TH_DECCTL_GET_PPLEVEL_MAX, &pp_level_max,
-				sizeof(pp_level_max));
+					  sizeof(pp_level_max));
 		pp_level = 0;
 		th_decode_ctl(td, TH_DECCTL_SET_PPLEVEL, &pp_level, sizeof(pp_level));
 		pp_inc = 0;
@@ -463,7 +463,7 @@ void VideoStreamPlaybackTheora::update(float p_delta) {
 				if (false && pp_inc) {
 					pp_level += pp_inc;
 					th_decode_ctl(td, TH_DECCTL_SET_PPLEVEL, &pp_level,
-							sizeof(pp_level));
+								  sizeof(pp_level));
 					pp_inc = 0;
 				}
 				/*HACK: This should be set after a seek or a gap, but we might not have
@@ -474,7 +474,7 @@ void VideoStreamPlaybackTheora::update(float p_delta) {
 				a seek or a gap.*/
 				if (op.granulepos >= 0) {
 					th_decode_ctl(td, TH_DECCTL_SET_GRANPOS, &op.granulepos,
-							sizeof(op.granulepos));
+								  sizeof(op.granulepos));
 				}
 				ogg_int64_t videobuf_granulepos;
 				if (th_decode_packetin(td, &op, &videobuf_granulepos) == 0) {
@@ -577,7 +577,7 @@ bool VideoStreamPlaybackTheora::is_paused() const {
 	return paused;
 };
 
-void VideoStreamPlaybackTheora::set_loop(bool p_enable){
+void VideoStreamPlaybackTheora::set_loop(bool p_enable) {
 
 };
 

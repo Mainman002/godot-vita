@@ -882,18 +882,18 @@ uniform vec4 refprobe2_ambient;
 
 void reflection_process(samplerCube reflection_map,
 #ifdef USE_VERTEX_LIGHTING
-		vec3 ref_normal,
+						vec3 ref_normal,
 #ifndef USE_LIGHTMAP
-		vec3 amb_normal,
+						vec3 amb_normal,
 #endif
-		float ref_blend,
+						float ref_blend,
 
 #else //no vertex lighting
-		vec3 normal, vec3 vertex,
-		mat4 local_matrix,
-		bool use_box_project, vec3 box_extents, vec3 box_offset,
+						vec3 normal, vec3 vertex,
+						mat4 local_matrix,
+						bool use_box_project, vec3 box_extents, vec3 box_offset,
 #endif //vertex lighting
-		bool exterior, float intensity, vec4 ref_ambient, float roughness, vec3 ambient, vec3 skybox, inout highp vec4 reflection_accum, inout highp vec4 ambient_accum) {
+						bool exterior, float intensity, vec4 ref_ambient, float roughness, vec3 ambient, vec3 skybox, inout highp vec4 reflection_accum, inout highp vec4 ambient_accum) {
 
 	vec4 reflection;
 
@@ -1572,11 +1572,11 @@ float sample_shadow(highp sampler2D shadow, highp vec4 spos) {
 						   f.y) +
 				   mix(
 						   mix(SAMPLE_SHADOW_TEXEL(shadow, pos + vec2(-shadow_pixel_size.x, -shadow_pixel_size.y), depth),
-								   SAMPLE_SHADOW_TEXEL(shadow, pos + vec2(2.0 * shadow_pixel_size.x, -shadow_pixel_size.y), depth),
-								   f.x),
+							   SAMPLE_SHADOW_TEXEL(shadow, pos + vec2(2.0 * shadow_pixel_size.x, -shadow_pixel_size.y), depth),
+							   f.x),
 						   mix(SAMPLE_SHADOW_TEXEL(shadow, pos + vec2(-shadow_pixel_size.x, 2.0 * shadow_pixel_size.y), depth),
-								   SAMPLE_SHADOW_TEXEL(shadow, pos + vec2(2.0 * shadow_pixel_size.x, 2.0 * shadow_pixel_size.y), depth),
-								   f.x),
+							   SAMPLE_SHADOW_TEXEL(shadow, pos + vec2(2.0 * shadow_pixel_size.x, 2.0 * shadow_pixel_size.y), depth),
+							   f.x),
 						   f.y)) *
 			(1.0 / 9.0);
 #endif
@@ -1785,17 +1785,17 @@ FRAGMENT_SHADER_CODE
 
 	reflection_process(reflection_probe1,
 #ifdef USE_VERTEX_LIGHTING
-			refprobe1_reflection_normal_blend.rgb,
+					   refprobe1_reflection_normal_blend.rgb,
 #ifndef USE_LIGHTMAP
-			refprobe1_ambient_normal,
+					   refprobe1_ambient_normal,
 #endif
-			refprobe1_reflection_normal_blend.a,
+					   refprobe1_reflection_normal_blend.a,
 #else
-			normal, vertex_interp, refprobe1_local_matrix,
-			refprobe1_use_box_project, refprobe1_box_extents, refprobe1_box_offset,
+					   normal, vertex_interp, refprobe1_local_matrix,
+					   refprobe1_use_box_project, refprobe1_box_extents, refprobe1_box_offset,
 #endif
-			refprobe1_exterior, refprobe1_intensity, refprobe1_ambient, roughness,
-			ambient_light, specular_light, reflection_accum, ambient_accum);
+					   refprobe1_exterior, refprobe1_intensity, refprobe1_ambient, roughness,
+					   ambient_light, specular_light, reflection_accum, ambient_accum);
 
 #endif // USE_REFLECTION_PROBE1
 
@@ -1803,17 +1803,17 @@ FRAGMENT_SHADER_CODE
 
 	reflection_process(reflection_probe2,
 #ifdef USE_VERTEX_LIGHTING
-			refprobe2_reflection_normal_blend.rgb,
+					   refprobe2_reflection_normal_blend.rgb,
 #ifndef USE_LIGHTMAP
-			refprobe2_ambient_normal,
+					   refprobe2_ambient_normal,
 #endif
-			refprobe2_reflection_normal_blend.a,
+					   refprobe2_reflection_normal_blend.a,
 #else
-			normal, vertex_interp, refprobe2_local_matrix,
-			refprobe2_use_box_project, refprobe2_box_extents, refprobe2_box_offset,
+					   normal, vertex_interp, refprobe2_local_matrix,
+					   refprobe2_use_box_project, refprobe2_box_extents, refprobe2_box_offset,
 #endif
-			refprobe2_exterior, refprobe2_intensity, refprobe2_ambient, roughness,
-			ambient_light, specular_light, reflection_accum, ambient_accum);
+					   refprobe2_exterior, refprobe2_intensity, refprobe2_ambient, roughness,
+					   ambient_light, specular_light, reflection_accum, ambient_accum);
 
 #endif // USE_REFLECTION_PROBE2
 

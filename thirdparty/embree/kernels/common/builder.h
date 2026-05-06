@@ -20,7 +20,7 @@ namespace embree
     virtual void build() = 0;
 
     /*! notifies the builder about the deletion of some geometry */
-    virtual void deleteGeometry(size_t geomID) {};
+    virtual void deleteGeometry(size_t geomID){};
 
     /*! clears internal builder state */
     virtual void clear() = 0;

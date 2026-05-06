@@ -61,7 +61,7 @@ public:
 	void environment_set_bg_energy(RID p_env, float p_energy) {}
 	void environment_set_canvas_max_layer(RID p_env, int p_max_layer) {}
 	void environment_set_ambient_light(RID p_env, const Color &p_color, float p_energy = 1.0, float p_sky_contribution = 0.0) {}
-	void environment_set_camera_feed_id(RID p_env, int p_camera_feed_id){};
+	void environment_set_camera_feed_id(RID p_env, int p_camera_feed_id) {};
 
 	void environment_set_dof_blur_near(RID p_env, bool p_enable, float p_distance, float p_transition, float p_far_amount, VS::EnvironmentDOFBlurQuality p_quality) {}
 	void environment_set_dof_blur_far(RID p_env, bool p_enable, float p_distance, float p_transition, float p_far_amount, VS::EnvironmentDOFBlurQuality p_quality) {}
@@ -781,7 +781,7 @@ public:
 
 	static RasterizerStorage *base_singleton;
 
-	RasterizerStorageDummy(){};
+	RasterizerStorageDummy() {};
 	~RasterizerStorageDummy() {}
 };
 
@@ -791,11 +791,11 @@ public:
 	void light_internal_update(RID p_rid, Light *p_light) {}
 	void light_internal_free(RID p_rid) {}
 
-	void canvas_begin(){};
-	void canvas_end(){};
+	void canvas_begin() {};
+	void canvas_end() {};
 
-	void canvas_render_items(Item *p_item_list, int p_z, const Color &p_modulate, Light *p_light, const Transform2D &p_transform){};
-	void canvas_debug_viewport_shadows(Light *p_lights_with_shadow){};
+	void canvas_render_items(Item *p_item_list, int p_z, const Color &p_modulate, Light *p_light, const Transform2D &p_transform) {};
+	void canvas_debug_viewport_shadows(Light *p_lights_with_shadow) {};
 
 	void canvas_light_shadow_buffer_update(RID p_buffer, const Transform2D &p_light_xform, int p_light_mask, float p_near, float p_far, LightOccluderInstance *p_occluders, CameraMatrix *p_xform_cache) {}
 

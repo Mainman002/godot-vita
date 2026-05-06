@@ -372,12 +372,12 @@ void CurveEditor::open_context_menu(Vector2 pos) {
 				if (_selected_point > 0) {
 					_context_menu->add_check_item(TTR("Left Linear"), CONTEXT_LEFT_LINEAR);
 					_context_menu->set_item_checked(_context_menu->get_item_index(CONTEXT_LEFT_LINEAR),
-							_curve_ref->get_point_left_mode(_selected_point) == Curve::TANGENT_LINEAR);
+													_curve_ref->get_point_left_mode(_selected_point) == Curve::TANGENT_LINEAR);
 				}
 				if (_selected_point + 1 < _curve_ref->get_point_count()) {
 					_context_menu->add_check_item(TTR("Right Linear"), CONTEXT_RIGHT_LINEAR);
 					_context_menu->set_item_checked(_context_menu->get_item_index(CONTEXT_RIGHT_LINEAR),
-							_curve_ref->get_point_right_mode(_selected_point) == Curve::TANGENT_LINEAR);
+													_curve_ref->get_point_right_mode(_selected_point) == Curve::TANGENT_LINEAR);
 				}
 			}
 		}

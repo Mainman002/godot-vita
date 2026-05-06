@@ -1459,7 +1459,7 @@ void TextEdit::_notification(int p_what) {
 						if (brace_matching_enabled) {
 							int yofs = ofs_y + (get_row_height() - cache.font->get_height()) / 2;
 							if ((brace_open_match_line == line && brace_open_match_column == last_wrap_column + j) ||
-									(cursor.column == last_wrap_column + j && cursor.line == line && cursor_wrap_index == line_wrap_index && (brace_open_matching || brace_open_mismatch))) {
+								(cursor.column == last_wrap_column + j && cursor.line == line && cursor_wrap_index == line_wrap_index && (brace_open_matching || brace_open_mismatch))) {
 								if (brace_open_mismatch) {
 									color = cache.brace_mismatch_color;
 								}
@@ -1467,7 +1467,7 @@ void TextEdit::_notification(int p_what) {
 							}
 
 							if ((brace_close_match_line == line && brace_close_match_column == last_wrap_column + j) ||
-									(cursor.column == last_wrap_column + j + 1 && cursor.line == line && cursor_wrap_index == line_wrap_index && (brace_close_matching || brace_close_mismatch))) {
+								(cursor.column == last_wrap_column + j + 1 && cursor.line == line && cursor_wrap_index == line_wrap_index && (brace_close_matching || brace_close_mismatch))) {
 								if (brace_close_mismatch) {
 									color = cache.brace_mismatch_color;
 								}
@@ -1962,8 +1962,8 @@ void TextEdit::_consume_pair_symbol(CharType ch) {
 
 		begin_complex_operation();
 		_insert_text(get_selection_from_line(), get_selection_from_column(),
-				ch_single,
-				&new_line, &new_column);
+					 ch_single,
+					 &new_line, &new_column);
 
 		int to_col_offset = 0;
 		if (get_selection_from_line() == get_selection_to_line()) {
@@ -1971,9 +1971,9 @@ void TextEdit::_consume_pair_symbol(CharType ch) {
 		}
 
 		_insert_text(get_selection_to_line(),
-				get_selection_to_column() + to_col_offset,
-				ch_single_pair,
-				&new_line, &new_column);
+					 get_selection_to_column() + to_col_offset,
+					 ch_single_pair,
+					 &new_line, &new_column);
 		end_complex_operation();
 
 		cursor_set_line(get_selection_to_line());
@@ -1985,7 +1985,7 @@ void TextEdit::_consume_pair_symbol(CharType ch) {
 	}
 
 	if ((ch == '\'' || ch == '"') &&
-			cursor_get_column() > 0 && _is_text_char(text[cursor.line][cursor_get_column() - 1]) && !_is_pair_right_symbol(text[cursor.line][cursor_get_column()])) {
+		cursor_get_column() > 0 && _is_text_char(text[cursor.line][cursor_get_column() - 1]) && !_is_pair_right_symbol(text[cursor.line][cursor_get_column()])) {
 		insert_text_at_cursor(ch_single);
 		cursor_set_column(cursor_position_to_move);
 		return;
@@ -1998,7 +1998,7 @@ void TextEdit::_consume_pair_symbol(CharType ch) {
 			return;
 		}
 		if (_is_pair_right_symbol(ch) &&
-				text[cursor.line][cursor_get_column()] == ch) {
+			text[cursor.line][cursor_get_column()] == ch) {
 			cursor_set_column(cursor_position_to_move);
 			return;
 		}
@@ -2101,8 +2101,8 @@ void TextEdit::backspace_at_cursor() {
 	}
 
 	if (auto_brace_completion_enabled &&
-			cursor.column > 0 &&
-			_is_pair_left_symbol(text[cursor.line][cursor.column - 1])) {
+		cursor.column > 0 &&
+		_is_pair_left_symbol(text[cursor.line][cursor.column - 1])) {
 		_consume_backspace_for_pair_symbol(prev_line, prev_column);
 	} else {
 		// Handle space indentation.
@@ -2242,12 +2242,12 @@ void TextEdit::indent_left() {
 		// Fix selection being off by one on the first line.
 		if (first_line_text != get_line(start_line)) {
 			select(selection.from_line, selection.from_column - removed_characters,
-					selection.to_line, initial_selection_end_column);
+				   selection.to_line, initial_selection_end_column);
 		}
 		// Fix selection being off by one on the last line.
 		if (last_line_text != get_line(end_line)) {
 			select(selection.from_line, selection.from_column,
-					selection.to_line, initial_selection_end_column - removed_characters);
+				   selection.to_line, initial_selection_end_column - removed_characters);
 		}
 	}
 	cursor_set_column(initial_cursor_column - removed_characters, false);

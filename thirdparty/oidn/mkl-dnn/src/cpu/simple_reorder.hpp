@@ -62,10 +62,10 @@ namespace fmt_order {
 }
 
 namespace spec {
-struct direct_copy {};
-struct direct_copy_except_dim_0 {};
-struct reference {};
-struct conv_s8s8 {};
+struct direct_copy{};
+struct direct_copy_except_dim_0{};
+struct reference{};
+struct conv_s8s8{};
 }
 
 #define SIMPLE_REORDER_TEMPL_DECL \
@@ -82,7 +82,7 @@ struct conv_s8s8 {};
 
 /* specific reorders: common template */
 template <SIMPLE_REORDER_TEMPL_DECL, typename spec = void>
-struct simple_reorder_impl {};
+struct simple_reorder_impl{};
 
 namespace {
 inline bool simple_fmt_check(bool order_keep, impl::format_tag_t tag_i,

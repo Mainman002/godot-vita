@@ -65,17 +65,17 @@ namespace utils {
  * (since there is no any c++-rt dependent stuff, ideally...). */
 
 /* SFINAE helper -- analogue to std::enable_if */
-template<bool expr, class T = void> struct enable_if {};
+template<bool expr, class T = void> struct enable_if{};
 template<class T> struct enable_if<true, T> { typedef T type; };
 
 /* analogue std::conditional */
-template <bool, typename, typename> struct conditional {};
+template <bool, typename, typename> struct conditional{};
 template <typename T, typename F> struct conditional<true, T, F>
 { typedef T type; };
 template <typename T, typename F> struct conditional<false, T, F>
 { typedef F type; };
 
-template <bool, typename, bool, typename, typename> struct conditional3 {};
+template <bool, typename, bool, typename, typename> struct conditional3{};
 template <typename T, typename FT, typename FF>
 struct conditional3<true, T, false, FT, FF> { typedef T type; };
 template <typename T, typename FT, typename FF>
@@ -83,7 +83,7 @@ struct conditional3<false, T, true, FT, FF> { typedef FT type; };
 template <typename T, typename FT, typename FF>
 struct conditional3<false, T, false, FT, FF> { typedef FF type; };
 
-template <bool, typename U, U, U> struct conditional_v {};
+template <bool, typename U, U, U> struct conditional_v{};
 template <typename U, U t, U f> struct conditional_v<true, U, t, f>
 { static constexpr U value = t; };
 template <typename U, U t, U f> struct conditional_v<false, U, t, f>

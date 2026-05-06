@@ -214,9 +214,9 @@ void CameraMatrix::set_frustum(real_t p_size, real_t p_aspect, Vector2 p_offset,
 real_t CameraMatrix::get_z_far() const {
 	const real_t *matrix = (const real_t *)this->matrix;
 	Plane new_plane = Plane(matrix[3] - matrix[2],
-			matrix[7] - matrix[6],
-			matrix[11] - matrix[10],
-			matrix[15] - matrix[14]);
+							matrix[7] - matrix[6],
+							matrix[11] - matrix[10],
+							matrix[15] - matrix[14]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -226,9 +226,9 @@ real_t CameraMatrix::get_z_far() const {
 real_t CameraMatrix::get_z_near() const {
 	const real_t *matrix = (const real_t *)this->matrix;
 	Plane new_plane = Plane(matrix[3] + matrix[2],
-			matrix[7] + matrix[6],
-			matrix[11] + matrix[10],
-			-matrix[15] - matrix[14]);
+							matrix[7] + matrix[6],
+							matrix[11] + matrix[10],
+							-matrix[15] - matrix[14]);
 
 	new_plane.normalize();
 	return new_plane.d;
@@ -238,22 +238,22 @@ Vector2 CameraMatrix::get_viewport_half_extents() const {
 	const real_t *matrix = (const real_t *)this->matrix;
 	///////--- Near Plane ---///////
 	Plane near_plane = Plane(matrix[3] + matrix[2],
-			matrix[7] + matrix[6],
-			matrix[11] + matrix[10],
-			-matrix[15] - matrix[14]);
+							 matrix[7] + matrix[6],
+							 matrix[11] + matrix[10],
+							 -matrix[15] - matrix[14]);
 	near_plane.normalize();
 
 	///////--- Right Plane ---///////
 	Plane right_plane = Plane(matrix[3] - matrix[0],
-			matrix[7] - matrix[4],
-			matrix[11] - matrix[8],
-			-matrix[15] + matrix[12]);
+							  matrix[7] - matrix[4],
+							  matrix[11] - matrix[8],
+							  -matrix[15] + matrix[12]);
 	right_plane.normalize();
 
 	Plane top_plane = Plane(matrix[3] - matrix[1],
-			matrix[7] - matrix[5],
-			matrix[11] - matrix[9],
-			-matrix[15] + matrix[13]);
+							matrix[7] - matrix[5],
+							matrix[11] - matrix[9],
+							-matrix[15] + matrix[13]);
 	top_plane.normalize();
 
 	Vector3 res;
@@ -300,9 +300,9 @@ Vector<Plane> CameraMatrix::get_projection_planes(const Transform &p_transform) 
 
 	///////--- Near Plane ---///////
 	new_plane = Plane(matrix[3] + matrix[2],
-			matrix[7] + matrix[6],
-			matrix[11] + matrix[10],
-			matrix[15] + matrix[14]);
+					  matrix[7] + matrix[6],
+					  matrix[11] + matrix[10],
+					  matrix[15] + matrix[14]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -311,9 +311,9 @@ Vector<Plane> CameraMatrix::get_projection_planes(const Transform &p_transform) 
 
 	///////--- Far Plane ---///////
 	new_plane = Plane(matrix[3] - matrix[2],
-			matrix[7] - matrix[6],
-			matrix[11] - matrix[10],
-			matrix[15] - matrix[14]);
+					  matrix[7] - matrix[6],
+					  matrix[11] - matrix[10],
+					  matrix[15] - matrix[14]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -322,9 +322,9 @@ Vector<Plane> CameraMatrix::get_projection_planes(const Transform &p_transform) 
 
 	///////--- Left Plane ---///////
 	new_plane = Plane(matrix[3] + matrix[0],
-			matrix[7] + matrix[4],
-			matrix[11] + matrix[8],
-			matrix[15] + matrix[12]);
+					  matrix[7] + matrix[4],
+					  matrix[11] + matrix[8],
+					  matrix[15] + matrix[12]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -333,9 +333,9 @@ Vector<Plane> CameraMatrix::get_projection_planes(const Transform &p_transform) 
 
 	///////--- Top Plane ---///////
 	new_plane = Plane(matrix[3] - matrix[1],
-			matrix[7] - matrix[5],
-			matrix[11] - matrix[9],
-			matrix[15] - matrix[13]);
+					  matrix[7] - matrix[5],
+					  matrix[11] - matrix[9],
+					  matrix[15] - matrix[13]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -344,9 +344,9 @@ Vector<Plane> CameraMatrix::get_projection_planes(const Transform &p_transform) 
 
 	///////--- Right Plane ---///////
 	new_plane = Plane(matrix[3] - matrix[0],
-			matrix[7] - matrix[4],
-			matrix[11] - matrix[8],
-			matrix[15] - matrix[12]);
+					  matrix[7] - matrix[4],
+					  matrix[11] - matrix[8],
+					  matrix[15] - matrix[12]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -355,9 +355,9 @@ Vector<Plane> CameraMatrix::get_projection_planes(const Transform &p_transform) 
 
 	///////--- Bottom Plane ---///////
 	new_plane = Plane(matrix[3] + matrix[1],
-			matrix[7] + matrix[5],
-			matrix[11] + matrix[9],
-			matrix[15] + matrix[13]);
+					  matrix[7] + matrix[5],
+					  matrix[11] + matrix[9],
+					  matrix[15] + matrix[13]);
 
 	new_plane.normal = -new_plane.normal;
 	new_plane.normalize();
@@ -565,9 +565,9 @@ real_t CameraMatrix::get_fov() const {
 	const real_t *matrix = (const real_t *)this->matrix;
 
 	Plane right_plane = Plane(matrix[3] - matrix[0],
-			matrix[7] - matrix[4],
-			matrix[11] - matrix[8],
-			-matrix[15] + matrix[12]);
+							  matrix[7] - matrix[4],
+							  matrix[11] - matrix[8],
+							  -matrix[15] + matrix[12]);
 	right_plane.normalize();
 
 	if ((matrix[8] == 0) && (matrix[9] == 0)) {
@@ -575,9 +575,9 @@ real_t CameraMatrix::get_fov() const {
 	} else {
 		// our frustum is asymmetrical need to calculate the left planes angle separately..
 		Plane left_plane = Plane(matrix[3] + matrix[0],
-				matrix[7] + matrix[4],
-				matrix[11] + matrix[8],
-				matrix[15] + matrix[12]);
+								 matrix[7] + matrix[4],
+								 matrix[11] + matrix[8],
+								 matrix[15] + matrix[12]);
 		left_plane.normalize();
 
 		return Math::rad2deg(Math::acos(Math::abs(left_plane.normal.x))) + Math::rad2deg(Math::acos(Math::abs(right_plane.normal.x)));

@@ -44,7 +44,7 @@ class jit_avx512_core_gemv_s8u8s32_kern : jit_generator {
     void update_c(int, Xbyak::Reg64, int, int, Xbyak::Xmm, int, Xbyak::Opmask);
 
 public:
-    jit_avx512_core_gemv_s8u8s32_kern() : jit_generator(nullptr, GEMM_CODE_SIZE) {};
+    jit_avx512_core_gemv_s8u8s32_kern() : jit_generator(nullptr, GEMM_CODE_SIZE){};
 
     // m, n, alpha, a, lda, x, beta, y
     typedef void (*gemv_s8u8s32_kernel_t)(const dim_t, const dim_t, const float,

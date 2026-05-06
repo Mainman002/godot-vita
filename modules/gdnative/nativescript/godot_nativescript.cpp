@@ -123,10 +123,10 @@ void GDAPI godot_nativescript_register_property(void *p_gdnative_handle, const c
 	property.rset_mode = p_attr->rset_type;
 	property.setter = p_set_func;
 	property.info = PropertyInfo((Variant::Type)p_attr->type,
-			p_path,
-			(PropertyHint)p_attr->hint,
-			*(String *)&p_attr->hint_string,
-			(PropertyUsageFlags)p_attr->usage);
+								 p_path,
+								 (PropertyHint)p_attr->hint,
+								 *(String *)&p_attr->hint_string,
+								 (PropertyUsageFlags)p_attr->usage);
 
 	E->get().properties.insert(p_path, property);
 }

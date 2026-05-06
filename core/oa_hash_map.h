@@ -49,8 +49,8 @@
  * in the arrays for each, but that memory is kept uninitialized.
  */
 template <class TKey, class TValue,
-		class Hasher = HashMapHasherDefault,
-		class Comparator = HashMapComparatorDefault<TKey>>
+		  class Hasher = HashMapHasherDefault,
+		  class Comparator = HashMapComparatorDefault<TKey>>
 class OAHashMap {
 private:
 	TValue *values;
@@ -272,7 +272,7 @@ public:
 
 		uint32_t next_pos = (pos + 1) % capacity;
 		while (hashes[next_pos] != EMPTY_HASH &&
-				_get_probe_length(next_pos, hashes[next_pos]) != 0) {
+			   _get_probe_length(next_pos, hashes[next_pos]) != 0) {
 			SWAP(hashes[next_pos], hashes[pos]);
 			SWAP(keys[next_pos], keys[pos]);
 			SWAP(values[next_pos], values[pos]);

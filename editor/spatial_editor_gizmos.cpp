@@ -628,7 +628,7 @@ bool EditorSpatialGizmo::intersect_ray(Camera *p_camera, const Point2 &p_point, 
 		Transform orig_camera_transform = p_camera->get_camera_transform();
 
 		if (orig_camera_transform.origin.distance_squared_to(t.origin) > 0.01 &&
-				ABS(orig_camera_transform.basis.get_axis(Vector3::AXIS_Z).dot(Vector3(0, 1, 0))) < 0.99) {
+			ABS(orig_camera_transform.basis.get_axis(Vector3::AXIS_Z).dot(Vector3(0, 1, 0))) < 0.99) {
 			p_camera->look_at(t.origin, Vector3(0, 1, 0));
 		}
 
@@ -4322,22 +4322,22 @@ void JointSpatialGizmoPlugin::CreateHingeJointGizmo(const Transform &p_offset, c
 
 	if (r_body_a_points) {
 		JointGizmosDrawer::draw_circle(Vector3::AXIS_Z,
-				BODY_A_RADIUS,
-				p_offset,
-				JointGizmosDrawer::look_body_toward_z(p_trs_joint, p_trs_body_a),
-				p_limit_lower,
-				p_limit_upper,
-				*r_body_a_points);
+									   BODY_A_RADIUS,
+									   p_offset,
+									   JointGizmosDrawer::look_body_toward_z(p_trs_joint, p_trs_body_a),
+									   p_limit_lower,
+									   p_limit_upper,
+									   *r_body_a_points);
 	}
 
 	if (r_body_b_points) {
 		JointGizmosDrawer::draw_circle(Vector3::AXIS_Z,
-				BODY_B_RADIUS,
-				p_offset,
-				JointGizmosDrawer::look_body_toward_z(p_trs_joint, p_trs_body_b),
-				p_limit_lower,
-				p_limit_upper,
-				*r_body_b_points);
+									   BODY_B_RADIUS,
+									   p_offset,
+									   JointGizmosDrawer::look_body_toward_z(p_trs_joint, p_trs_body_b),
+									   p_limit_lower,
+									   p_limit_upper,
+									   *r_body_b_points);
 	}
 }
 

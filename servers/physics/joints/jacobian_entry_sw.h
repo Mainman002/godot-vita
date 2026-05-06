@@ -54,7 +54,7 @@ subject to the following restrictions:
 
 class JacobianEntrySW {
 public:
-	JacobianEntrySW(){};
+	JacobianEntrySW() {};
 	//constraint between two different rigidbodies
 	JacobianEntrySW(
 			const Basis &world2A,
@@ -77,10 +77,10 @@ public:
 
 	//angular constraint between two different rigidbodies
 	JacobianEntrySW(const Vector3 &jointAxis,
-			const Basis &world2A,
-			const Basis &world2B,
-			const Vector3 &inertiaInvA,
-			const Vector3 &inertiaInvB) :
+					const Basis &world2A,
+					const Basis &world2B,
+					const Vector3 &inertiaInvA,
+					const Vector3 &inertiaInvB) :
 			m_linearJointAxis(Vector3(real_t(0.), real_t(0.), real_t(0.))) {
 		m_aJ = world2A.xform(jointAxis);
 		m_bJ = world2B.xform(-jointAxis);
@@ -93,9 +93,9 @@ public:
 
 	//angular constraint between two different rigidbodies
 	JacobianEntrySW(const Vector3 &axisInA,
-			const Vector3 &axisInB,
-			const Vector3 &inertiaInvA,
-			const Vector3 &inertiaInvB) :
+					const Vector3 &axisInB,
+					const Vector3 &inertiaInvA,
+					const Vector3 &inertiaInvB) :
 			m_linearJointAxis(Vector3(real_t(0.), real_t(0.), real_t(0.))),
 			m_aJ(axisInA),
 			m_bJ(-axisInB) {

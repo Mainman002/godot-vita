@@ -527,11 +527,11 @@ Variant SceneTreeTween::calculate_delta_value(Variant p_intial_val, Variant p_fi
 			Transform2D i = p_intial_val;
 			Transform2D f = p_final_val;
 			return Transform2D(f.elements[0][0] - i.elements[0][0],
-					f.elements[0][1] - i.elements[0][1],
-					f.elements[1][0] - i.elements[1][0],
-					f.elements[1][1] - i.elements[1][1],
-					f.elements[2][0] - i.elements[2][0],
-					f.elements[2][1] - i.elements[2][1]);
+							   f.elements[0][1] - i.elements[0][1],
+							   f.elements[1][0] - i.elements[1][0],
+							   f.elements[1][1] - i.elements[1][1],
+							   f.elements[2][0] - i.elements[2][0],
+							   f.elements[2][1] - i.elements[2][1]);
 		}
 
 		case Variant::AABB: {
@@ -544,31 +544,31 @@ Variant SceneTreeTween::calculate_delta_value(Variant p_intial_val, Variant p_fi
 			Basis i = p_intial_val;
 			Basis f = p_final_val;
 			return Basis(f.elements[0][0] - i.elements[0][0],
-					f.elements[0][1] - i.elements[0][1],
-					f.elements[0][2] - i.elements[0][2],
-					f.elements[1][0] - i.elements[1][0],
-					f.elements[1][1] - i.elements[1][1],
-					f.elements[1][2] - i.elements[1][2],
-					f.elements[2][0] - i.elements[2][0],
-					f.elements[2][1] - i.elements[2][1],
-					f.elements[2][2] - i.elements[2][2]);
+						 f.elements[0][1] - i.elements[0][1],
+						 f.elements[0][2] - i.elements[0][2],
+						 f.elements[1][0] - i.elements[1][0],
+						 f.elements[1][1] - i.elements[1][1],
+						 f.elements[1][2] - i.elements[1][2],
+						 f.elements[2][0] - i.elements[2][0],
+						 f.elements[2][1] - i.elements[2][1],
+						 f.elements[2][2] - i.elements[2][2]);
 		}
 
 		case Variant::TRANSFORM: {
 			Transform i = p_intial_val;
 			Transform f = p_final_val;
 			return Transform(f.basis.elements[0][0] - i.basis.elements[0][0],
-					f.basis.elements[0][1] - i.basis.elements[0][1],
-					f.basis.elements[0][2] - i.basis.elements[0][2],
-					f.basis.elements[1][0] - i.basis.elements[1][0],
-					f.basis.elements[1][1] - i.basis.elements[1][1],
-					f.basis.elements[1][2] - i.basis.elements[1][2],
-					f.basis.elements[2][0] - i.basis.elements[2][0],
-					f.basis.elements[2][1] - i.basis.elements[2][1],
-					f.basis.elements[2][2] - i.basis.elements[2][2],
-					f.origin.x - i.origin.x,
-					f.origin.y - i.origin.y,
-					f.origin.z - i.origin.z);
+							 f.basis.elements[0][1] - i.basis.elements[0][1],
+							 f.basis.elements[0][2] - i.basis.elements[0][2],
+							 f.basis.elements[1][0] - i.basis.elements[1][0],
+							 f.basis.elements[1][1] - i.basis.elements[1][1],
+							 f.basis.elements[1][2] - i.basis.elements[1][2],
+							 f.basis.elements[2][0] - i.basis.elements[2][0],
+							 f.basis.elements[2][1] - i.basis.elements[2][1],
+							 f.basis.elements[2][2] - i.basis.elements[2][2],
+							 f.origin.x - i.origin.x,
+							 f.origin.y - i.origin.y,
+							 f.origin.z - i.origin.z);
 		}
 
 		default: {

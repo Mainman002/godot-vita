@@ -126,10 +126,10 @@ bool WSLClient::_verify_headers(String &r_protocol) {
 
 #define _WSL_CHECK(NAME, VALUE)                                                         \
 	ERR_FAIL_COND_V_MSG(!headers.has(NAME) || headers[NAME].to_lower() != VALUE, false, \
-			"Missing or invalid header '" + String(NAME) + "'. Expected value '" + VALUE + "'.");
+						"Missing or invalid header '" + String(NAME) + "'. Expected value '" + VALUE + "'.");
 #define _WSL_CHECK_NC(NAME, VALUE)                                           \
 	ERR_FAIL_COND_V_MSG(!headers.has(NAME) || headers[NAME] != VALUE, false, \
-			"Missing or invalid header '" + String(NAME) + "'. Expected value '" + VALUE + "'.");
+						"Missing or invalid header '" + String(NAME) + "'. Expected value '" + VALUE + "'.");
 	_WSL_CHECK("connection", "upgrade");
 	_WSL_CHECK("upgrade", "websocket");
 	_WSL_CHECK_NC("sec-websocket-accept", WSLPeer::compute_key_response(_key));

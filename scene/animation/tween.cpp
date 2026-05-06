@@ -1275,14 +1275,14 @@ bool Tween::_calc_delta_val(const Variant &p_initial_val, const Variant &p_final
 			Basis i = initial_val;
 			Basis f = final_val;
 			delta_val = Basis(f.elements[0][0] - i.elements[0][0],
-					f.elements[0][1] - i.elements[0][1],
-					f.elements[0][2] - i.elements[0][2],
-					f.elements[1][0] - i.elements[1][0],
-					f.elements[1][1] - i.elements[1][1],
-					f.elements[1][2] - i.elements[1][2],
-					f.elements[2][0] - i.elements[2][0],
-					f.elements[2][1] - i.elements[2][1],
-					f.elements[2][2] - i.elements[2][2]);
+							  f.elements[0][1] - i.elements[0][1],
+							  f.elements[0][2] - i.elements[0][2],
+							  f.elements[1][0] - i.elements[1][0],
+							  f.elements[1][1] - i.elements[1][1],
+							  f.elements[1][2] - i.elements[1][2],
+							  f.elements[2][0] - i.elements[2][0],
+							  f.elements[2][1] - i.elements[2][1],
+							  f.elements[2][2] - i.elements[2][2]);
 		} break;
 
 		case Variant::TRANSFORM: {
@@ -1291,17 +1291,17 @@ bool Tween::_calc_delta_val(const Variant &p_initial_val, const Variant &p_final
 			Transform f = final_val;
 			Transform d;
 			d.set(f.basis.elements[0][0] - i.basis.elements[0][0],
-					f.basis.elements[0][1] - i.basis.elements[0][1],
-					f.basis.elements[0][2] - i.basis.elements[0][2],
-					f.basis.elements[1][0] - i.basis.elements[1][0],
-					f.basis.elements[1][1] - i.basis.elements[1][1],
-					f.basis.elements[1][2] - i.basis.elements[1][2],
-					f.basis.elements[2][0] - i.basis.elements[2][0],
-					f.basis.elements[2][1] - i.basis.elements[2][1],
-					f.basis.elements[2][2] - i.basis.elements[2][2],
-					f.origin.x - i.origin.x,
-					f.origin.y - i.origin.y,
-					f.origin.z - i.origin.z);
+				  f.basis.elements[0][1] - i.basis.elements[0][1],
+				  f.basis.elements[0][2] - i.basis.elements[0][2],
+				  f.basis.elements[1][0] - i.basis.elements[1][0],
+				  f.basis.elements[1][1] - i.basis.elements[1][1],
+				  f.basis.elements[1][2] - i.basis.elements[1][2],
+				  f.basis.elements[2][0] - i.basis.elements[2][0],
+				  f.basis.elements[2][1] - i.basis.elements[2][1],
+				  f.basis.elements[2][2] - i.basis.elements[2][2],
+				  f.origin.x - i.origin.x,
+				  f.origin.y - i.origin.y,
+				  f.origin.z - i.origin.z);
 
 			delta_val = d;
 		} break;

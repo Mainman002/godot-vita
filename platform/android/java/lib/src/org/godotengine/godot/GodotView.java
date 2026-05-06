@@ -258,10 +258,10 @@ public class GodotView extends GLSurfaceView {
 
 				eglConfigChooser =
 						new RegularFallbackConfigChooser(8, 8, 8, 8, 24, 0,
-								new RegularFallbackConfigChooser(8, 8, 8, 8, 16, 0,
-										// Let such a desperate fallback be used if under some circumstances that's the best we can get
-										// (the translucency flag would be ignored, but that's better than not running at all)
-										new RegularConfigChooser(5, 6, 5, 0, 16, 0)));
+														 new RegularFallbackConfigChooser(8, 8, 8, 8, 16, 0,
+																						  // Let such a desperate fallback be used if under some circumstances that's the best we can get
+																						  // (the translucency flag would be ignored, but that's better than not running at all)
+																						  new RegularConfigChooser(5, 6, 5, 0, 16, 0)));
 				break;
 		}
 		setEGLConfigChooser(eglConfigChooser);

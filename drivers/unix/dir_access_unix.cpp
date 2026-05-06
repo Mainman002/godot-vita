@@ -142,7 +142,7 @@ String DirAccessUnix::get_next() {
 // known if it points to a directory. stat() will resolve the link
 // for us.
 #ifdef VITA_ENABLED
-#define SCE_SO_ISDIR(m) (((m)&SCE_SO_IFMT) == SCE_SO_IFDIR)
+#define SCE_SO_ISDIR(m) (((m) & SCE_SO_IFMT) == SCE_SO_IFDIR)
 	_cisdir = SCE_SO_ISDIR(entry->d_stat.st_attr);
 #else
 	if (entry->d_type == DT_UNKNOWN || entry->d_type == DT_LNK) {
@@ -189,9 +189,9 @@ static bool _filter_drive(struct mntent *mnt) {
 
 	// Accept devices mounted at common locations
 	if (strncmp(mnt->mnt_dir, "/media", 6) == 0 ||
-			strncmp(mnt->mnt_dir, "/mnt", 4) == 0 ||
-			strncmp(mnt->mnt_dir, "/home", 5) == 0 ||
-			strncmp(mnt->mnt_dir, "/run/media", 10) == 0) {
+		strncmp(mnt->mnt_dir, "/mnt", 4) == 0 ||
+		strncmp(mnt->mnt_dir, "/home", 5) == 0 ||
+		strncmp(mnt->mnt_dir, "/run/media", 10) == 0) {
 		return true;
 	}
 

@@ -1347,8 +1347,8 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 			const PropertyInterface &iprop = E->get();
 			Error prop_err = _generate_cs_property(itype, iprop, output);
 			ERR_FAIL_COND_V_MSG(prop_err != OK, prop_err,
-					"Failed to generate property '" + iprop.cname.operator String() +
-							"' for class '" + itype.name + "'.");
+								"Failed to generate property '" + iprop.cname.operator String() +
+										"' for class '" + itype.name + "'.");
 		}
 	}
 
@@ -1412,7 +1412,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 		const MethodInterface &imethod = E->get();
 		Error method_err = _generate_cs_method(itype, imethod, method_bind_count, output);
 		ERR_FAIL_COND_V_MSG(method_err != OK, method_err,
-				"Failed to generate method '" + imethod.name + "' for class '" + itype.name + "'.");
+							"Failed to generate method '" + imethod.name + "' for class '" + itype.name + "'.");
 	}
 
 	if (itype.is_singleton) {
@@ -1430,7 +1430,7 @@ Error BindingsGenerator::_generate_cs_type(const TypeInterface &itype, const Str
 	}
 
 	output.append(INDENT1 CLOSE_BLOCK /* class */
-					CLOSE_BLOCK /* namespace */);
+						  CLOSE_BLOCK /* namespace */);
 
 	output.append("\n"
 				  "#pragma warning restore CS1591\n"
@@ -1516,7 +1516,7 @@ Error BindingsGenerator::_generate_cs_property(const BindingsGenerator::TypeInte
 								// TODO Remove this once we make accessor methods private/internal (they will no longer be marked as obsolete after that)
 								"#pragma warning disable CS0618 // Disable warning about obsolete method\n"
 
-				OPEN_BLOCK_L3);
+						OPEN_BLOCK_L3);
 
 		p_output.append("return ");
 		p_output.append(getter->proxy_name + "(");
@@ -1533,7 +1533,7 @@ Error BindingsGenerator::_generate_cs_property(const BindingsGenerator::TypeInte
 		}
 		p_output.append(");\n"
 
-				CLOSE_BLOCK_L3
+						CLOSE_BLOCK_L3
 
 						// TODO Remove this once we make accessor methods private/internal (they will no longer be marked as obsolete after that)
 						"#pragma warning restore CS0618\n");
@@ -1545,7 +1545,7 @@ Error BindingsGenerator::_generate_cs_property(const BindingsGenerator::TypeInte
 								// TODO Remove this once we make accessor methods private/internal (they will no longer be marked as obsolete after that)
 								"#pragma warning disable CS0618 // Disable warning about obsolete method\n"
 
-				OPEN_BLOCK_L3);
+						OPEN_BLOCK_L3);
 
 		p_output.append(setter->proxy_name + "(");
 		if (p_iprop.index != -1) {
@@ -1561,7 +1561,7 @@ Error BindingsGenerator::_generate_cs_property(const BindingsGenerator::TypeInte
 		}
 		p_output.append("value);\n"
 
-				CLOSE_BLOCK_L3
+						CLOSE_BLOCK_L3
 
 						// TODO Remove this once we make accessor methods private/internal (they will no longer be marked as obsolete after that)
 						"#pragma warning restore CS0618\n");
@@ -1825,7 +1825,7 @@ Error BindingsGenerator::generate_glue(const String &p_output_dir) {
 			const MethodInterface &imethod = E->get();
 			Error method_err = _generate_glue_method(itype, imethod, output);
 			ERR_FAIL_COND_V_MSG(method_err != OK, method_err,
-					"Failed to generate method '" + imethod.name + "' for class '" + itype.name + "'.");
+								"Failed to generate method '" + imethod.name + "' for class '" + itype.name + "'.");
 		}
 
 		if (itype.is_singleton) {
@@ -2350,7 +2350,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 			// Prevent the property and its enclosing type from sharing the same name
 			if (iprop.proxy_name == itype.proxy_name) {
 				_log("Name of property '%s' is ambiguous with the name of its enclosing class '%s'. Renaming property to '%s_'\n",
-						iprop.proxy_name.utf8().get_data(), itype.proxy_name.utf8().get_data(), iprop.proxy_name.utf8().get_data());
+					 iprop.proxy_name.utf8().get_data(), itype.proxy_name.utf8().get_data(), iprop.proxy_name.utf8().get_data());
 
 				iprop.proxy_name += "_";
 			}
@@ -2408,7 +2408,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 
 			if (!m && !imethod.is_virtual) {
 				ERR_FAIL_COND_V_MSG(!virtual_method_list.find(method_info), false,
-						"Missing MethodBind for non-virtual method: '" + itype.name + "." + imethod.name + "'.");
+									"Missing MethodBind for non-virtual method: '" + itype.name + "." + imethod.name + "'.");
 
 				// A virtual method without the virtual flag. This is a special case.
 
@@ -2426,7 +2426,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 				if (itype.cname != name_cache.type_Object || imethod.name != "free") {
 					WARN_PRINT("Notification: New unexpected virtual non-overridable method found."
 							   " We only expected Object.free, but found '" +
-							itype.name + "." + imethod.name + "'.");
+							   itype.name + "." + imethod.name + "'.");
 				}
 			} else if (return_info.type == Variant::INT && return_info.usage & PROPERTY_USAGE_CLASS_IS_ENUM) {
 				imethod.return_type.cname = return_info.class_name;
@@ -2488,7 +2488,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 				if (m && m->has_default_argument(i)) {
 					bool defval_ok = _arg_default_value_from_variant(m->get_default_argument(i), iarg);
 					ERR_FAIL_COND_V_MSG(!defval_ok, false,
-							"Cannot determine default value for argument '" + orig_arg_name + "' of method '" + itype.name + "." + imethod.name + "'.");
+										"Cannot determine default value for argument '" + orig_arg_name + "' of method '" + itype.name + "." + imethod.name + "'.");
 				}
 
 				imethod.add_argument(iarg);
@@ -2506,7 +2506,7 @@ bool BindingsGenerator::_populate_object_type_interfaces() {
 			// Prevent the method and its enclosing type from sharing the same name
 			if (imethod.proxy_name == itype.proxy_name) {
 				_log("Name of method '%s' is ambiguous with the name of its enclosing class '%s'. Renaming method to '%s_'\n",
-						imethod.proxy_name.utf8().get_data(), itype.proxy_name.utf8().get_data(), imethod.proxy_name.utf8().get_data());
+					 imethod.proxy_name.utf8().get_data(), itype.proxy_name.utf8().get_data(), imethod.proxy_name.utf8().get_data());
 
 				imethod.proxy_name += "_";
 			}
@@ -2690,7 +2690,7 @@ bool BindingsGenerator::_arg_default_value_from_variant(const Variant &p_val, Ar
 			break;
 		case Variant::OBJECT:
 			ERR_FAIL_COND_V_MSG(!p_val.is_zero(), false,
-					"Parameter of type '" + String(r_iarg.type.cname) + "' can only have null/zero as the default value.");
+								"Parameter of type '" + String(r_iarg.type.cname) + "' can only have null/zero as the default value.");
 
 			r_iarg.default_argument = "null";
 			break;
@@ -2700,10 +2700,10 @@ bool BindingsGenerator::_arg_default_value_from_variant(const Variant &p_val, Ar
 			break;
 		case Variant::_RID:
 			ERR_FAIL_COND_V_MSG(r_iarg.type.cname != name_cache.type_RID, false,
-					"Parameter of type '" + String(r_iarg.type.cname) + "' cannot have a default value of type '" + String(name_cache.type_RID) + "'.");
+								"Parameter of type '" + String(r_iarg.type.cname) + "' cannot have a default value of type '" + String(name_cache.type_RID) + "'.");
 
 			ERR_FAIL_COND_V_MSG(!p_val.is_zero(), false,
-					"Parameter of type '" + String(r_iarg.type.cname) + "' can only have null/zero as the default value.");
+								"Parameter of type '" + String(r_iarg.type.cname) + "' can only have null/zero as the default value.");
 
 			r_iarg.default_argument = "null";
 			break;

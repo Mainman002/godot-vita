@@ -409,15 +409,15 @@ Error EditorExportPlatform::_save_zip_file(void *p_userdata, const String &p_pat
 	zipFile zip = (zipFile)zd->zip;
 
 	zipOpenNewFileInZip(zip,
-			path.utf8().get_data(),
-			nullptr,
-			nullptr,
-			0,
-			nullptr,
-			0,
-			nullptr,
-			Z_DEFLATED,
-			Z_DEFAULT_COMPRESSION);
+						path.utf8().get_data(),
+						nullptr,
+						nullptr,
+						0,
+						nullptr,
+						0,
+						nullptr,
+						Z_DEFLATED,
+						Z_DEFAULT_COMPRESSION);
 
 	zipWriteInFileInZip(zip, p_data.ptr(), p_data.size());
 	zipCloseFileInZip(zip);
@@ -1940,7 +1940,7 @@ String EditorExportPlatformPC::get_preset_arch(const Ref<EditorExportPreset> &p_
 	String arch = p_preset->get("binary_format/architecture");
 	if (arch != "x86_64" && arch != "x86_32" && arch != "arm64" && arch != "arm32") {
 		ERR_PRINT(vformat("Invalid value \"%s\" for \"binary_format/architecture\" in export preset \"%s\". Defaulting to \"x86_64\".",
-				arch, p_preset->get_name()));
+						  arch, p_preset->get_name()));
 		arch = "x86_64";
 	}
 	return arch;

@@ -252,7 +252,7 @@ static bool _connect_faces(_FaceClassify *p_faces, int len, int p_group) {
 					Vector3 vj1 = p_faces[j].face.vertex[(l + 1) % 3];
 
 					if (vi1.distance_to(vj1) < 0.00001f &&
-							vi2.distance_to(vj2) < 0.00001f) {
+						vi2.distance_to(vj2) < 0.00001f) {
 						if (p_faces[i].links[k].face != -1) {
 							ERR_PRINT("already linked\n");
 							error = true;
@@ -568,7 +568,7 @@ static inline void _build_faces(uint8_t ***p_cell_status, int x, int y, int z, i
 		return;
 	}
 
-#define vert(m_idx) Vector3(((m_idx)&4) >> 2, ((m_idx)&2) >> 1, (m_idx)&1)
+#define vert(m_idx) Vector3(((m_idx) & 4) >> 2, ((m_idx) & 2) >> 1, (m_idx) & 1)
 
 	static const uint8_t indices[6][4] = {
 		{ 7, 6, 4, 5 },

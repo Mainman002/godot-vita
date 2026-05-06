@@ -112,7 +112,7 @@ Error OS_Vita::initialize(const VideoMode &p_desired, int p_video_driver, int p_
 	} else {
 		OS::get_singleton()->alert("OpenGL ES 3 is not supported on this device.\n\n"
 								   "Please enable the option \"Fallback to OpenGL ES 2.0\" in the options menu.\n",
-				"OpenGL ES 3 Not Supported");
+								   "OpenGL ES 3 Not Supported");
 		//gl_initialization_error = true;
 		p_video_driver = VIDEO_DRIVER_GLES2;
 		gles2 = true;
@@ -142,7 +142,7 @@ Error OS_Vita::initialize(const VideoMode &p_desired, int p_video_driver, int p_
 	if (gl_initialization_error) {
 		OS::get_singleton()->alert("Your device does not support any of the supported OpenGL versions.\n"
 								   "Please check your graphics drivers and try again.\n",
-				"Graphics Driver Error");
+								   "Graphics Driver Error");
 		return ERR_UNAVAILABLE;
 	}
 

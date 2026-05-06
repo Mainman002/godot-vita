@@ -584,7 +584,7 @@ static void interop_get_active_network_dns_servers(char **r_dns_servers, int *dn
 		return;
 
 	jmethodID getLinkProperties = env->GetMethodID(connectivityManagerClass,
-			"getLinkProperties", "(Landroid/net/Network;)Landroid/net/LinkProperties;");
+												   "getLinkProperties", "(Landroid/net/Network;)Landroid/net/LinkProperties;");
 	ERR_FAIL_NULL(getLinkProperties);
 
 	ScopedLocalRef<jobject> linkProperties(env, env->CallObjectMethod(connectivityManager, getLinkProperties, activeNetwork.get()));

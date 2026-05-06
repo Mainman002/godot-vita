@@ -287,11 +287,11 @@ void FindInFiles::_scan_file(String fpath) {
 
 void FindInFiles::_bind_methods() {
 	ADD_SIGNAL(MethodInfo(SIGNAL_RESULT_FOUND,
-			PropertyInfo(Variant::STRING, "path"),
-			PropertyInfo(Variant::INT, "line_number"),
-			PropertyInfo(Variant::INT, "begin"),
-			PropertyInfo(Variant::INT, "end"),
-			PropertyInfo(Variant::STRING, "text")));
+						  PropertyInfo(Variant::STRING, "path"),
+						  PropertyInfo(Variant::INT, "line_number"),
+						  PropertyInfo(Variant::INT, "begin"),
+						  PropertyInfo(Variant::INT, "end"),
+						  PropertyInfo(Variant::STRING, "text")));
 
 	ADD_SIGNAL(MethodInfo(SIGNAL_FINISHED));
 }
@@ -994,10 +994,10 @@ void FindInFilesPanel::_bind_methods() {
 	ClassDB::bind_method("_draw_result_text", &FindInFilesPanel::draw_result_text);
 
 	ADD_SIGNAL(MethodInfo(SIGNAL_RESULT_SELECTED,
-			PropertyInfo(Variant::STRING, "path"),
-			PropertyInfo(Variant::INT, "line_number"),
-			PropertyInfo(Variant::INT, "begin"),
-			PropertyInfo(Variant::INT, "end")));
+						  PropertyInfo(Variant::STRING, "path"),
+						  PropertyInfo(Variant::INT, "line_number"),
+						  PropertyInfo(Variant::INT, "begin"),
+						  PropertyInfo(Variant::INT, "end")));
 
 	ADD_SIGNAL(MethodInfo(SIGNAL_FILES_MODIFIED, PropertyInfo(Variant::STRING, "paths")));
 }

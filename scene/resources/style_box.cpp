@@ -555,7 +555,7 @@ inline void set_inner_corner_radius(const Rect2 style_rect, const Rect2 inner_re
 }
 
 inline void draw_ring(Vector<Vector2> &verts, Vector<int> &indices, Vector<Color> &colors, const Rect2 &style_rect, const real_t corner_radius[4],
-		const Rect2 &ring_rect, const Rect2 &inner_rect, const Color &inner_color, const Color &outer_color, const int corner_detail, const Vector2 &skew, bool fill_center = false) {
+					  const Rect2 &ring_rect, const Rect2 &inner_rect, const Color &inner_color, const Color &outer_color, const int corner_detail, const Vector2 &skew, bool fill_center = false) {
 	int vert_offset = verts.size();
 	if (!vert_offset) {
 		vert_offset = 0;
@@ -733,24 +733,24 @@ void StyleBoxFlat::draw(RID p_canvas_item, const Rect2 &p_rect) const {
 		Color shadow_color_transparent = Color(shadow_color.r, shadow_color.g, shadow_color.b, 0);
 
 		draw_ring(verts, indices, colors, shadow_inner_rect, adapted_corner,
-				shadow_rect, shadow_inner_rect, shadow_color, shadow_color_transparent, corner_detail, skew);
+				  shadow_rect, shadow_inner_rect, shadow_color, shadow_color_transparent, corner_detail, skew);
 
 		if (draw_center) {
 			draw_ring(verts, indices, colors, shadow_inner_rect, adapted_corner,
-					shadow_inner_rect, shadow_inner_rect, shadow_color, shadow_color, corner_detail, skew, true);
+					  shadow_inner_rect, shadow_inner_rect, shadow_color, shadow_color, corner_detail, skew, true);
 		}
 	}
 
 	// Create border (no AA).
 	if (draw_border && !aa_on) {
 		draw_ring(verts, indices, colors, border_style_rect, adapted_corner,
-				border_style_rect, infill_rect, border_color_inner, border_color, corner_detail, skew);
+				  border_style_rect, infill_rect, border_color_inner, border_color, corner_detail, skew);
 	}
 
 	// Create infill (no AA).
 	if (draw_center && (!aa_on || blend_on || !draw_border)) {
 		draw_ring(verts, indices, colors, border_style_rect, adapted_corner,
-				infill_rect, infill_rect, bg_color, bg_color, corner_detail, skew, true);
+				  infill_rect, infill_rect, bg_color, bg_color, corner_detail, skew, true);
 	}
 
 	if (aa_on) {
@@ -774,50 +774,50 @@ void StyleBoxFlat::draw(RID p_canvas_item, const Rect2 &p_rect) const {
 		}
 
 		Rect2 infill_inner_rect = infill_rect.grow_individual(-aa_border_width[MARGIN_LEFT], -aa_border_width[MARGIN_TOP],
-				-aa_border_width[MARGIN_RIGHT], -aa_border_width[MARGIN_BOTTOM]);
+															  -aa_border_width[MARGIN_RIGHT], -aa_border_width[MARGIN_BOTTOM]);
 
 		if (draw_center) {
 			if (!blend_on && draw_border) {
 				Rect2 infill_inner_rect_aa = infill_inner_rect.grow_individual(aa_border_width[MARGIN_LEFT], aa_border_width[MARGIN_TOP],
-						aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
+																			   aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
 				// Create infill within AA border.
 				draw_ring(verts, indices, colors, border_style_rect, adapted_corner,
-						infill_inner_rect_aa, infill_inner_rect_aa, bg_color, bg_color, corner_detail, skew, true);
+						  infill_inner_rect_aa, infill_inner_rect_aa, bg_color, bg_color, corner_detail, skew, true);
 			}
 
 			if (!blend_on || !draw_border) {
 				Rect2 infill_rect_aa = infill_rect.grow_individual(aa_fill_width[MARGIN_LEFT], aa_fill_width[MARGIN_TOP],
-						aa_fill_width[MARGIN_RIGHT], aa_fill_width[MARGIN_BOTTOM]);
+																   aa_fill_width[MARGIN_RIGHT], aa_fill_width[MARGIN_BOTTOM]);
 
 				Color alpha_bg = Color(bg_color.r, bg_color.g, bg_color.b, 0);
 
 				// Create infill fake AA gradient.
 				draw_ring(verts, indices, colors, style_rect, adapted_corner,
-						infill_rect_aa, infill_rect, bg_color, alpha_bg, corner_detail, skew);
+						  infill_rect_aa, infill_rect, bg_color, alpha_bg, corner_detail, skew);
 			}
 		}
 
 		if (draw_border) {
 			Rect2 infill_rect_aa = infill_rect.grow_individual(aa_border_width[MARGIN_LEFT], aa_border_width[MARGIN_TOP],
-					aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
+															   aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
 			Rect2 style_rect_aa = style_rect.grow_individual(aa_border_width[MARGIN_LEFT], aa_border_width[MARGIN_TOP],
-					aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
+															 aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
 			Rect2 border_style_rect_aa = border_style_rect.grow_individual(aa_border_width[MARGIN_LEFT], aa_border_width[MARGIN_TOP],
-					aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
+																		   aa_border_width[MARGIN_RIGHT], aa_border_width[MARGIN_BOTTOM]);
 
 			// Create border.
 			draw_ring(verts, indices, colors, border_style_rect, adapted_corner,
-					border_style_rect_aa, ((blend_on) ? infill_rect : infill_rect_aa), border_color_inner, border_color, corner_detail, skew);
+					  border_style_rect_aa, ((blend_on) ? infill_rect : infill_rect_aa), border_color_inner, border_color, corner_detail, skew);
 
 			if (!blend_on) {
 				// Create inner border fake AA gradient.
 				draw_ring(verts, indices, colors, border_style_rect, adapted_corner,
-						infill_rect_aa, infill_rect, border_color_blend, border_color, corner_detail, skew);
+						  infill_rect_aa, infill_rect, border_color_blend, border_color, corner_detail, skew);
 			}
 
 			// Create outer border fake AA gradient.
 			draw_ring(verts, indices, colors, border_style_rect, adapted_corner,
-					style_rect_aa, border_style_rect_aa, border_color, border_color_alpha, corner_detail, skew);
+					  style_rect_aa, border_style_rect_aa, border_color, border_color_alpha, corner_detail, skew);
 		}
 	}
 

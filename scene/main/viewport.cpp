@@ -1231,7 +1231,7 @@ Transform Viewport::get_camera_override_transform() const {
 void Viewport::set_camera_override_perspective(float p_fovy_degrees, float p_z_near, float p_z_far) {
 	if (camera_override) {
 		if (camera_override.fov == p_fovy_degrees && camera_override.z_near == p_z_near &&
-				camera_override.z_far == p_z_far && camera_override.projection == CameraOverrideData::PROJECTION_PERSPECTIVE) {
+			camera_override.z_far == p_z_far && camera_override.projection == CameraOverrideData::PROJECTION_PERSPECTIVE) {
 			return;
 		}
 
@@ -1247,7 +1247,7 @@ void Viewport::set_camera_override_perspective(float p_fovy_degrees, float p_z_n
 void Viewport::set_camera_override_orthogonal(float p_size, float p_z_near, float p_z_far) {
 	if (camera_override) {
 		if (camera_override.size == p_size && camera_override.z_near == p_z_near &&
-				camera_override.z_far == p_z_far && camera_override.projection == CameraOverrideData::PROJECTION_ORTHOGONAL) {
+			camera_override.z_far == p_z_far && camera_override.projection == CameraOverrideData::PROJECTION_ORTHOGONAL) {
 			return;
 		}
 
@@ -1647,10 +1647,10 @@ void Viewport::_gui_call_input(Control *p_control, const Ref<InputEvent> &p_inpu
 	Ref<InputEventMouseButton> mb = p_input;
 
 	bool cant_stop_me_now = (mb.is_valid() &&
-			(mb->get_button_index() == BUTTON_WHEEL_DOWN ||
-					mb->get_button_index() == BUTTON_WHEEL_UP ||
-					mb->get_button_index() == BUTTON_WHEEL_LEFT ||
-					mb->get_button_index() == BUTTON_WHEEL_RIGHT));
+							 (mb->get_button_index() == BUTTON_WHEEL_DOWN ||
+							  mb->get_button_index() == BUTTON_WHEEL_UP ||
+							  mb->get_button_index() == BUTTON_WHEEL_LEFT ||
+							  mb->get_button_index() == BUTTON_WHEEL_RIGHT));
 	Ref<InputEventPanGesture> pn = p_input;
 	cant_stop_me_now = pn.is_valid() || cant_stop_me_now;
 
@@ -2176,9 +2176,9 @@ void Viewport::_gui_input_event(Ref<InputEvent> p_event) {
 				// If the mouse is over a menu button, this menu will open automatically
 				// if there is already a pop-up menu open at the same hierarchical level.
 				if (popup_menu_parent && menu_button && popup_menu_parent->is_switch_on_hover() &&
-						!menu_button->is_disabled() && menu_button->is_switch_on_hover() &&
-						(popup_menu_parent->get_parent()->is_a_parent_of(menu_button) ||
-								menu_button->get_parent()->is_a_parent_of(popup_menu))) {
+					!menu_button->is_disabled() && menu_button->is_switch_on_hover() &&
+					(popup_menu_parent->get_parent()->is_a_parent_of(menu_button) ||
+					 menu_button->get_parent()->is_a_parent_of(popup_menu))) {
 					popup_menu->notification(Control::NOTIFICATION_MODAL_CLOSE);
 					popup_menu->_modal_stack_remove();
 					popup_menu->hide();
@@ -2909,13 +2909,13 @@ void Viewport::unhandled_input(const Ref<InputEvent> &p_event) {
 
 	if (physics_object_picking && !get_tree()->input_handled) {
 		if (Input::get_singleton()->get_mouse_mode() != Input::MOUSE_MODE_CAPTURED &&
-				(Object::cast_to<InputEventMouseButton>(*p_event) ||
-						Object::cast_to<InputEventMouseMotion>(*p_event) ||
-						Object::cast_to<InputEventScreenDrag>(*p_event) ||
-						Object::cast_to<InputEventScreenTouch>(*p_event) ||
-						Object::cast_to<InputEventKey>(*p_event) //to remember state
+			(Object::cast_to<InputEventMouseButton>(*p_event) ||
+			 Object::cast_to<InputEventMouseMotion>(*p_event) ||
+			 Object::cast_to<InputEventScreenDrag>(*p_event) ||
+			 Object::cast_to<InputEventScreenTouch>(*p_event) ||
+			 Object::cast_to<InputEventKey>(*p_event) //to remember state
 
-						)) {
+			 )) {
 			physics_picking_events.push_back(p_event);
 		}
 	}

@@ -163,12 +163,12 @@ class EditorExportPlatformAndroid : public EditorExportPlatform {
 	void store_image(const String &export_path, const Vector<uint8_t> &data);
 
 	void _copy_icons_to_gradle_project(const Ref<EditorExportPreset> &p_preset,
-			const String &processed_splash_config_xml,
-			const Ref<Image> &splash_image,
-			const Ref<Image> &splash_bg_color_image,
-			const Ref<Image> &main_image,
-			const Ref<Image> &foreground,
-			const Ref<Image> &background);
+									   const String &processed_splash_config_xml,
+									   const Ref<Image> &splash_image,
+									   const Ref<Image> &splash_bg_color_image,
+									   const Ref<Image> &main_image,
+									   const Ref<Image> &foreground,
+									   const Ref<Image> &background);
 
 	static Vector<String> get_enabled_abis(const Ref<EditorExportPreset> &p_preset);
 

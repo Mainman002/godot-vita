@@ -187,8 +187,10 @@ void add_internal_call(const char *p_name, R (*p_func)(P...)) {
 	(void)__gdmono__scope__thread__attach__;
 
 #ifdef DEBUG_ENABLED
-#define GD_MONO_ASSERT_THREAD_ATTACHED \
-	{ CRASH_COND(!GDMonoUtils::is_thread_attached()); }
+#define GD_MONO_ASSERT_THREAD_ATTACHED                  \
+	{                                                   \
+		CRASH_COND(!GDMonoUtils::is_thread_attached()); \
+	}
 #else
 #define GD_MONO_ASSERT_THREAD_ATTACHED
 #endif

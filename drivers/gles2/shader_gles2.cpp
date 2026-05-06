@@ -600,14 +600,14 @@ uint32_t ShaderGLES2::create_custom_shader() {
 }
 
 void ShaderGLES2::set_custom_shader_code(uint32_t p_code_id,
-		const String &p_vertex,
-		const String &p_vertex_globals,
-		const String &p_fragment,
-		const String &p_light,
-		const String &p_fragment_globals,
-		const Vector<StringName> &p_uniforms,
-		const Vector<StringName> &p_texture_uniforms,
-		const Vector<CharString> &p_custom_defines) {
+										 const String &p_vertex,
+										 const String &p_vertex_globals,
+										 const String &p_fragment,
+										 const String &p_light,
+										 const String &p_fragment_globals,
+										 const Vector<StringName> &p_uniforms,
+										 const Vector<StringName> &p_texture_uniforms,
+										 const Vector<CharString> &p_custom_defines) {
 	CustomCode *cc = custom_code_map.getptr(p_code_id);
 	ERR_FAIL_COND(!cc);
 
@@ -818,43 +818,43 @@ void ShaderGLES2::use_material(void *p_material) {
 					if (V->get().get_type() == Variant::TRANSFORM) {
 						Transform tr = V->get();
 						GLfloat matrix[16] = { /* build a 16x16 matrix */
-							tr.basis.elements[0][0],
-							tr.basis.elements[1][0],
-							tr.basis.elements[2][0],
-							0,
-							tr.basis.elements[0][1],
-							tr.basis.elements[1][1],
-							tr.basis.elements[2][1],
-							0,
-							tr.basis.elements[0][2],
-							tr.basis.elements[1][2],
-							tr.basis.elements[2][2],
-							0,
-							tr.origin.x,
-							tr.origin.y,
-							tr.origin.z,
-							1
+											   tr.basis.elements[0][0],
+											   tr.basis.elements[1][0],
+											   tr.basis.elements[2][0],
+											   0,
+											   tr.basis.elements[0][1],
+											   tr.basis.elements[1][1],
+											   tr.basis.elements[2][1],
+											   0,
+											   tr.basis.elements[0][2],
+											   tr.basis.elements[1][2],
+											   tr.basis.elements[2][2],
+											   0,
+											   tr.origin.x,
+											   tr.origin.y,
+											   tr.origin.z,
+											   1
 						};
 						glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
 					} else {
 						Transform2D tr = V->get();
 						GLfloat matrix[16] = { /* build a 16x16 matrix */
-							tr.elements[0][0],
-							tr.elements[0][1],
-							0,
-							0,
-							tr.elements[1][0],
-							tr.elements[1][1],
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							tr.elements[2][0],
-							tr.elements[2][1],
-							0,
-							1
+											   tr.elements[0][0],
+											   tr.elements[0][1],
+											   0,
+											   0,
+											   tr.elements[1][0],
+											   tr.elements[1][1],
+											   0,
+											   0,
+											   0,
+											   0,
+											   1,
+											   0,
+											   tr.elements[2][0],
+											   tr.elements[2][1],
+											   0,
+											   1
 						};
 						glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
 					}

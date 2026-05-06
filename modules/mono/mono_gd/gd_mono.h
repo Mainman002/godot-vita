@@ -135,7 +135,7 @@ private:
 	bool _load_project_assembly();
 
 	bool _try_load_api_assemblies(LoadedApiAssembly &r_core_api_assembly, LoadedApiAssembly &r_editor_api_assembly,
-			const String &p_config, bool p_refonly, CoreApiAssemblyLoadedCallback p_callback);
+								  const String &p_config, bool p_refonly, CoreApiAssemblyLoadedCallback p_callback);
 	bool _try_load_api_assemblies_preset();
 	void _load_api_assemblies();
 

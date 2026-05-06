@@ -87,9 +87,9 @@ struct IntPoint {
   cInt Y;
 #ifdef use_xyz
   cInt Z;
-  IntPoint(cInt x = 0, cInt y = 0, cInt z = 0): X(x), Y(y), Z(z) {};
+  IntPoint(cInt x = 0, cInt y = 0, cInt z = 0): X(x), Y(y), Z(z){};
 #else
-  IntPoint(cInt x = 0, cInt y = 0): X(x), Y(y) {};
+  IntPoint(cInt x = 0, cInt y = 0): X(x), Y(y){};
 #endif
 
   friend inline bool operator== (const IntPoint& a, const IntPoint& b)

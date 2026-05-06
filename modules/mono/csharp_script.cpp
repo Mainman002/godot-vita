@@ -1809,7 +1809,7 @@ MonoObject *CSharpInstance::_internal_new_managed() {
 	// Search the constructor first, to fail with an error if it's not found before allocating anything else.
 	GDMonoMethod *ctor = script->script_class->get_method(CACHED_STRING_NAME(dotctor), 0);
 	ERR_FAIL_NULL_V_MSG(ctor, NULL,
-			"Cannot create script instance because the class does not define a parameterless constructor: '" + script->get_path() + "'.");
+						"Cannot create script instance because the class does not define a parameterless constructor: '" + script->get_path() + "'.");
 
 	CSharpLanguage::get_singleton()->release_script_gchandle(gchandle);
 
@@ -2303,7 +2303,7 @@ bool CSharpScript::_update_exports(PlaceHolderScriptInstance *p_instance_to_upda
 			GDMonoMethod *ctor = script_class->get_method(CACHED_STRING_NAME(dotctor), 0);
 
 			ERR_FAIL_NULL_V_MSG(ctor, NULL,
-					"Cannot construct temporary MonoObject because the class does not define a parameterless constructor: '" + get_path() + "'.");
+								"Cannot construct temporary MonoObject because the class does not define a parameterless constructor: '" + get_path() + "'.");
 
 			MonoException *ctor_exc = NULL;
 			ctor->invoke(tmp_object, NULL, &ctor_exc);
@@ -2593,8 +2593,8 @@ bool CSharpScript::_get_member_export(IMonoClassMember *p_member, bool p_inspect
 	int hint_res = _try_get_member_export_hint(p_member, type, variant_type, /* allow_generics: */ true, hint, hint_string);
 
 	ERR_FAIL_COND_V_MSG(hint_res == -1, false,
-			"Error while trying to determine information about the exported member: '" +
-					MEMBER_FULL_QUALIFIED_NAME(p_member) + "'.");
+						"Error while trying to determine information about the exported member: '" +
+								MEMBER_FULL_QUALIFIED_NAME(p_member) + "'.");
 
 	if (hint_res == 0) {
 		hint = PropertyHint(CACHED_FIELD(ExportAttribute, hint)->get_int_value(attr));
@@ -2911,9 +2911,9 @@ CSharpInstance *CSharpScript::_create_instance(const Variant **p_args, int p_arg
 	GDMonoMethod *ctor = script_class->get_method(CACHED_STRING_NAME(dotctor), p_argcount);
 	if (ctor == NULL) {
 		ERR_FAIL_COND_V_MSG(p_argcount == 0, NULL,
-				"Cannot create script instance. The class '" + script_class->get_full_name() +
-						"' does not define a parameterless constructor." +
-						(get_path().empty() ? String() : " Path: '" + get_path() + "'."));
+							"Cannot create script instance. The class '" + script_class->get_full_name() +
+									"' does not define a parameterless constructor." +
+									(get_path().empty() ? String() : " Path: '" + get_path() + "'."));
 
 		ERR_FAIL_V_MSG(NULL, "Constructor not found.");
 	}
@@ -3314,10 +3314,10 @@ Error CSharpScript::load_source_code(const String &p_path) {
 	Error ferr = read_all_file_utf8(p_path, source);
 
 	ERR_FAIL_COND_V_MSG(ferr != OK, ferr,
-			ferr == ERR_INVALID_DATA
-					? "Script '" + p_path + "' contains invalid unicode (UTF-8), so it was not loaded."
-											" Please ensure that scripts are saved in valid UTF-8 unicode."
-					: "Failed to read file: '" + p_path + "'.");
+						ferr == ERR_INVALID_DATA
+								? "Script '" + p_path + "' contains invalid unicode (UTF-8), so it was not loaded."
+														" Please ensure that scripts are saved in valid UTF-8 unicode."
+								: "Failed to read file: '" + p_path + "'.");
 
 #ifdef TOOLS_ENABLED
 	source_changed_cache = true;
@@ -3420,8 +3420,8 @@ Error ResourceFormatSaverCSharpScript::save(const String &p_path, const RES &p_r
 
 		if (_create_project_solution_if_needed()) {
 			CSharpProject::add_item(GodotSharpDirs::get_project_csproj_path(),
-					"Compile",
-					ProjectSettings::get_singleton()->globalize_path(p_path));
+									"Compile",
+									ProjectSettings::get_singleton()->globalize_path(p_path));
 		} else {
 			ERR_PRINT("C# project could not be created; cannot add file: '" + p_path + "'.");
 		}

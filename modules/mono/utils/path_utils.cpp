@@ -114,8 +114,8 @@ String realpath(const String &p_path) {
 #ifdef WINDOWS_ENABLED
 	// Open file without read/write access
 	HANDLE hFile = ::CreateFileW(p_path.c_str(), 0,
-			FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-			NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+								 FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+								 NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (hFile == INVALID_HANDLE_VALUE)
 		return p_path;
@@ -156,7 +156,7 @@ String join(const String &p_a, const String &p_b) {
 
 	const CharType a_last = p_a[p_a.length() - 1];
 	if ((a_last == '/' || a_last == '\\') ||
-			(p_b.size() > 0 && (p_b[0] == '/' || p_b[0] == '\\'))) {
+		(p_b.size() > 0 && (p_b[0] == '/' || p_b[0] == '\\'))) {
 		return p_a + p_b;
 	}
 

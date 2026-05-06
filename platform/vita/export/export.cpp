@@ -187,23 +187,23 @@ public:
 				zipfi.internal_fa = 0;
 
 				zipOpenNewFileInZip4(p_zip,
-						p_folder.plus_file(f).utf8().get_data(),
-						&zipfi,
-						nullptr,
-						0,
-						nullptr,
-						0,
-						nullptr,
-						Z_DEFLATED,
-						Z_DEFAULT_COMPRESSION,
-						0,
-						-MAX_WBITS,
-						DEF_MEM_LEVEL,
-						Z_DEFAULT_STRATEGY,
-						nullptr,
-						0,
-						0x0314, // "version made by", 0x03 - Unix, 0x14 - ZIP specification version 2.0, required to store Unix file permissions
-						0);
+									 p_folder.plus_file(f).utf8().get_data(),
+									 &zipfi,
+									 nullptr,
+									 0,
+									 nullptr,
+									 0,
+									 nullptr,
+									 Z_DEFLATED,
+									 Z_DEFAULT_COMPRESSION,
+									 0,
+									 -MAX_WBITS,
+									 DEF_MEM_LEVEL,
+									 Z_DEFAULT_STRATEGY,
+									 nullptr,
+									 0,
+									 0x0314, // "version made by", 0x03 - Unix, 0x14 - ZIP specification version 2.0, required to store Unix file permissions
+									 0);
 
 				FileAccessRef fa = FileAccess::open(dir.plus_file(f), FileAccess::READ);
 				if (!fa) {

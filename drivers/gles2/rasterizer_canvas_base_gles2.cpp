@@ -84,9 +84,9 @@ void RasterizerCanvasBaseGLES2::canvas_begin() {
 
 	if (storage->frame.clear_request) {
 		glClearColor(storage->frame.clear_request_color.r,
-				storage->frame.clear_request_color.g,
-				storage->frame.clear_request_color.b,
-				state.using_transparent_rt ? storage->frame.clear_request_color.a : 1.0);
+					 storage->frame.clear_request_color.g,
+					 storage->frame.clear_request_color.b,
+					 state.using_transparent_rt ? storage->frame.clear_request_color.a : 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 		storage->frame.clear_request = false;
 	}
@@ -271,7 +271,7 @@ void RasterizerCanvasBaseGLES2::draw_window_margins(int *black_margin, RID *blac
 		_bind_canvas_texture(black_image[MARGIN_LEFT], RID());
 		Size2 sz(storage->texture_get_width(black_image[MARGIN_LEFT]), storage->texture_get_height(black_image[MARGIN_LEFT]));
 		draw_generic_textured_rect(Rect2(0, 0, black_margin[MARGIN_LEFT], window_h),
-				Rect2(0, 0, (float)black_margin[MARGIN_LEFT] / sz.x, (float)(window_h) / sz.y));
+								   Rect2(0, 0, (float)black_margin[MARGIN_LEFT] / sz.x, (float)(window_h) / sz.y));
 	} else if (black_margin[MARGIN_LEFT]) {
 		WRAPPED_GL_ACTIVE_TEXTURE(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, storage->resources.black_tex);
@@ -283,7 +283,7 @@ void RasterizerCanvasBaseGLES2::draw_window_margins(int *black_margin, RID *blac
 		_bind_canvas_texture(black_image[MARGIN_RIGHT], RID());
 		Size2 sz(storage->texture_get_width(black_image[MARGIN_RIGHT]), storage->texture_get_height(black_image[MARGIN_RIGHT]));
 		draw_generic_textured_rect(Rect2(window_w - black_margin[MARGIN_RIGHT], 0, black_margin[MARGIN_RIGHT], window_h),
-				Rect2(0, 0, (float)black_margin[MARGIN_RIGHT] / sz.x, (float)window_h / sz.y));
+								   Rect2(0, 0, (float)black_margin[MARGIN_RIGHT] / sz.x, (float)window_h / sz.y));
 	} else if (black_margin[MARGIN_RIGHT]) {
 		WRAPPED_GL_ACTIVE_TEXTURE(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, storage->resources.black_tex);
@@ -296,7 +296,7 @@ void RasterizerCanvasBaseGLES2::draw_window_margins(int *black_margin, RID *blac
 
 		Size2 sz(storage->texture_get_width(black_image[MARGIN_TOP]), storage->texture_get_height(black_image[MARGIN_TOP]));
 		draw_generic_textured_rect(Rect2(0, 0, window_w, black_margin[MARGIN_TOP]),
-				Rect2(0, 0, (float)window_w / sz.x, (float)black_margin[MARGIN_TOP] / sz.y));
+								   Rect2(0, 0, (float)window_w / sz.x, (float)black_margin[MARGIN_TOP] / sz.y));
 
 	} else if (black_margin[MARGIN_TOP]) {
 		WRAPPED_GL_ACTIVE_TEXTURE(GL_TEXTURE0);
@@ -310,7 +310,7 @@ void RasterizerCanvasBaseGLES2::draw_window_margins(int *black_margin, RID *blac
 
 		Size2 sz(storage->texture_get_width(black_image[MARGIN_BOTTOM]), storage->texture_get_height(black_image[MARGIN_BOTTOM]));
 		draw_generic_textured_rect(Rect2(0, window_h - black_margin[MARGIN_BOTTOM], window_w, black_margin[MARGIN_BOTTOM]),
-				Rect2(0, 0, (float)window_w / sz.x, (float)black_margin[MARGIN_BOTTOM] / sz.y));
+								   Rect2(0, 0, (float)window_w / sz.x, (float)black_margin[MARGIN_BOTTOM] / sz.y));
 
 	} else if (black_margin[MARGIN_BOTTOM]) {
 		WRAPPED_GL_ACTIVE_TEXTURE(GL_TEXTURE0);
@@ -842,7 +842,7 @@ void RasterizerCanvasBaseGLES2::canvas_light_shadow_buffer_update(RID p_buffer, 
 			VS::CanvasOccluderPolygonCullMode transformed_cull_cache = instance->cull_cache;
 
 			if (transformed_cull_cache != VS::CANVAS_OCCLUDER_POLYGON_CULL_DISABLED &&
-					(p_light_xform.determinant() * instance->xform_cache.determinant()) < 0) {
+				(p_light_xform.determinant() * instance->xform_cache.determinant()) < 0) {
 				transformed_cull_cache = (transformed_cull_cache == VS::CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE)
 						? VS::CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
 						: VS::CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE;

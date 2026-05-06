@@ -68,7 +68,7 @@ uint32_t EditorSceneImporterFBX::get_import_flags() const {
 }
 
 Node *EditorSceneImporterFBX::import_scene(const String &p_path, uint32_t p_flags, int p_bake_fps, uint32_t p_compress_flags,
-		List<String> *r_missing_deps, Error *r_err) {
+										   List<String> *r_missing_deps, Error *r_err) {
 	// done for performance when re-importing lots of files when testing importer in verbose only!
 	if (OS::get_singleton()->is_stdout_verbose()) {
 		EditorLog *log = EditorNode::get_log();
@@ -243,7 +243,7 @@ struct EditorSceneImporterAssetImportInterpolate<Quat> {
 
 template <class T>
 T EditorSceneImporterFBX::_interpolate_track(const Vector<float> &p_times, const Vector<T> &p_values, float p_time,
-		AssetImportAnimation::Interpolation p_interp) {
+											 AssetImportAnimation::Interpolation p_interp) {
 	//could use binary search, worth it?
 	int idx = -1;
 	for (int i = 0; i < p_times.size(); i++) {
@@ -492,8 +492,8 @@ Spatial *EditorSceneImporterFBX::_generate_scene(
 			}
 
 			for (const int *vertex_index = mesh_vertex_data->vertex_weights.next(nullptr);
-					vertex_index != nullptr;
-					vertex_index = mesh_vertex_data->vertex_weights.next(vertex_index)) {
+				 vertex_index != nullptr;
+				 vertex_index = mesh_vertex_data->vertex_weights.next(vertex_index)) {
 				VertexWeightMapping *vm = mesh_vertex_data->vertex_weights.getptr(*vertex_index);
 				const int influence_count = vm->weights.size();
 				if (influence_count > mesh_vertex_data->max_weight_count) {
@@ -616,8 +616,8 @@ Spatial *EditorSceneImporterFBX::_generate_scene(
 	// build godot node tree
 	if (state.fbx_node_list.size() > 0) {
 		for (List<Ref<FBXNode>>::Element *node_element = state.fbx_node_list.front();
-				node_element;
-				node_element = node_element->next()) {
+			 node_element;
+			 node_element = node_element->next()) {
 			Ref<FBXNode> fbx_node = node_element->get();
 			MeshInstance *mesh_node = nullptr;
 			Ref<FBXMeshData> mesh_data_precached;
@@ -1186,17 +1186,17 @@ Spatial *EditorSceneImporterFBX::_generate_scene(
 
 							if (pos_values.size()) {
 								pos = _interpolate_track<Vector3>(pos_times, pos_values, time,
-										AssetImportAnimation::INTERP_LINEAR);
+																  AssetImportAnimation::INTERP_LINEAR);
 							}
 
 							if (rot_values.size()) {
 								rot = _interpolate_track<Quat>(rot_times, rot_values, time,
-										AssetImportAnimation::INTERP_LINEAR);
+															   AssetImportAnimation::INTERP_LINEAR);
 							}
 
 							if (scale_values.size()) {
 								scale = _interpolate_track<Vector3>(scale_times, scale_values, time,
-										AssetImportAnimation::INTERP_LINEAR);
+																	AssetImportAnimation::INTERP_LINEAR);
 							}
 
 							// node animations must also include pivots
@@ -1273,8 +1273,8 @@ Spatial *EditorSceneImporterFBX::_generate_scene(
 }
 
 void EditorSceneImporterFBX::BuildDocumentBones(Ref<FBXBone> p_parent_bone,
-		ImportState &state, const FBXDocParser::Document *p_doc,
-		uint64_t p_id) {
+												ImportState &state, const FBXDocParser::Document *p_doc,
+												uint64_t p_id) {
 	const std::vector<const FBXDocParser::Connection *> &conns = p_doc->GetConnectionsByDestinationSequenced(p_id, "Model");
 	// FBX can do an join like this
 	// Model -> SubDeformer (bone) -> Deformer (skin pose)

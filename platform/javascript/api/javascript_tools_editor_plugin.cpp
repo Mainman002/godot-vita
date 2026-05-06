@@ -97,15 +97,15 @@ void JavaScriptToolsEditorPlugin::_zip_file(String p_path, String p_base_path, z
 
 	String path = p_path.replace_first(p_base_path, "");
 	zipOpenNewFileInZip(p_zip,
-			path.utf8().get_data(),
-			NULL,
-			NULL,
-			0,
-			NULL,
-			0,
-			NULL,
-			Z_DEFLATED,
-			Z_DEFAULT_COMPRESSION);
+						path.utf8().get_data(),
+						NULL,
+						NULL,
+						0,
+						NULL,
+						0,
+						NULL,
+						Z_DEFLATED,
+						Z_DEFAULT_COMPRESSION);
 	zipWriteInFileInZip(p_zip, data.ptr(), data.size());
 	zipCloseFileInZip(p_zip);
 }
@@ -126,15 +126,15 @@ void JavaScriptToolsEditorPlugin::_zip_recursive(String p_path, String p_base_pa
 		} else if (dir->current_is_dir()) {
 			String path = cs.replace_first(p_base_path, "") + "/";
 			zipOpenNewFileInZip(p_zip,
-					path.utf8().get_data(),
-					NULL,
-					NULL,
-					0,
-					NULL,
-					0,
-					NULL,
-					Z_DEFLATED,
-					Z_DEFAULT_COMPRESSION);
+								path.utf8().get_data(),
+								NULL,
+								NULL,
+								0,
+								NULL,
+								0,
+								NULL,
+								Z_DEFLATED,
+								Z_DEFAULT_COMPRESSION);
 			zipCloseFileInZip(p_zip);
 			_zip_recursive(cs, p_base_path, p_zip);
 		} else {

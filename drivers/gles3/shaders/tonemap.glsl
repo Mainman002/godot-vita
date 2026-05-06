@@ -355,13 +355,13 @@ vec4 apply_fxaa(vec4 color, float exposure, vec2 uv_interp, vec2 pixel_size) {
 	dir.y = ((lumaNW + lumaSW) - (lumaNE + lumaSE));
 
 	float dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) *
-					(0.25 * FXAA_REDUCE_MUL),
-			FXAA_REDUCE_MIN);
+								  (0.25 * FXAA_REDUCE_MUL),
+						  FXAA_REDUCE_MIN);
 
 	float rcpDirMin = 1.0 / (min(abs(dir.x), abs(dir.y)) + dirReduce);
 	dir = min(vec2(FXAA_SPAN_MAX, FXAA_SPAN_MAX),
-				  max(vec2(-FXAA_SPAN_MAX, -FXAA_SPAN_MAX),
-						  dir * rcpDirMin)) *
+			  max(vec2(-FXAA_SPAN_MAX, -FXAA_SPAN_MAX),
+				  dir * rcpDirMin)) *
 			pixel_size;
 
 	vec4 rgbA = 0.5 * exposure * (textureLod(source, uv_interp + dir * (1.0 / 3.0 - 0.5), 0.0) + textureLod(source, uv_interp + dir * (2.0 / 3.0 - 0.5), 0.0));

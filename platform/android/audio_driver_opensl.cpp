@@ -167,7 +167,7 @@ void AudioDriverOpenSL::start() {
 	res = (*player)->GetInterface(player, SL_IID_PLAY, (void *)&playItf);
 	ERR_FAIL_COND(res != SL_RESULT_SUCCESS);
 	res = (*player)->GetInterface(player, SL_IID_BUFFERQUEUE,
-			(void *)&bufferQueueItf);
+								  (void *)&bufferQueueItf);
 	ERR_FAIL_COND(res != SL_RESULT_SUCCESS);
 	/* Setup to receive buffer queue event callbacks */
 	res = (*bufferQueueItf)->RegisterCallback(bufferQueueItf, _buffer_callbacks, this);

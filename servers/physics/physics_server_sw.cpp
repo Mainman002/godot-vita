@@ -1449,6 +1449,6 @@ PhysicsServerSW::PhysicsServerSW() {
 	flushing_queries = false;
 };
 
-PhysicsServerSW::~PhysicsServerSW(){
+PhysicsServerSW::~PhysicsServerSW() {
 
 };

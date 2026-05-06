@@ -2743,24 +2743,24 @@ uint32_t Variant::recursive_hash(int p_recursion_count) const {
 
 #define hash_compare_vector2(p_lhs, p_rhs)        \
 	(hash_compare_scalar((p_lhs).x, (p_rhs).x) && \
-			hash_compare_scalar((p_lhs).y, (p_rhs).y))
+	 hash_compare_scalar((p_lhs).y, (p_rhs).y))
 
-#define hash_compare_vector3(p_lhs, p_rhs)               \
-	(hash_compare_scalar((p_lhs).x, (p_rhs).x) &&        \
-			hash_compare_scalar((p_lhs).y, (p_rhs).y) && \
-			hash_compare_scalar((p_lhs).z, (p_rhs).z))
+#define hash_compare_vector3(p_lhs, p_rhs)        \
+	(hash_compare_scalar((p_lhs).x, (p_rhs).x) && \
+	 hash_compare_scalar((p_lhs).y, (p_rhs).y) && \
+	 hash_compare_scalar((p_lhs).z, (p_rhs).z))
 
-#define hash_compare_quat(p_lhs, p_rhs)                  \
-	(hash_compare_scalar((p_lhs).x, (p_rhs).x) &&        \
-			hash_compare_scalar((p_lhs).y, (p_rhs).y) && \
-			hash_compare_scalar((p_lhs).z, (p_rhs).z) && \
-			hash_compare_scalar((p_lhs).w, (p_rhs).w))
+#define hash_compare_quat(p_lhs, p_rhs)           \
+	(hash_compare_scalar((p_lhs).x, (p_rhs).x) && \
+	 hash_compare_scalar((p_lhs).y, (p_rhs).y) && \
+	 hash_compare_scalar((p_lhs).z, (p_rhs).z) && \
+	 hash_compare_scalar((p_lhs).w, (p_rhs).w))
 
-#define hash_compare_color(p_lhs, p_rhs)                 \
-	(hash_compare_scalar((p_lhs).r, (p_rhs).r) &&        \
-			hash_compare_scalar((p_lhs).g, (p_rhs).g) && \
-			hash_compare_scalar((p_lhs).b, (p_rhs).b) && \
-			hash_compare_scalar((p_lhs).a, (p_rhs).a))
+#define hash_compare_color(p_lhs, p_rhs)          \
+	(hash_compare_scalar((p_lhs).r, (p_rhs).r) && \
+	 hash_compare_scalar((p_lhs).g, (p_rhs).g) && \
+	 hash_compare_scalar((p_lhs).b, (p_rhs).b) && \
+	 hash_compare_scalar((p_lhs).a, (p_rhs).a))
 
 #define hash_compare_pool_array(p_lhs, p_rhs, p_type, p_compare_func)                   \
 	const PoolVector<p_type> &l = *reinterpret_cast<const PoolVector<p_type> *>(p_lhs); \

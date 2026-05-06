@@ -1192,10 +1192,10 @@ struct _VariantCall {
 	}
 
 	static void add_constructor(VariantConstructFunc p_func, const Variant::Type p_type,
-			const String &p_name1 = "", const Variant::Type p_type1 = Variant::NIL,
-			const String &p_name2 = "", const Variant::Type p_type2 = Variant::NIL,
-			const String &p_name3 = "", const Variant::Type p_type3 = Variant::NIL,
-			const String &p_name4 = "", const Variant::Type p_type4 = Variant::NIL) {
+								const String &p_name1 = "", const Variant::Type p_type1 = Variant::NIL,
+								const String &p_name2 = "", const Variant::Type p_type2 = Variant::NIL,
+								const String &p_name3 = "", const Variant::Type p_type3 = Variant::NIL,
+								const String &p_name4 = "", const Variant::Type p_type4 = Variant::NIL) {
 		ConstructData cd;
 		cd.func = p_func;
 		cd.arg_count = 0;

@@ -247,7 +247,7 @@ void ScrollContainer::ensure_control_visible(Control *p_control) {
 	float bottom_margin = h_scroll->is_visible() ? h_scroll->get_size().y : 0.0f;
 
 	Vector2 diff = Vector2(MAX(MIN(other_rect.position.x, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin),
-			MAX(MIN(other_rect.position.y, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin));
+						   MAX(MIN(other_rect.position.y, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin));
 
 	set_h_scroll(get_h_scroll() + (diff.x - global_rect.position.x));
 	set_v_scroll(get_v_scroll() + (diff.y - global_rect.position.y));

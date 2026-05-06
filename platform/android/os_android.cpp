@@ -210,7 +210,7 @@ Error OS_Android::initialize(const VideoMode &p_desired, int p_video_driver, int
 	if (gl_initialization_error) {
 		OS::get_singleton()->alert("Your device does not support any of the supported OpenGL versions.\n"
 								   "Please try updating your Android version.",
-				"Unable to initialize Video driver");
+								   "Unable to initialize Video driver");
 		return ERR_UNAVAILABLE;
 	}
 

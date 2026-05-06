@@ -75,7 +75,7 @@ public class GodotIO {
 	GodotIO(Activity p_activity) {
 		activity = p_activity;
 		String androidId = Settings.Secure.getString(activity.getContentResolver(),
-				Settings.Secure.ANDROID_ID);
+													 Settings.Secure.ANDROID_ID);
 		if (androidId == null) {
 			androidId = "";
 		}

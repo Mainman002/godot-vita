@@ -1835,7 +1835,7 @@ void SpatialEditorViewport::_sinput(const Ref<InputEvent> &p_event) {
 						// This might not be necessary anymore after issue #288 is solved (in 4.0?).
 						// TRANSLATORS: Refers to changing the scale of a node in the 3D editor.
 						set_message(TTR("Scaling:") + " (" + String::num(motion_snapped.x, snap_step_decimals) + ", " +
-								String::num(motion_snapped.y, snap_step_decimals) + ", " + String::num(motion_snapped.z, snap_step_decimals) + ")");
+									String::num(motion_snapped.y, snap_step_decimals) + ", " + String::num(motion_snapped.z, snap_step_decimals) + ")");
 
 						for (List<Node *>::Element *E = selection.front(); E; E = E->next()) {
 							Spatial *sp = Object::cast_to<Spatial>(E->get());
@@ -1958,7 +1958,7 @@ void SpatialEditorViewport::_sinput(const Ref<InputEvent> &p_event) {
 						motion_snapped.snap(Vector3(snap, snap, snap));
 						// TRANSLATORS: Refers to changing the position of a node in the 3D editor.
 						set_message(TTR("Translating:") + " (" + String::num(motion_snapped.x, snap_step_decimals) + ", " +
-								String::num(motion_snapped.y, snap_step_decimals) + ", " + String::num(motion_snapped.z, snap_step_decimals) + ")");
+									String::num(motion_snapped.y, snap_step_decimals) + ", " + String::num(motion_snapped.z, snap_step_decimals) + ")");
 
 						for (List<Node *>::Element *E = selection.front(); E; E = E->next()) {
 							Spatial *sp = Object::cast_to<Spatial>(E->get());

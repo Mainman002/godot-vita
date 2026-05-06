@@ -243,9 +243,9 @@ void VideoStreamPlaybackWebm::update(float p_delta) {
 
 	const bool hasAudio = (audio && mix_callback);
 	while ((hasAudio && !audio_buffer_full && !has_enough_video_frames()) ||
-			(!hasAudio && video_frames_pos == 0)) {
+		   (!hasAudio && video_frames_pos == 0)) {
 		if (hasAudio && !audio_buffer_full && audio_frame->isValid() &&
-				audio->getPCMF(*audio_frame, pcm, num_decoded_samples) && num_decoded_samples > 0) {
+			audio->getPCMF(*audio_frame, pcm, num_decoded_samples) && num_decoded_samples > 0) {
 			const int mixed = mix_callback(mix_udata, pcm, num_decoded_samples);
 
 			if (mixed != num_decoded_samples) {

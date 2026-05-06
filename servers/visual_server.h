@@ -121,21 +121,21 @@ public:
 	virtual RID texture_create() = 0;
 	RID texture_create_from_image(const Ref<Image> &p_image, uint32_t p_flags = TEXTURE_FLAGS_DEFAULT); // helper
 	virtual void texture_allocate(RID p_texture,
-			int p_width,
-			int p_height,
-			int p_depth_3d,
-			Image::Format p_format,
-			TextureType p_type,
-			uint32_t p_flags = TEXTURE_FLAGS_DEFAULT) = 0;
+								  int p_width,
+								  int p_height,
+								  int p_depth_3d,
+								  Image::Format p_format,
+								  TextureType p_type,
+								  uint32_t p_flags = TEXTURE_FLAGS_DEFAULT) = 0;
 
 	virtual void texture_set_data(RID p_texture, const Ref<Image> &p_image, int p_layer = 0) = 0;
 	virtual void texture_set_data_partial(RID p_texture,
-			const Ref<Image> &p_image,
-			int src_x, int src_y,
-			int src_w, int src_h,
-			int dst_x, int dst_y,
-			int p_dst_mip,
-			int p_layer = 0) = 0;
+										  const Ref<Image> &p_image,
+										  int src_x, int src_y,
+										  int src_w, int src_h,
+										  int dst_x, int dst_y,
+										  int p_dst_mip,
+										  int p_layer = 0) = 0;
 
 	virtual Ref<Image> texture_get_data(RID p_texture, int p_layer = 0) const = 0;
 	virtual void texture_set_flags(RID p_texture, uint32_t p_flags) = 0;

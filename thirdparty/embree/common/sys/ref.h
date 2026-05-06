@@ -16,7 +16,7 @@ namespace embree
   {
   public:
     RefCount(int val = 0) : refCounter(val) {}
-    virtual ~RefCount() {};
+    virtual ~RefCount(){};
   
     virtual RefCount* refInc() { refCounter.fetch_add(1); return this; }
     virtual void refDec() { if (refCounter.fetch_add(-1) == 1) delete this; }

@@ -499,7 +499,7 @@ namespace {
 // ------------------------------------------------------------------------------------------------
 // read the type code and element count of a binary data array and stop there
 void ReadBinaryDataArrayHead(const char *&data, const char *end, char &type, uint32_t &count,
-		const ElementPtr el) {
+							 const ElementPtr el) {
 	TokenPtr token = el->KeyToken();
 	if (static_cast<size_t>(end - data) < 5) {
 		print_error("binary data array is too short, need five (5) bytes for type signature and element count: " + String(token->StringContents().c_str()));
@@ -519,8 +519,8 @@ void ReadBinaryDataArrayHead(const char *&data, const char *end, char &type, uin
 // ------------------------------------------------------------------------------------------------
 // read binary data array, assume cursor points to the 'compression mode' field (i.e. behind the header)
 void ReadBinaryDataArray(char type, uint32_t count, const char *&data, const char *end,
-		std::vector<char> &buff,
-		const ElementPtr /*el*/) {
+						 std::vector<char> &buff,
+						 const ElementPtr /*el*/) {
 	uint32_t encmode = SafeParse<uint32_t>(data, end);
 	AI_SWAP4(encmode);
 	data += 4;
@@ -639,8 +639,8 @@ void ParseVectorDataArray(std::vector<Vector3> &out, const ElementPtr el) {
 			const double *d = reinterpret_cast<const double *>(&buff[0]);
 			for (unsigned int i = 0; i < count3; ++i, d += 3) {
 				out.push_back(Vector3(static_cast<real_t>(d[0]),
-						static_cast<real_t>(d[1]),
-						static_cast<real_t>(d[2])));
+									  static_cast<real_t>(d[1]),
+									  static_cast<real_t>(d[2])));
 			}
 		} else if (type == 'f') {
 			const float *f = reinterpret_cast<const float *>(&buff[0]);
@@ -719,9 +719,9 @@ void ParseVectorDataArray(std::vector<Color> &out, const ElementPtr el) {
 			const double *d = reinterpret_cast<const double *>(&buff[0]);
 			for (unsigned int i = 0; i < count4; ++i, d += 4) {
 				out.push_back(Color(static_cast<float>(d[0]),
-						static_cast<float>(d[1]),
-						static_cast<float>(d[2]),
-						static_cast<float>(d[3])));
+									static_cast<float>(d[1]),
+									static_cast<float>(d[2]),
+									static_cast<float>(d[3])));
 			}
 		} else if (type == 'f') {
 			const float *f = reinterpret_cast<const float *>(&buff[0]);
@@ -796,7 +796,7 @@ void ParseVectorDataArray(std::vector<Vector2> &out, const ElementPtr el) {
 			const double *d = reinterpret_cast<const double *>(&buff[0]);
 			for (unsigned int i = 0; i < count2; ++i, d += 2) {
 				out.push_back(Vector2(static_cast<float>(d[0]),
-						static_cast<float>(d[1])));
+									  static_cast<float>(d[1])));
 			}
 		} else if (type == 'f') {
 			const float *f = reinterpret_cast<const float *>(&buff[0]);

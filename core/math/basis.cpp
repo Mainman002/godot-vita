@@ -66,8 +66,8 @@ void Basis::invert() {
 	real_t s = 1 / det;
 
 	set(co[0] * s, cofac(0, 2, 2, 1) * s, cofac(0, 1, 1, 2) * s,
-			co[1] * s, cofac(0, 0, 2, 2) * s, cofac(0, 2, 1, 0) * s,
-			co[2] * s, cofac(0, 1, 2, 0) * s, cofac(0, 0, 1, 1) * s);
+		co[1] * s, cofac(0, 0, 2, 2) * s, cofac(0, 2, 1, 0) * s,
+		co[2] * s, cofac(0, 1, 2, 0) * s, cofac(0, 0, 1, 1) * s);
 }
 
 void Basis::orthonormalize() {
@@ -946,8 +946,8 @@ void Basis::set_quat(const Quat &p_quat) {
 	real_t xx = p_quat.x * xs, xy = p_quat.x * ys, xz = p_quat.x * zs;
 	real_t yy = p_quat.y * ys, yz = p_quat.y * zs, zz = p_quat.z * zs;
 	set(1 - (yy + zz), xy - wz, xz + wy,
-			xy + wz, 1 - (xx + zz), yz - wx,
-			xz - wy, yz + wx, 1 - (xx + yy));
+		xy + wz, 1 - (xx + zz), yz - wx,
+		xz - wy, yz + wx, 1 - (xx + yy));
 }
 
 void Basis::set_axis_angle(const Vector3 &p_axis, real_t p_angle) {

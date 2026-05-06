@@ -773,20 +773,20 @@ bool GraphEdit::_check_clickable_control(Control *p_control, const Vector2 &pos)
 bool GraphEdit::is_in_hot_zone(const Vector2 &pos, const Vector2 &p_mouse_pos, const Vector2i &p_port_size, bool p_left) {
 	if (p_left) {
 		if (!Rect2(
-					pos.x - p_port_size.x / 2 - port_grab_distance_horizontal,
-					pos.y - p_port_size.y / 2 - port_grab_distance_vertical / 2,
-					p_port_size.x + port_grab_distance_horizontal,
-					p_port_size.y + port_grab_distance_vertical)
-						.has_point(p_mouse_pos)) {
+					 pos.x - p_port_size.x / 2 - port_grab_distance_horizontal,
+					 pos.y - p_port_size.y / 2 - port_grab_distance_vertical / 2,
+					 p_port_size.x + port_grab_distance_horizontal,
+					 p_port_size.y + port_grab_distance_vertical)
+					 .has_point(p_mouse_pos)) {
 			return false;
 		}
 	} else {
 		if (!Rect2(
-					pos.x - p_port_size.x / 2,
-					pos.y - p_port_size.y / 2 - port_grab_distance_vertical / 2,
-					p_port_size.x + port_grab_distance_horizontal,
-					p_port_size.y + port_grab_distance_vertical)
-						.has_point(p_mouse_pos)) {
+					 pos.x - p_port_size.x / 2,
+					 pos.y - p_port_size.y / 2 - port_grab_distance_vertical / 2,
+					 p_port_size.x + port_grab_distance_horizontal,
+					 p_port_size.y + port_grab_distance_vertical)
+					 .has_point(p_mouse_pos)) {
 			return false;
 		}
 	}
@@ -1136,9 +1136,9 @@ void GraphEdit::_gui_input(const Ref<InputEvent> &p_ev) {
 		box_selecting_to = mm->get_position();
 
 		box_selecting_rect = Rect2(MIN(box_selecting_from.x, box_selecting_to.x),
-				MIN(box_selecting_from.y, box_selecting_to.y),
-				ABS(box_selecting_from.x - box_selecting_to.x),
-				ABS(box_selecting_from.y - box_selecting_to.y));
+								   MIN(box_selecting_from.y, box_selecting_to.y),
+								   ABS(box_selecting_from.x - box_selecting_to.x),
+								   ABS(box_selecting_from.y - box_selecting_to.y));
 
 		for (int i = get_child_count() - 1; i >= 0; i--) {
 			GraphNode *gn = Object::cast_to<GraphNode>(get_child(i));

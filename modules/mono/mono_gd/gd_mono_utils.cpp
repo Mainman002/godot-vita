@@ -209,7 +209,7 @@ GDMonoClass *get_class_native_base(GDMonoClass *p_class) {
 MonoObject *create_managed_for_godot_object(GDMonoClass *p_class, const StringName &p_native, Object *p_object) {
 	bool parent_is_object_class = ClassDB::is_parent_class(p_object->get_class_name(), p_native);
 	ERR_FAIL_COND_V_MSG(!parent_is_object_class, NULL,
-			"Type inherits from native type '" + p_native + "', so it can't be instanced in object of type: '" + p_object->get_class() + "'.");
+						"Type inherits from native type '" + p_native + "', so it can't be instanced in object of type: '" + p_object->get_class() + "'.");
 
 	MonoObject *mono_object = mono_object_new(mono_domain_get(), p_class->get_mono_ptr());
 	ERR_FAIL_NULL_V(mono_object, NULL);
@@ -258,7 +258,7 @@ MonoObject *create_managed_from(const Array &p_from, GDMonoClass *p_class) {
 			MonoMethodSignature *sig = mono_method_signature(m);
 			void *front = NULL;
 			if (mono_signature_get_param_count(sig) == 1 &&
-					mono_class_from_mono_type(mono_signature_get_params(sig, &front)) == CACHED_CLASS(IntPtr)->get_mono_ptr()) {
+				mono_class_from_mono_type(mono_signature_get_params(sig, &front)) == CACHED_CLASS(IntPtr)->get_mono_ptr()) {
 				break;
 			}
 		}
@@ -288,7 +288,7 @@ MonoObject *create_managed_from(const Dictionary &p_from, GDMonoClass *p_class) 
 			MonoMethodSignature *sig = mono_method_signature(m);
 			void *front = NULL;
 			if (mono_signature_get_param_count(sig) == 1 &&
-					mono_class_from_mono_type(mono_signature_get_params(sig, &front)) == CACHED_CLASS(IntPtr)->get_mono_ptr()) {
+				mono_class_from_mono_type(mono_signature_get_params(sig, &front)) == CACHED_CLASS(IntPtr)->get_mono_ptr()) {
 				break;
 			}
 		}
@@ -524,11 +524,14 @@ namespace Marshal {
 	}
 #else
 #define NO_GLUE_RET(m_ret) \
-	{}
+	{                      \
+	}
 #endif
 #else
 #define NO_GLUE_RET(m_ret) \
-	{ return m_ret; }
+	{                      \
+		return m_ret;      \
+	}
 #endif
 
 bool type_is_generic_array(MonoReflectionType *p_reftype) {

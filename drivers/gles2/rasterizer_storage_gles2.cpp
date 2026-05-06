@@ -605,14 +605,14 @@ void RasterizerStorageGLES2::texture_allocate(RID p_texture, int p_width, int p_
 
 		Image::Format real_format;
 		_get_gl_image_and_format(Ref<Image>(),
-				texture->format,
-				texture->flags,
-				real_format,
-				format,
-				internal_format,
-				type,
-				compressed,
-				texture->resize_to_po2);
+								 texture->format,
+								 texture->flags,
+								 real_format,
+								 format,
+								 internal_format,
+								 type,
+								 compressed,
+								 texture->resize_to_po2);
 
 		texture->gl_format_cache = format;
 		texture->gl_type_cache = type;
@@ -1996,7 +1996,7 @@ void RasterizerStorageGLES2::_update_material(Material *p_material) {
 
 		if (p_material->shader && p_material->shader->mode == VS::SHADER_SPATIAL) {
 			if (p_material->shader->spatial.blend_mode == Shader::Spatial::BLEND_MODE_MIX &&
-					(!(p_material->shader->spatial.uses_alpha && !p_material->shader->spatial.uses_alpha_scissor) || p_material->shader->spatial.depth_draw_mode == Shader::Spatial::DEPTH_DRAW_ALPHA_PREPASS)) {
+				(!(p_material->shader->spatial.uses_alpha && !p_material->shader->spatial.uses_alpha_scissor) || p_material->shader->spatial.depth_draw_mode == Shader::Spatial::DEPTH_DRAW_ALPHA_PREPASS)) {
 				can_cast_shadow = true;
 			}
 

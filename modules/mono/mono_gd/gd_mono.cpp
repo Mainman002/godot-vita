@@ -164,8 +164,8 @@ void gd_mono_debug_init() {
 	int da_timeout = GLOBAL_DEF("mono/debugger_agent/wait_timeout", 3000);
 
 	if (Engine::get_singleton()->is_editor_hint() ||
-			ProjectSettings::get_singleton()->get_resource_path().empty() ||
-			Main::is_project_manager()) {
+		ProjectSettings::get_singleton()->get_resource_path().empty() ||
+		Main::is_project_manager()) {
 		if (da_args.size() == 0)
 			return;
 	}
@@ -174,7 +174,7 @@ void gd_mono_debug_init() {
 		// Use project settings defaults for the editor player
 
 		da_args = String("--debugger-agent=transport=dt_socket,address=127.0.0.1:" + itos(da_port) +
-				",embedding=1,server=y,suspend=" + (da_suspend ? "y,timeout=" + itos(da_timeout) : "n"))
+						 ",embedding=1,server=y,suspend=" + (da_suspend ? "y,timeout=" + itos(da_timeout) : "n"))
 						  .utf8();
 	}
 #else
@@ -356,7 +356,7 @@ void GDMono::initialize() {
 
 	// Leak if we call mono_set_dirs more than once
 	mono_set_dirs(assembly_rootdir.length() ? assembly_rootdir.utf8().get_data() : NULL,
-			config_dir.length() ? config_dir.utf8().get_data() : NULL);
+				  config_dir.length() ? config_dir.utf8().get_data() : NULL);
 
 	add_mono_shared_libs_dir_to_path();
 #endif
@@ -525,7 +525,7 @@ void GDMono::_init_godot_api_hashes() {
 
 void GDMono::_init_exception_policy() {
 	PropertyInfo exc_policy_prop = PropertyInfo(Variant::INT, "mono/runtime/unhandled_exception_policy", PROPERTY_HINT_ENUM,
-			vformat("Terminate Application:%s,Log Error:%s", (int)POLICY_TERMINATE_APP, (int)POLICY_LOG_ERROR));
+												vformat("Terminate Application:%s,Log Error:%s", (int)POLICY_TERMINATE_APP, (int)POLICY_LOG_ERROR));
 	unhandled_exception_policy = (UnhandledExceptionPolicy)(int)GLOBAL_DEF(exc_policy_prop.name, (int)POLICY_TERMINATE_APP);
 	ProjectSettings::get_singleton()->set_custom_property_info(exc_policy_prop.name, exc_policy_prop);
 
@@ -707,7 +707,7 @@ static bool try_get_cached_api_hash_for(const String &p_api_assemblies_dir, bool
 
 	// Checking the modified time is good enough
 	if (FileAccess::get_modified_time(core_api_assembly_path) != (uint64_t)cfg->get_value("core", "modified_time") ||
-			FileAccess::get_modified_time(editor_api_assembly_path) != (uint64_t)cfg->get_value("editor", "modified_time")) {
+		FileAccess::get_modified_time(editor_api_assembly_path) != (uint64_t)cfg->get_value("editor", "modified_time")) {
 		return false;
 	}
 
@@ -756,7 +756,7 @@ bool GDMono::_temp_domain_load_are_assemblies_out_of_sync(const String &p_config
 	GDMono::LoadedApiAssembly temp_editor_api_assembly;
 
 	if (!_try_load_api_assemblies(temp_core_api_assembly, temp_editor_api_assembly,
-				p_config, /* refonly: */ true, /* loaded_callback: */ NULL)) {
+								  p_config, /* refonly: */ true, /* loaded_callback: */ NULL)) {
 		return temp_core_api_assembly.out_of_sync || temp_editor_api_assembly.out_of_sync;
 	}
 
@@ -802,7 +802,7 @@ String GDMono::update_api_assemblies_from_prebuilt(const String &p_config, const
 
 	// Copy the prebuilt Api
 	if (!copy_prebuilt_api_assembly(ApiAssemblyInfo::API_CORE, p_config) ||
-			!copy_prebuilt_api_assembly(ApiAssemblyInfo::API_EDITOR, p_config)) {
+		!copy_prebuilt_api_assembly(ApiAssemblyInfo::API_EDITOR, p_config)) {
 		return FAIL_REASON(api_assemblies_out_of_sync, /* prebuilt_exists: */ true);
 	}
 
@@ -874,7 +874,7 @@ bool GDMono::_load_editor_api_assembly(LoadedApiAssembly &r_loaded_api_assembly,
 #endif
 
 bool GDMono::_try_load_api_assemblies(LoadedApiAssembly &r_core_api_assembly, LoadedApiAssembly &r_editor_api_assembly,
-		const String &p_config, bool p_refonly, CoreApiAssemblyLoadedCallback p_callback) {
+									  const String &p_config, bool p_refonly, CoreApiAssemblyLoadedCallback p_callback) {
 	if (!_load_core_api_assembly(r_core_api_assembly, p_config, p_refonly)) {
 		if (OS::get_singleton()->is_stdout_verbose())
 			print_error("Mono: Failed to load Core API assembly");
@@ -917,7 +917,7 @@ bool GDMono::_on_core_api_assembly_loaded() {
 
 bool GDMono::_try_load_api_assemblies_preset() {
 	return _try_load_api_assemblies(core_api_assembly, editor_api_assembly,
-			get_expected_api_build_config(), /* refonly: */ false, _on_core_api_assembly_loaded);
+									get_expected_api_build_config(), /* refonly: */ false, _on_core_api_assembly_loaded);
 }
 
 void GDMono::_load_api_assemblies() {

@@ -292,14 +292,14 @@ MeshInstance *FBXMeshData::create_fbx_mesh(const ImportState &state, const FBXDo
 			// This must be done before add_vertex because the surface tool is
 			// expecting this before the st->add_vertex() call
 			add_vertex(state,
-					surface->surface_tool,
-					state.scale,
-					vertex,
-					vertices,
-					normals,
-					uvs_0,
-					uvs_1,
-					colors);
+					   surface->surface_tool,
+					   state.scale,
+					   vertex,
+					   vertices,
+					   normals,
+					   uvs_0,
+					   uvs_1,
+					   colors);
 		}
 
 		// Triangulate the various polygons and add the indices.
@@ -736,7 +736,7 @@ void FBXMeshData::reorganize_vertices(
 			duplicated_vertices[old_index].push_back(new_index);
 		} else {
 			if (r_normals_raw.has(index) &&
-					r_normals.has(index) == false) {
+				r_normals.has(index) == false) {
 				r_normals.set(index, this_vert_poly_normal);
 			}
 
@@ -745,12 +745,12 @@ void FBXMeshData::reorganize_vertices(
 			}
 
 			if (r_uv_1_raw.has(index) &&
-					r_uv_1.has(index) == false) {
+				r_uv_1.has(index) == false) {
 				r_uv_1.set(index, this_vert_poly_uv1);
 			}
 
 			if (r_uv_2_raw.has(index) &&
-					r_uv_2.has(index) == false) {
+				r_uv_2.has(index) == false) {
 				r_uv_2.set(index, this_vert_poly_uv2);
 			}
 		}
@@ -1152,8 +1152,8 @@ HashMap<int, R> FBXMeshData::extract_per_vertex_data(
 				// Advance each polygon vertex, each new polygon advance the polygon index.
 				int polygon_index = -1;
 				for (size_t polygon_vertex_index = 0;
-						polygon_vertex_index < p_mesh_indices.size();
-						polygon_vertex_index += 1) {
+					 polygon_vertex_index < p_mesh_indices.size();
+					 polygon_vertex_index += 1) {
 					if (is_start_of_polygon(p_mesh_indices, polygon_vertex_index)) {
 						polygon_index += 1;
 						ERR_FAIL_INDEX_V_MSG(polygon_index, (int)p_mapping_data.data.size(), (HashMap<int, R>()), "FBX file seems corrupted: #ERR13");
@@ -1177,8 +1177,8 @@ HashMap<int, R> FBXMeshData::extract_per_vertex_data(
 				// Advance each polygon vertex, each new polygon advance the polygon index.
 				int polygon_index = -1;
 				for (size_t polygon_vertex_index = 0;
-						polygon_vertex_index < p_mesh_indices.size();
-						polygon_vertex_index += 1) {
+					 polygon_vertex_index < p_mesh_indices.size();
+					 polygon_vertex_index += 1) {
 					if (is_start_of_polygon(p_mesh_indices, polygon_vertex_index)) {
 						polygon_index += 1;
 						ERR_FAIL_INDEX_V_MSG(polygon_index, (int)p_mapping_data.index.size(), (HashMap<int, R>()), "FBX file seems corrupted: #ERR18");
@@ -1301,8 +1301,8 @@ HashMap<int, T> FBXMeshData::extract_per_polygon(
 			if (p_fbx_data.ref_type == FBXDocParser::MeshGeometry::ReferenceType::index_to_direct) {
 				// The data is stored efficiently index_to_direct allows less data in the FBX file.
 				for (int polygon_index = 0;
-						polygon_index < polygon_count;
-						polygon_index += 1) {
+					 polygon_index < polygon_count;
+					 polygon_index += 1) {
 					if (p_fbx_data.index.size() == 0) {
 						ERR_FAIL_INDEX_V_MSG(polygon_index, (int)p_fbx_data.data.size(), (HashMap<int, T>()), "FBX file is corrupted: #ERR62");
 						aggregate_polygon_data[polygon_index].push_back(p_fbx_data.data[polygon_index]);
@@ -1320,8 +1320,8 @@ HashMap<int, T> FBXMeshData::extract_per_polygon(
 
 				// Advance each polygon vertex, each new polygon advance the polygon index.
 				for (int polygon_index = 0;
-						polygon_index < polygon_count;
-						polygon_index += 1) {
+					 polygon_index < polygon_count;
+					 polygon_index += 1) {
 					ERR_FAIL_INDEX_V_MSG(polygon_index, (int)p_fbx_data.data.size(), (HashMap<int, T>()), "FBX file is corrupted: #ERR52");
 					aggregate_polygon_data[polygon_index].push_back(p_fbx_data.data[polygon_index]);
 				}
@@ -1335,8 +1335,8 @@ HashMap<int, T> FBXMeshData::extract_per_polygon(
 
 				// Advance each polygon vertex, each new polygon advance the polygon index.
 				for (int polygon_index = 0;
-						polygon_index < polygon_count;
-						polygon_index += 1) {
+					 polygon_index < polygon_count;
+					 polygon_index += 1) {
 					ERR_FAIL_INDEX_V_MSG(polygon_index, (int)p_fbx_data.index.size(), (HashMap<int, T>()), "FBX file is corrupted: #ERR53");
 					ERR_FAIL_INDEX_V_MSG(p_fbx_data.index[polygon_index], (int)p_fbx_data.data.size(), (HashMap<int, T>()), "FBX file is corrupted: #ERR54");
 					aggregate_polygon_data[polygon_index].push_back(p_fbx_data.data[p_fbx_data.index[polygon_index]]);

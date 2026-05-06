@@ -339,7 +339,7 @@ MainFrameTime MainTimerSync::advance_core(float p_frame_slice, int p_iterations_
 	for (int i = 0; i < CONTROL_STEPS - 1; ++i) {
 		int steps_left_to_match_typical = typical_physics_steps[i + 1] - accumulated_physics_steps[i];
 		if (steps_left_to_match_typical > max_typical_steps ||
-				steps_left_to_match_typical + 1 < min_typical_steps) {
+			steps_left_to_match_typical + 1 < min_typical_steps) {
 			update_typical = true;
 			break;
 		}

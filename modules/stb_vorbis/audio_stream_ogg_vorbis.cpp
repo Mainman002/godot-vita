@@ -123,9 +123,9 @@ Ref<AudioStreamPlayback> AudioStreamOGGVorbis::instance_playback() {
 	Ref<AudioStreamPlaybackOGGVorbis> ovs;
 
 	ERR_FAIL_COND_V_MSG(data == nullptr, ovs,
-			"This AudioStreamOGGVorbis does not have an audio file assigned "
-			"to it. AudioStreamOGGVorbis should not be created from the "
-			"inspector or with `.new()`. Instead, load an audio file.");
+						"This AudioStreamOGGVorbis does not have an audio file assigned "
+						"to it. AudioStreamOGGVorbis should not be created from the "
+						"inspector or with `.new()`. Instead, load an audio file.");
 
 	ovs.instance();
 	ovs->vorbis_stream = Ref<AudioStreamOGGVorbis>(this);

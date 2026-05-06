@@ -61,9 +61,9 @@ void Quat::set_euler_xyz(const Vector3 &p_euler) {
 	real_t sin_a3 = Math::sin(half_a3);
 
 	set(sin_a1 * cos_a2 * cos_a3 + sin_a2 * sin_a3 * cos_a1,
-			-sin_a1 * sin_a3 * cos_a2 + sin_a2 * cos_a1 * cos_a3,
-			sin_a1 * sin_a2 * cos_a3 + sin_a3 * cos_a1 * cos_a2,
-			-sin_a1 * sin_a2 * sin_a3 + cos_a1 * cos_a2 * cos_a3);
+		-sin_a1 * sin_a3 * cos_a2 + sin_a2 * cos_a1 * cos_a3,
+		sin_a1 * sin_a2 * cos_a3 + sin_a3 * cos_a1 * cos_a2,
+		-sin_a1 * sin_a2 * sin_a3 + cos_a1 * cos_a2 * cos_a3);
 }
 
 // get_euler_xyz returns a vector containing the Euler angles in the format
@@ -96,9 +96,9 @@ void Quat::set_euler_yxz(const Vector3 &p_euler) {
 	real_t sin_a3 = Math::sin(half_a3);
 
 	set(sin_a1 * cos_a2 * sin_a3 + cos_a1 * sin_a2 * cos_a3,
-			sin_a1 * cos_a2 * cos_a3 - cos_a1 * sin_a2 * sin_a3,
-			-sin_a1 * sin_a2 * cos_a3 + cos_a1 * cos_a2 * sin_a3,
-			sin_a1 * sin_a2 * sin_a3 + cos_a1 * cos_a2 * cos_a3);
+		sin_a1 * cos_a2 * cos_a3 - cos_a1 * sin_a2 * sin_a3,
+		-sin_a1 * sin_a2 * cos_a3 + cos_a1 * cos_a2 * sin_a3,
+		sin_a1 * sin_a2 * sin_a3 + cos_a1 * cos_a2 * cos_a3);
 }
 
 // get_euler_yxz returns a vector containing the Euler angles in the format
@@ -115,9 +115,9 @@ Vector3 Quat::get_euler_yxz() const {
 
 void Quat::operator*=(const Quat &p_q) {
 	set(w * p_q.x + x * p_q.w + y * p_q.z - z * p_q.y,
-			w * p_q.y + y * p_q.w + z * p_q.x - x * p_q.z,
-			w * p_q.z + z * p_q.w + x * p_q.y - y * p_q.x,
-			w * p_q.w - x * p_q.x - y * p_q.y - z * p_q.z);
+		w * p_q.y + y * p_q.w + z * p_q.x - x * p_q.z,
+		w * p_q.z + z * p_q.w + x * p_q.y - y * p_q.x,
+		w * p_q.w - x * p_q.x - y * p_q.y - z * p_q.z);
 }
 
 Quat Quat::operator*(const Quat &p_q) const {
@@ -219,9 +219,9 @@ Quat Quat::slerpni(const Quat &p_to, real_t p_weight) const {
 		   invFactor = Math::sin((1 - p_weight) * theta) * sinT;
 
 	return Quat(invFactor * from.x + newFactor * p_to.x,
-			invFactor * from.y + newFactor * p_to.y,
-			invFactor * from.z + newFactor * p_to.z,
-			invFactor * from.w + newFactor * p_to.w);
+				invFactor * from.y + newFactor * p_to.y,
+				invFactor * from.z + newFactor * p_to.z,
+				invFactor * from.w + newFactor * p_to.w);
 }
 
 Quat Quat::cubic_slerp(const Quat &p_b, const Quat &p_pre_a, const Quat &p_post_b, real_t p_weight) const {
@@ -252,6 +252,6 @@ void Quat::set_axis_angle(const Vector3 &p_axis, real_t p_angle) {
 		real_t cos_angle = Math::cos(p_angle * 0.5f);
 		real_t s = sin_angle / d;
 		set(p_axis.x * s, p_axis.y * s, p_axis.z * s,
-				cos_angle);
+			cos_angle);
 	}
 }

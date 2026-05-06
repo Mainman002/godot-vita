@@ -53,8 +53,8 @@ typedef struct {
 	godot_bool (*get_prop)(godot_pluginscript_instance_data *p_data, const godot_string *p_name, godot_variant *r_ret);
 
 	godot_variant (*call_method)(godot_pluginscript_instance_data *p_data,
-			const godot_string_name *p_method, const godot_variant **p_args,
-			int p_argcount, godot_variant_call_error *r_error);
+								 const godot_string_name *p_method, const godot_variant **p_args,
+								 int p_argcount, godot_variant_call_error *r_error);
 
 	void (*notification)(godot_pluginscript_instance_data *p_data, int p_notification);
 	// TODO: could this rpc mode stuff be moved to the godot_pluginscript_script_manifest ?

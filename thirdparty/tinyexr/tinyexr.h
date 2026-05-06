@@ -6777,7 +6777,7 @@ struct MemoryMappedFile {
       return;
     }
 
-    LARGE_INTEGER windows_file_size = {};
+    LARGE_INTEGER windows_file_size ={};
     if (!GetFileSizeEx(windows_file, &windows_file_size) ||
         static_cast<ULONGLONG>(windows_file_size.QuadPart) >
             std::numeric_limits<size_t>::max()) {

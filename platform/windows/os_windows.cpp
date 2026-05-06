@@ -112,7 +112,7 @@ static BOOL CALLBACK _MonitorEnumProcSize(HMONITOR hMonitor, HDC hdcMonitor, LPR
 static String format_error_message(DWORD id) {
 	LPWSTR messageBuffer = NULL;
 	size_t size = FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-			NULL, id, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPWSTR)&messageBuffer, 0, NULL);
+								 NULL, id, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPWSTR)&messageBuffer, 0, NULL);
 
 	String msg = "Error " + itos(id) + ": " + String(messageBuffer, size);
 
@@ -229,9 +229,9 @@ bool OS_Windows::can_draw() const {
 #define SIGNATURE_MASK 0xFFFFFF00
 // Keeping the name suggested by Microsoft, but this macro really answers:
 // Is this mouse event emulated from touch or pen input?
-#define IsPenEvent(dw) (((dw)&SIGNATURE_MASK) == MI_WP_SIGNATURE)
+#define IsPenEvent(dw) (((dw) & SIGNATURE_MASK) == MI_WP_SIGNATURE)
 // This one tells whether the event comes from touchscreen (and not from pen)
-#define IsTouchEvent(dw) (IsPenEvent(dw) && ((dw)&0x80))
+#define IsTouchEvent(dw) (IsPenEvent(dw) && ((dw) & 0x80))
 
 void OS_Windows::_touch_event(bool p_pressed, float p_x, float p_y, int idx) {
 	// Defensive
@@ -1633,7 +1633,7 @@ Error OS_Windows::initialize(const VideoMode &p_desired, int p_video_driver, int
 	if (gl_initialization_error) {
 		OS::get_singleton()->alert("Your video card driver does not support any of the supported OpenGL versions.\n"
 								   "Please update your drivers or if you have a very old or integrated GPU, upgrade it.",
-				"Unable to initialize Video driver");
+								   "Unable to initialize Video driver");
 		return ERR_UNAVAILABLE;
 	}
 
@@ -3484,9 +3484,9 @@ uint32_t OS_Windows::keyboard_get_scancode_from_physical(uint32_t p_scancode) co
 	uint32_t scancode_no_mod = (uint32_t)(p_scancode & KEY_CODE_MASK);
 
 	if (scancode_no_mod == KEY_PRINT ||
-			scancode_no_mod == KEY_KP_ADD ||
-			scancode_no_mod == KEY_KP_5 ||
-			(scancode_no_mod >= KEY_0 && scancode_no_mod <= KEY_9)) {
+		scancode_no_mod == KEY_KP_ADD ||
+		scancode_no_mod == KEY_KP_5 ||
+		(scancode_no_mod >= KEY_0 && scancode_no_mod <= KEY_9)) {
 		return p_scancode;
 	}
 

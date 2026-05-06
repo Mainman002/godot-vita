@@ -70,10 +70,10 @@ static ViewController *mainViewController = nil;
 	self.window = [[UIWindow alloc] initWithFrame:windowBounds];
 
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-			NSUserDomainMask, YES);
+														 NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
-			NSUserDomainMask, YES);
+												NSUserDomainMask, YES);
 	NSString *cacheDirectory = [paths objectAtIndex:0];
 
 	int err = iphone_main(gargc, gargv, String::utf8([documentsDirectory UTF8String]), String::utf8([cacheDirectory UTF8String]));

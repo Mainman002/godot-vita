@@ -249,7 +249,7 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 	if (!refresh_device_info()) {
 		OS::get_singleton()->alert("Your system does not support XInput 2.\n"
 								   "Please upgrade your distribution.",
-				"Unable to initialize XInput");
+								   "Unable to initialize XInput");
 		return ERR_UNAVAILABLE;
 	}
 
@@ -263,7 +263,7 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 		im_destroy_callback.client_data = (::XPointer)(this);
 		im_destroy_callback.callback = (::XIMProc)(xim_destroy_callback);
 		if (XSetIMValues(xim, XNDestroyCallback, &im_destroy_callback,
-					NULL) != nullptr) {
+						 NULL) != nullptr) {
 			WARN_PRINT("Error setting XIM destroy callback");
 		}
 
@@ -278,7 +278,7 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 			xim_style = 0L;
 			for (int i = 0; i < xim_styles->count_styles; i++) {
 				if (xim_styles->supported_styles[i] ==
-						(XIMPreeditNothing | XIMStatusNothing)) {
+					(XIMPreeditNothing | XIMStatusNothing)) {
 					xim_style = xim_styles->supported_styles[i];
 					break;
 				}
@@ -311,11 +311,11 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 		int use_prime = -1;
 
 		if (getenv("PRIMUS_DISPLAY") ||
-				getenv("PRIMUS_libGLd") ||
-				getenv("PRIMUS_libGLa") ||
-				getenv("PRIMUS_libGL") ||
-				getenv("PRIMUS_LOAD_GLOBAL") ||
-				getenv("BUMBLEBEE_SOCKET")) {
+			getenv("PRIMUS_libGLd") ||
+			getenv("PRIMUS_libGLa") ||
+			getenv("PRIMUS_libGL") ||
+			getenv("PRIMUS_LOAD_GLOBAL") ||
+			getenv("BUMBLEBEE_SOCKET")) {
 			print_verbose("Optirun/primusrun detected. Skipping GPU detection");
 			use_prime = 0;
 		}
@@ -329,7 +329,7 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 
 			for (int i = 0; i < libraries.size(); ++i) {
 				if (FileAccess::exists(libraries[i] + "/libGL.so.1") ||
-						FileAccess::exists(libraries[i] + "/libGL.so")) {
+					FileAccess::exists(libraries[i] + "/libGL.so")) {
 					print_verbose("Custom libGL override detected. Skipping GPU detection");
 					use_prime = 0;
 				}
@@ -416,7 +416,7 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 								   "If you have updated your graphics drivers recently, try rebooting.\n"
 								   "Alternatively, you can force software rendering by running Godot with the `LIBGL_ALWAYS_SOFTWARE=1`\n"
 								   "environment variable set, but this will be very slow.",
-				"Unable to initialize Video driver");
+								   "Unable to initialize Video driver");
 		return ERR_UNAVAILABLE;
 	}
 
@@ -613,7 +613,7 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 
 		// Create 1x1 bitmap
 		Pixmap cursormask = XCreatePixmap(x11_display,
-				RootWindow(x11_display, DefaultScreen(x11_display)), 1, 1, 1);
+										  RootWindow(x11_display, DefaultScreen(x11_display)), 1, 1, 1);
 
 		// Fill with zero
 		XGCValues xgc;
@@ -625,9 +625,9 @@ Error OS_X11::initialize(const VideoMode &p_desired, int p_video_driver, int p_a
 		XColor col = {};
 
 		Cursor cursor = XCreatePixmapCursor(x11_display,
-				cursormask, // source (using cursor mask as placeholder, since it'll all be ignored)
-				cursormask, // mask
-				&col, &col, 0, 0);
+											cursormask, // source (using cursor mask as placeholder, since it'll all be ignored)
+											cursormask, // mask
+											&col, &col, 0, 0);
 
 		XFreePixmap(x11_display, cursormask);
 		XFreeGC(x11_display, gc);
@@ -709,7 +709,7 @@ bool OS_X11::refresh_device_info() {
 
 	if (xi_major_query < XINPUT_CLIENT_VERSION_MAJOR || (xi_major_query == XINPUT_CLIENT_VERSION_MAJOR && xi_minor_query < XINPUT_CLIENT_VERSION_MINOR)) {
 		print_verbose(vformat("XInput %d.%d not available (server supports %d.%d). Touch input unavailable.",
-				XINPUT_CLIENT_VERSION_MAJOR, XINPUT_CLIENT_VERSION_MINOR, xi_major_query, xi_minor_query));
+							  XINPUT_CLIENT_VERSION_MAJOR, XINPUT_CLIENT_VERSION_MINOR, xi_major_query, xi_minor_query));
 	}
 
 	xi.absolute_devices.clear();
@@ -807,7 +807,7 @@ bool OS_X11::refresh_device_info() {
 }
 
 void OS_X11::xim_destroy_callback(::XIM im, ::XPointer client_data,
-		::XPointer call_data) {
+								  ::XPointer call_data) {
 	WARN_PRINT("Input method stopped");
 	OS_X11 *os = reinterpret_cast<OS_X11 *>(client_data);
 	os->xim = nullptr;
@@ -1015,7 +1015,7 @@ void OS_X11::set_mouse_mode(MouseMode p_mode) {
 			center.y = current_videomode.height / 2;
 
 			XWarpPointer(x11_display, None, x11_window,
-					0, 0, 0, 0, (int)center.x, (int)center.y);
+						 0, 0, 0, 0, (int)center.x, (int)center.y);
 
 			input->set_mouse_position(center);
 		}
@@ -1035,7 +1035,7 @@ void OS_X11::warp_mouse_position(const Point2 &p_to) {
 		printf("%d %d\n", xwa.x, xwa.y); needed? */
 
 		XWarpPointer(x11_display, None, x11_window,
-				0, 0, 0, 0, (int)p_to.x, (int)p_to.y);
+					 0, 0, 0, 0, (int)p_to.x, (int)p_to.y);
 	}
 }
 
@@ -2099,12 +2099,12 @@ void OS_X11::_handle_key_event(XKeyEvent *p_event, LocalVector<XEvent> &p_events
 		int utf8len = 8;
 		char *utf8string = (char *)memalloc(sizeof(char) * utf8len);
 		int utf8bytes = Xutf8LookupString(xic, xkeyevent, utf8string,
-				utf8len - 1, &keysym_unicode, &status);
+										  utf8len - 1, &keysym_unicode, &status);
 		if (status == XBufferOverflow) {
 			utf8len = utf8bytes + 1;
 			utf8string = (char *)memrealloc(utf8string, utf8len);
 			utf8bytes = Xutf8LookupString(xic, xkeyevent, utf8string,
-					utf8len - 1, &keysym_unicode, &status);
+										  utf8len - 1, &keysym_unicode, &status);
 		}
 		utf8string[utf8bytes] = '\0';
 
@@ -2312,32 +2312,32 @@ Atom OS_X11::_process_selection_request_target(Atom p_target, Window p_requestor
 		data[8] = XInternAtom(x11_display, "text/plain", 0);
 
 		XChangeProperty(x11_display,
-				p_requestor,
-				p_property,
-				XA_ATOM,
-				32,
-				PropModeReplace,
-				(unsigned char *)&data,
-				sizeof(data) / sizeof(data[0]));
+						p_requestor,
+						p_property,
+						XA_ATOM,
+						32,
+						PropModeReplace,
+						(unsigned char *)&data,
+						sizeof(data) / sizeof(data[0]));
 
 		return p_property;
 	} else if (p_target == XInternAtom(x11_display, "SAVE_TARGETS", 0)) {
 		// Request to check if SAVE_TARGETS is supported, nothing special to do.
 		XChangeProperty(x11_display,
-				p_requestor,
-				p_property,
-				XInternAtom(x11_display, "NULL", False),
-				32,
-				PropModeReplace,
-				nullptr,
-				0);
+						p_requestor,
+						p_property,
+						XInternAtom(x11_display, "NULL", False),
+						32,
+						PropModeReplace,
+						nullptr,
+						0);
 		return p_property;
 	} else if (p_target == XInternAtom(x11_display, "UTF8_STRING", 0) ||
-			p_target == XInternAtom(x11_display, "COMPOUND_TEXT", 0) ||
-			p_target == XInternAtom(x11_display, "TEXT", 0) ||
-			p_target == XA_STRING ||
-			p_target == XInternAtom(x11_display, "text/plain;charset=utf-8", 0) ||
-			p_target == XInternAtom(x11_display, "text/plain", 0)) {
+			   p_target == XInternAtom(x11_display, "COMPOUND_TEXT", 0) ||
+			   p_target == XInternAtom(x11_display, "TEXT", 0) ||
+			   p_target == XA_STRING ||
+			   p_target == XInternAtom(x11_display, "text/plain;charset=utf-8", 0) ||
+			   p_target == XInternAtom(x11_display, "text/plain", 0)) {
 		// Directly using internal clipboard because we know our window
 		// is the owner during a selection request.
 		CharString clip;
@@ -2348,13 +2348,13 @@ Atom OS_X11::_process_selection_request_target(Atom p_target, Window p_requestor
 			clip = OS::get_clipboard().utf8();
 		}
 		XChangeProperty(x11_display,
-				p_requestor,
-				p_property,
-				p_target,
-				8,
-				PropModeReplace,
-				(unsigned char *)clip.get_data(),
-				clip.length());
+						p_requestor,
+						p_property,
+						p_target,
+						8,
+						PropModeReplace,
+						(unsigned char *)clip.get_data(),
+						clip.length());
 		return p_property;
 	} else {
 		char *target_name = XGetAtomName(x11_display, p_target);
@@ -2388,13 +2388,13 @@ void OS_X11::_handle_selection_request_event(XSelectionRequestEvent *p_event) co
 				}
 
 				XChangeProperty(x11_display,
-						p_event->requestor,
-						p_event->property,
-						atom_pair,
-						32,
-						PropModeReplace,
-						(unsigned char *)targets,
-						len);
+								p_event->requestor,
+								p_event->property,
+								atom_pair,
+								32,
+								PropModeReplace,
+								(unsigned char *)targets,
+								len);
 
 				respond.xselection.property = p_event->property;
 			}
@@ -2440,8 +2440,8 @@ static Property read_property(Display *p_display, Window p_window, Atom p_proper
 			}
 
 			XGetWindowProperty(p_display, p_window, p_property, 0, read_bytes, False, AnyPropertyType,
-					&actual_type, &actual_format, &nitems, &bytes_after,
-					&ret);
+							   &actual_type, &actual_format, &nitems, &bytes_after,
+							   &ret);
 
 			read_bytes *= 2;
 
@@ -2489,7 +2489,7 @@ void OS_X11::_window_changed(XEvent *event) {
 		set_ime_position(Point2(0, 1));
 	}
 	if ((event->xconfigure.width == current_videomode.width) &&
-			(event->xconfigure.height == current_videomode.height)) {
+		(event->xconfigure.height == current_videomode.height)) {
 		return;
 	}
 
@@ -3171,7 +3171,7 @@ void OS_X11::process_xevents() {
 
 	if (do_mouse_warp) {
 		XWarpPointer(x11_display, None, x11_window,
-				0, 0, 0, 0, (int)current_videomode.width / 2, (int)current_videomode.height / 2);
+					 0, 0, 0, 0, (int)current_videomode.width / 2, (int)current_videomode.height / 2);
 
 		/*
 		Window root, child;
@@ -3344,7 +3344,7 @@ String OS_X11::_get_clipboard_impl(Atom p_source, Window x11_window, Atom target
 
 		Atom selection = XA_PRIMARY;
 		XConvertSelection(x11_display, p_source, target, selection,
-				x11_window, CurrentTime);
+						  x11_window, CurrentTime);
 
 		XFlush(x11_display);
 
@@ -3358,14 +3358,14 @@ String OS_X11::_get_clipboard_impl(Atom p_source, Window x11_window, Atom target
 		unsigned long len, bytes_left, dummy;
 		unsigned char *data;
 		XGetWindowProperty(x11_display, x11_window,
-				selection, // Tricky..
-				0, 0, // offset - len
-				0, // Delete 0==FALSE
-				AnyPropertyType, // flag
-				&type, // return type
-				&format, // return format
-				&len, &bytes_left, // data length
-				&data);
+						   selection, // Tricky..
+						   0, 0, // offset - len
+						   0, // Delete 0==FALSE
+						   AnyPropertyType, // flag
+						   &type, // return type
+						   &format, // return format
+						   &len, &bytes_left, // data length
+						   &data);
 
 		if (data) {
 			XFree(data);
@@ -3394,14 +3394,14 @@ String OS_X11::_get_clipboard_impl(Atom p_source, Window x11_window, Atom target
 				XEvent ev;
 				while (XCheckIfEvent(x11_display, &ev, _predicate_clipboard_incr, nullptr)) {
 					result = XGetWindowProperty(x11_display, x11_window,
-							selection, // selection type
-							0, LONG_MAX, // offset - len
-							True, // delete property to notify the owner
-							AnyPropertyType, // flag
-							&type, // return type
-							&format, // return format
-							&len, &bytes_left, // data length
-							&data);
+												selection, // selection type
+												0, LONG_MAX, // offset - len
+												True, // delete property to notify the owner
+												AnyPropertyType, // flag
+												&type, // return type
+												&format, // return format
+												&len, &bytes_left, // data length
+												&data);
 
 					DEBUG_LOG_X11("PropertyNotify: len=%lu, format=%i\n", len, format);
 
@@ -3444,9 +3444,9 @@ String OS_X11::_get_clipboard_impl(Atom p_source, Window x11_window, Atom target
 		} else if (bytes_left > 0) {
 			// Data is ready and can be processed all at once.
 			result = XGetWindowProperty(x11_display, x11_window,
-					selection, 0, bytes_left, 0,
-					AnyPropertyType, &type, &format,
-					&len, &dummy, &data);
+										selection, 0, bytes_left, 0,
+										AnyPropertyType, &type, &format,
+										&len, &dummy, &data);
 
 			if (result == Success) {
 				ret.parse_utf8((const char *)data);
@@ -3508,7 +3508,7 @@ void OS_X11::_clipboard_transfer_ownership(Atom p_source, Window x11_window) con
 	Atom clipboard_manager = XInternAtom(x11_display, "CLIPBOARD_MANAGER", False);
 	Atom save_targets = XInternAtom(x11_display, "SAVE_TARGETS", False);
 	XConvertSelection(x11_display, clipboard_manager, save_targets, None,
-			x11_window, CurrentTime);
+					  x11_window, CurrentTime);
 
 	// Process events from the queue.
 	while (true) {
@@ -4461,7 +4461,7 @@ void OS_X11::update_real_mouse_position() {
 	unsigned int mask_return;
 
 	Bool xquerypointer_result = XQueryPointer(x11_display, x11_window, &root_return, &child_return, &root_x, &root_y,
-			&win_x, &win_y, &mask_return);
+											  &win_x, &win_y, &mask_return);
 
 	if (xquerypointer_result) {
 		if (win_x > 0 && win_y > 0 && win_x <= current_videomode.width && win_y <= current_videomode.height) {

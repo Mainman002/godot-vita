@@ -578,7 +578,7 @@ bool CSGBrushOperation::MeshMerge::_bvh_inside(FaceBVH *facebvhptr, int p_max_de
 				if (current_facebvhptr->face >= 0) {
 					while (current_facebvhptr) {
 						if (p_face_idx != current_facebvhptr->face &&
-								current_facebvhptr->aabb.intersects_ray(face_center, face_normal)) {
+							current_facebvhptr->aabb.intersects_ray(face_center, face_normal)) {
 							const Face &current_face = faces[current_facebvhptr->face];
 							Vector3 current_points[3] = {
 								points[current_face.points[0]],
@@ -590,7 +590,7 @@ bool CSGBrushOperation::MeshMerge::_bvh_inside(FaceBVH *facebvhptr, int p_max_de
 
 							// Check if faces are co-planar.
 							if ((current_normal - face_normal).length_squared() < CMP_EPSILON2 &&
-									is_point_in_triangle(face_center, current_points)) {
+								is_point_in_triangle(face_center, current_points)) {
 								// Only add an intersection if not a B face.
 								if (!face.from_b) {
 									_add_distance(intersectionsA, intersectionsB, current_face.from_b, 0);
@@ -898,7 +898,7 @@ void CSGBrushOperation::Build2DFaces::_merge_faces(const Vector<int> &p_segment_
 
 			// Skip flattened faces.
 			if (outer_edge_idx[0] == p_segment_indices[closest_idx] ||
-					outer_edge_idx[1] == p_segment_indices[closest_idx]) {
+				outer_edge_idx[1] == p_segment_indices[closest_idx]) {
 				continue;
 			}
 
@@ -1051,7 +1051,7 @@ void CSGBrushOperation::Build2DFaces::_find_edge_intersections(const Vector2 p_s
 			if (on_edge || Geometry::segment_intersects_segment_2d(p_segment_points[0], p_segment_points[1], edge_points[0], edge_points[1], &intersection_point)) {
 				// Check if intersection point is an edge point.
 				if ((intersection_point - edge_points[0]).length_squared() < vertex_snap2 ||
-						(intersection_point - edge_points[1]).length_squared() < vertex_snap2) {
+					(intersection_point - edge_points[1]).length_squared() < vertex_snap2) {
 					continue;
 				}
 
@@ -1173,7 +1173,7 @@ int CSGBrushOperation::Build2DFaces::_insert_point(const Vector2 &p_point) {
 				Vector2 split_edge2[2] = { vertices[new_vertex_idx].point, edge_points[1] };
 				Vector2 new_edge[2] = { vertices[new_vertex_idx].point, vertices[opposite_vertex_idx].point };
 				if (are_segements_parallel(split_edge1, new_edge, vertex_snap2) &&
-						are_segements_parallel(split_edge2, new_edge, vertex_snap2)) {
+					are_segements_parallel(split_edge2, new_edge, vertex_snap2)) {
 					break;
 				}
 
@@ -1370,15 +1370,15 @@ void CSGBrushOperation::update_faces(const CSGBrush &p_brush_a, const int p_face
 	// Don't use degenerate faces.
 	bool has_degenerate = false;
 	if (is_snapable(vertices_a[0], vertices_a[1], p_vertex_snap) ||
-			is_snapable(vertices_a[0], vertices_a[2], p_vertex_snap) ||
-			is_snapable(vertices_a[1], vertices_a[2], p_vertex_snap)) {
+		is_snapable(vertices_a[0], vertices_a[2], p_vertex_snap) ||
+		is_snapable(vertices_a[1], vertices_a[2], p_vertex_snap)) {
 		p_collection.build2DFacesA[p_face_idx_a] = Build2DFaces();
 		has_degenerate = true;
 	}
 
 	if (is_snapable(vertices_b[0], vertices_b[1], p_vertex_snap) ||
-			is_snapable(vertices_b[0], vertices_b[2], p_vertex_snap) ||
-			is_snapable(vertices_b[1], vertices_b[2], p_vertex_snap)) {
+		is_snapable(vertices_b[0], vertices_b[2], p_vertex_snap) ||
+		is_snapable(vertices_b[1], vertices_b[2], p_vertex_snap)) {
 		p_collection.build2DFacesB[p_face_idx_b] = Build2DFaces();
 		has_degenerate = true;
 	}

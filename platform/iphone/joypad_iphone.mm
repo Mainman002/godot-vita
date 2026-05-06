@@ -259,37 +259,37 @@ void JoypadIPhone::start_processing() {
 
 			if (element == gamepad.buttonA) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_0,
-						gamepad.buttonA.isPressed);
+													  gamepad.buttonA.isPressed);
 			} else if (element == gamepad.buttonB) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_1,
-						gamepad.buttonB.isPressed);
+													  gamepad.buttonB.isPressed);
 			} else if (element == gamepad.buttonX) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_2,
-						gamepad.buttonX.isPressed);
+													  gamepad.buttonX.isPressed);
 			} else if (element == gamepad.buttonY) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_3,
-						gamepad.buttonY.isPressed);
+													  gamepad.buttonY.isPressed);
 			} else if (element == gamepad.leftShoulder) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_L,
-						gamepad.leftShoulder.isPressed);
+													  gamepad.leftShoulder.isPressed);
 			} else if (element == gamepad.rightShoulder) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_R,
-						gamepad.rightShoulder.isPressed);
+													  gamepad.rightShoulder.isPressed);
 			} else if (element == gamepad.leftTrigger) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_L2,
-						gamepad.leftTrigger.isPressed);
+													  gamepad.leftTrigger.isPressed);
 			} else if (element == gamepad.rightTrigger) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_R2,
-						gamepad.rightTrigger.isPressed);
+													  gamepad.rightTrigger.isPressed);
 			} else if (element == gamepad.dpad) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_UP,
-						gamepad.dpad.up.isPressed);
+													  gamepad.dpad.up.isPressed);
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_DOWN,
-						gamepad.dpad.down.isPressed);
+													  gamepad.dpad.down.isPressed);
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_LEFT,
-						gamepad.dpad.left.isPressed);
+													  gamepad.dpad.left.isPressed);
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_RIGHT,
-						gamepad.dpad.right.isPressed);
+													  gamepad.dpad.right.isPressed);
 			};
 
 			if (element == gamepad.leftThumbstick) {
@@ -313,17 +313,17 @@ void JoypadIPhone::start_processing() {
 			if (@available(iOS 13, *)) {
 				if (element == gamepad.buttonOptions) {
 					OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_10,
-							gamepad.buttonOptions.isPressed);
+														  gamepad.buttonOptions.isPressed);
 				} else if (element == gamepad.buttonMenu) {
 					OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_11,
-							gamepad.buttonMenu.isPressed);
+														  gamepad.buttonMenu.isPressed);
 				}
 			}
 
 			if (@available(iOS 14, *)) {
 				if (element == gamepad.buttonHome) {
 					OSIPhone::get_singleton()->joy_button(joy_id, JOY_GUIDE,
-							gamepad.buttonHome.isPressed);
+														  gamepad.buttonHome.isPressed);
 				}
 			}
 		};
@@ -340,19 +340,19 @@ void JoypadIPhone::start_processing() {
 
 			if (element == gamepad.buttonA) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_0,
-						gamepad.buttonA.isPressed);
+													  gamepad.buttonA.isPressed);
 			} else if (element == gamepad.buttonX) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_BUTTON_2,
-						gamepad.buttonX.isPressed);
+													  gamepad.buttonX.isPressed);
 			} else if (element == gamepad.dpad) {
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_UP,
-						gamepad.dpad.up.isPressed);
+													  gamepad.dpad.up.isPressed);
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_DOWN,
-						gamepad.dpad.down.isPressed);
+													  gamepad.dpad.down.isPressed);
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_LEFT,
-						gamepad.dpad.left.isPressed);
+													  gamepad.dpad.left.isPressed);
 				OSIPhone::get_singleton()->joy_button(joy_id, JOY_DPAD_RIGHT,
-						gamepad.dpad.right.isPressed);
+													  gamepad.dpad.right.isPressed);
 			}
 		};
 	}

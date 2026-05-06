@@ -178,7 +178,7 @@ Variant::Type managed_to_variant_type(const ManagedType &p_type) {
 
 			// ICollection or IEnumerable
 			if (p_type.type_class == CACHED_CLASS(System_Collections_ICollection) ||
-					p_type.type_class == CACHED_CLASS(System_Collections_IEnumerable)) {
+				p_type.type_class == CACHED_CLASS(System_Collections_IEnumerable)) {
 				return Variant::ARRAY;
 			}
 		} break;
@@ -243,9 +243,9 @@ bool try_get_array_element_type(const ManagedType &p_array_type, ManagedType &r_
 			MonoReflectionType *array_reftype = mono_type_get_object(mono_domain_get(), p_array_type.type_class->get_mono_type());
 
 			if (GDMonoUtils::Marshal::type_is_generic_array(array_reftype) ||
-					GDMonoUtils::Marshal::type_is_system_generic_list(array_reftype) ||
-					GDMonoUtils::Marshal::type_is_generic_icollection(array_reftype) ||
-					GDMonoUtils::Marshal::type_is_generic_ienumerable(array_reftype)) {
+				GDMonoUtils::Marshal::type_is_system_generic_list(array_reftype) ||
+				GDMonoUtils::Marshal::type_is_generic_icollection(array_reftype) ||
+				GDMonoUtils::Marshal::type_is_generic_ienumerable(array_reftype)) {
 				MonoReflectionType *elem_reftype;
 
 				GDMonoUtils::Marshal::array_get_element_type(array_reftype, &elem_reftype);
@@ -267,8 +267,8 @@ bool try_get_dictionary_key_value_types(const ManagedType &p_dictionary_type, Ma
 			MonoReflectionType *dict_reftype = mono_type_get_object(mono_domain_get(), p_dictionary_type.type_class->get_mono_type());
 
 			if (GDMonoUtils::Marshal::type_is_generic_dictionary(dict_reftype) ||
-					GDMonoUtils::Marshal::type_is_system_generic_dictionary(dict_reftype) ||
-					GDMonoUtils::Marshal::type_is_generic_idictionary(dict_reftype)) {
+				GDMonoUtils::Marshal::type_is_system_generic_dictionary(dict_reftype) ||
+				GDMonoUtils::Marshal::type_is_generic_idictionary(dict_reftype)) {
 				MonoReflectionType *key_reftype;
 				MonoReflectionType *value_reftype;
 
@@ -401,8 +401,8 @@ MonoObject *variant_to_mono_object_of_class(const Variant &p_var, GDMonoClass *p
 
 	// Godot.Collections.Array or ICollection or IEnumerable
 	if (CACHED_CLASS(Array) == p_type_class ||
-			CACHED_CLASS(System_Collections_ICollection) == p_type_class ||
-			CACHED_CLASS(System_Collections_IEnumerable) == p_type_class) {
+		CACHED_CLASS(System_Collections_ICollection) == p_type_class ||
+		CACHED_CLASS(System_Collections_IEnumerable) == p_type_class) {
 		return GDMonoUtils::create_managed_from(p_var.operator Array(), CACHED_CLASS(Array));
 	}
 

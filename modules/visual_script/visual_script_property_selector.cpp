@@ -243,9 +243,9 @@ void VisualScriptPropertySelector::_update_search() {
 			String desc = desc_raw.capitalize().replace("( ", "(");
 
 			if (search_box->get_text() != String() &&
-					name.findn(search_box->get_text()) == -1 &&
-					desc.findn(search_box->get_text()) == -1 &&
-					desc_raw.findn(search_box->get_text()) == -1) {
+				name.findn(search_box->get_text()) == -1 &&
+				desc.findn(search_box->get_text()) == -1 &&
+				desc_raw.findn(search_box->get_text()) == -1) {
 				continue;
 			}
 

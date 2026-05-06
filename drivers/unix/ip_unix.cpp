@@ -172,7 +172,7 @@ void IP_Unix::get_local_interfaces(Map<String, Interface_Info> *r_interfaces) co
 	while (true) {
 		addrs = (IP_ADAPTER_ADDRESSES *)memalloc(buf_size);
 		int err = GetAdaptersAddresses(AF_UNSPEC, GAA_FLAG_SKIP_ANYCAST | GAA_FLAG_SKIP_MULTICAST | GAA_FLAG_SKIP_DNS_SERVER | GAA_FLAG_SKIP_FRIENDLY_NAME,
-				NULL, addrs, &buf_size);
+									   NULL, addrs, &buf_size);
 		if (err == NO_ERROR) {
 			break;
 		};

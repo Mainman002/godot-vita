@@ -53,7 +53,7 @@ static SegmentIntersectionResult segment_intersection(
 		float ub = (ab.x * (a.y - c.y) - ab.y * (a.x - c.x)) / div;
 		*out_intersection = a + ua * ab;
 		if (ua >= 0.f && ua <= 1.f &&
-				ub >= 0.f && ub <= 1.f) {
+			ub >= 0.f && ub <= 1.f) {
 			return SEGMENT_INTERSECT;
 		}
 		return SEGMENT_NO_INTERSECT;

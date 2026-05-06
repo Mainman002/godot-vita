@@ -994,16 +994,16 @@ public:
 		Item() {}
 
 		Item(const String &p_project,
-				const String &p_name,
-				const String &p_description,
-				const String &p_path,
-				const String &p_icon,
-				const String &p_main_scene,
-				uint64_t p_last_modified,
-				bool p_favorite,
-				bool p_grayed,
-				bool p_missing,
-				int p_version) {
+			 const String &p_name,
+			 const String &p_description,
+			 const String &p_path,
+			 const String &p_icon,
+			 const String &p_main_scene,
+			 uint64_t p_last_modified,
+			 bool p_favorite,
+			 bool p_grayed,
+			 bool p_missing,
+			 int p_version) {
 			project_key = p_project;
 			project_name = p_name;
 			description = p_description;

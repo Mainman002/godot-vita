@@ -126,12 +126,12 @@ static void GLAPIENTRY _gl_debug_print(GLenum source, GLenum type, GLuint id, GL
 #endif // GLAD_ENABLED
 
 typedef void (*DEBUGPROCARB)(GLenum source,
-		GLenum type,
-		GLuint id,
-		GLenum severity,
-		GLsizei length,
-		const char *message,
-		const void *userParam);
+							 GLenum type,
+							 GLuint id,
+							 GLenum severity,
+							 GLsizei length,
+							 const char *message,
+							 const void *userParam);
 
 typedef void (*DebugMessageCallbackARB)(DEBUGPROCARB callback, const void *userParam);
 

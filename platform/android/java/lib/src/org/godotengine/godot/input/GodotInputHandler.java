@@ -317,7 +317,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener {
 
 		// Device may not be a joystick or gamepad
 		if ((sources & InputDevice.SOURCE_GAMEPAD) != InputDevice.SOURCE_GAMEPAD &&
-				(sources & InputDevice.SOURCE_JOYSTICK) != InputDevice.SOURCE_JOYSTICK) {
+			(sources & InputDevice.SOURCE_JOYSTICK) != InputDevice.SOURCE_JOYSTICK) {
 			return;
 		}
 

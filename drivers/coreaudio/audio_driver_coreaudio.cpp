@@ -40,8 +40,8 @@
 
 #ifdef OSX_ENABLED
 OSStatus AudioDriverCoreAudio::input_device_address_cb(AudioObjectID inObjectID,
-		UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
-		void *inClientData) {
+													   UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
+													   void *inClientData) {
 	AudioDriverCoreAudio *driver = (AudioDriverCoreAudio *)inClientData;
 
 	// If our selected device is the Default call set_device to update the
@@ -54,8 +54,8 @@ OSStatus AudioDriverCoreAudio::input_device_address_cb(AudioObjectID inObjectID,
 }
 
 OSStatus AudioDriverCoreAudio::output_device_address_cb(AudioObjectID inObjectID,
-		UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
-		void *inClientData) {
+														UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses,
+														void *inClientData) {
 	AudioDriverCoreAudio *driver = (AudioDriverCoreAudio *)inClientData;
 
 	// If our selected device is the Default call set_device to update the
@@ -164,10 +164,10 @@ Error AudioDriverCoreAudio::init() {
 }
 
 OSStatus AudioDriverCoreAudio::output_callback(void *inRefCon,
-		AudioUnitRenderActionFlags *ioActionFlags,
-		const AudioTimeStamp *inTimeStamp,
-		UInt32 inBusNumber, UInt32 inNumberFrames,
-		AudioBufferList *ioData) {
+											   AudioUnitRenderActionFlags *ioActionFlags,
+											   const AudioTimeStamp *inTimeStamp,
+											   UInt32 inBusNumber, UInt32 inNumberFrames,
+											   AudioBufferList *ioData) {
 	AudioDriverCoreAudio *ad = (AudioDriverCoreAudio *)inRefCon;
 
 	if (!ad->active || !ad->try_lock()) {
@@ -205,10 +205,10 @@ OSStatus AudioDriverCoreAudio::output_callback(void *inRefCon,
 };
 
 OSStatus AudioDriverCoreAudio::input_callback(void *inRefCon,
-		AudioUnitRenderActionFlags *ioActionFlags,
-		const AudioTimeStamp *inTimeStamp,
-		UInt32 inBusNumber, UInt32 inNumberFrames,
-		AudioBufferList *ioData) {
+											  AudioUnitRenderActionFlags *ioActionFlags,
+											  const AudioTimeStamp *inTimeStamp,
+											  UInt32 inBusNumber, UInt32 inNumberFrames,
+											  AudioBufferList *ioData) {
 	AudioDriverCoreAudio *ad = (AudioDriverCoreAudio *)inRefCon;
 	if (!ad->active) {
 		return 0;
@@ -680,6 +680,6 @@ AudioDriverCoreAudio::AudioDriverCoreAudio() :
 	samples_in.clear();
 }
 
-AudioDriverCoreAudio::~AudioDriverCoreAudio(){};
+AudioDriverCoreAudio::~AudioDriverCoreAudio() {};
 
 #endif

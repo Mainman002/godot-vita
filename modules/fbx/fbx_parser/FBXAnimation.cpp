@@ -128,8 +128,8 @@ AnimationCurve::~AnimationCurve() {
 
 // ------------------------------------------------------------------------------------------------
 AnimationCurveNode::AnimationCurveNode(uint64_t id, const ElementPtr element, const std::string &name,
-		const Document &doc, const char *const *target_prop_whitelist /*= NULL*/,
-		size_t whitelist_size /*= 0*/) :
+									   const Document &doc, const char *const *target_prop_whitelist /*= NULL*/,
+									   size_t whitelist_size /*= 0*/) :
 		Object(id, element, name), target(), doc(doc) {
 	const ScopePtr sc = GetRequiredScope(element);
 
@@ -200,7 +200,7 @@ AnimationLayer::~AnimationLayer() {
 
 // ------------------------------------------------------------------------------------------------
 const AnimationCurveNodeList AnimationLayer::Nodes(const char *const *target_prop_whitelist,
-		size_t whitelist_size /*= 0*/) const {
+												   size_t whitelist_size /*= 0*/) const {
 	AnimationCurveNodeList nodes;
 
 	// resolve attached animation nodes

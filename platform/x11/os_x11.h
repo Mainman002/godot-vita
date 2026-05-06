@@ -113,7 +113,7 @@ class OS_X11 : public OS_Unix {
 	::XIM xim;
 	::XIMStyle xim_style;
 	static void xim_destroy_callback(::XIM im, ::XPointer client_data,
-			::XPointer call_data);
+									 ::XPointer call_data);
 
 	// IME
 	bool im_active;

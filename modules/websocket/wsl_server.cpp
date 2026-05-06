@@ -68,7 +68,7 @@ bool WSLServer::PendingPeer::_parse_request(const Vector<String> p_protocols) {
 	}
 #define _WSL_CHECK(NAME, VALUE)                                                         \
 	ERR_FAIL_COND_V_MSG(!headers.has(NAME) || headers[NAME].to_lower() != VALUE, false, \
-			"Missing or invalid header '" + String(NAME) + "'. Expected value '" + VALUE + "'.");
+						"Missing or invalid header '" + String(NAME) + "'. Expected value '" + VALUE + "'.");
 #define _WSL_CHECK_EX(NAME) \
 	ERR_FAIL_COND_V_MSG(!headers.has(NAME), false, "Missing header '" + String(NAME) + "'.");
 	_WSL_CHECK("upgrade", "websocket");

@@ -117,7 +117,7 @@ public final class GodotPluginRegistry {
 			ApplicationInfo appInfo = activity
 											  .getPackageManager()
 											  .getApplicationInfo(activity.getPackageName(),
-													  PackageManager.GET_META_DATA);
+																  PackageManager.GET_META_DATA);
 			Bundle metaData = appInfo.metaData;
 			if (metaData == null || metaData.isEmpty()) {
 				return;
@@ -145,7 +145,7 @@ public final class GodotPluginRegistry {
 							// Load the plugin initializer into the registry using the plugin name as key.
 							if (!pluginName.equals(pluginHandle.getPluginName())) {
 								Log.w(TAG,
-										"Meta-data plugin name does not match the value returned by the plugin handle: " + pluginName + " =/= " + pluginHandle.getPluginName());
+									  "Meta-data plugin name does not match the value returned by the plugin handle: " + pluginName + " =/= " + pluginHandle.getPluginName());
 							}
 							registry.put(pluginName, pluginHandle);
 							Log.i(TAG, "Completed initialization for Godot plugin " + pluginHandle.getPluginName());

@@ -150,6 +150,6 @@ void UNSCALE_BT_BASIS(btTransform &scaledBasis) {
 	column2.normalize();
 
 	basis.setValue(column0[0], column1[0], column2[0],
-			column0[1], column1[1], column2[1],
-			column0[2], column1[2], column2[2]);
+				   column0[1], column1[1], column2[1],
+				   column0[2], column1[2], column2[2]);
 }

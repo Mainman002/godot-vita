@@ -303,7 +303,7 @@ private:
 		}
 
 		if (!(p_A->pairable_type & p_B->pairable_mask) &&
-				!(p_B->pairable_type & p_A->pairable_mask)) {
+			!(p_B->pairable_type & p_A->pairable_mask)) {
 			return; // none can pair with none
 		}
 
@@ -885,7 +885,7 @@ OCTREE_FUNC(OctreeElementID)::create(T *p_userdata, const AABB &p_aabb, int p_su
 
 #endif
 	typename ElementMap::Element *E = element_map.insert(last_element_id++,
-			Element());
+														 Element());
 	Element &e = E->get();
 
 	e.aabb = p_aabb;

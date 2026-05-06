@@ -61,13 +61,13 @@ class EditorExportPlatformOSX : public EditorExportPlatform {
 	Error _notarize(const Ref<EditorExportPreset> &p_preset, const String &p_path);
 	Error _code_sign(const Ref<EditorExportPreset> &p_preset, const String &p_path, const String &p_ent_path);
 	Error _code_sign_directory(const Ref<EditorExportPreset> &p_preset, const String &p_path, const String &p_ent_path,
-			bool p_should_error_on_non_code = true);
+							   bool p_should_error_on_non_code = true);
 	Error _copy_and_sign_files(DirAccessRef &dir_access, const String &p_src_path, const String &p_in_app_path,
-			bool p_sign_enabled, const Ref<EditorExportPreset> &p_preset, const String &p_ent_path,
-			bool p_should_error_on_non_code_sign);
+							   bool p_sign_enabled, const Ref<EditorExportPreset> &p_preset, const String &p_ent_path,
+							   bool p_should_error_on_non_code_sign);
 	Error _export_osx_plugins_for(Ref<EditorExportPlugin> p_editor_export_plugin, const String &p_app_path_name,
-			DirAccessRef &dir_access, bool p_sign_enabled, const Ref<EditorExportPreset> &p_preset,
-			const String &p_ent_path);
+								  DirAccessRef &dir_access, bool p_sign_enabled, const Ref<EditorExportPreset> &p_preset,
+								  const String &p_ent_path);
 	Error _create_pkg(const Ref<EditorExportPreset> &p_preset, const String &p_pkg_path, const String &p_app_path_name);
 	Error _create_dmg(const String &p_dmg_path, const String &p_pkg_name, const String &p_app_path_name);
 	void _zip_folder_recursive(zipFile &p_zip, const String &p_root_path, const String &p_folder, const String &p_pkg_name);
@@ -1013,7 +1013,7 @@ Error EditorExportPlatformOSX::_code_sign(const Ref<EditorExportPreset> &p_prese
 }
 
 Error EditorExportPlatformOSX::_code_sign_directory(const Ref<EditorExportPreset> &p_preset, const String &p_path,
-		const String &p_ent_path, bool p_should_error_on_non_code) {
+													const String &p_ent_path, bool p_should_error_on_non_code) {
 #ifdef OSX_ENABLED
 	static Vector<String> extensions_to_sign;
 
@@ -1063,9 +1063,9 @@ Error EditorExportPlatformOSX::_code_sign_directory(const Ref<EditorExportPreset
 }
 
 Error EditorExportPlatformOSX::_copy_and_sign_files(DirAccessRef &dir_access, const String &p_src_path,
-		const String &p_in_app_path, bool p_sign_enabled,
-		const Ref<EditorExportPreset> &p_preset, const String &p_ent_path,
-		bool p_should_error_on_non_code_sign) {
+													const String &p_in_app_path, bool p_sign_enabled,
+													const Ref<EditorExportPreset> &p_preset, const String &p_ent_path,
+													bool p_should_error_on_non_code_sign) {
 	static Vector<String> extensions_to_sign;
 
 	if (extensions_to_sign.size() == 0) {
@@ -1102,9 +1102,9 @@ Error EditorExportPlatformOSX::_copy_and_sign_files(DirAccessRef &dir_access, co
 }
 
 Error EditorExportPlatformOSX::_export_osx_plugins_for(Ref<EditorExportPlugin> p_editor_export_plugin,
-		const String &p_app_path_name, DirAccessRef &dir_access,
-		bool p_sign_enabled, const Ref<EditorExportPreset> &p_preset,
-		const String &p_ent_path) {
+													   const String &p_app_path_name, DirAccessRef &dir_access,
+													   bool p_sign_enabled, const Ref<EditorExportPreset> &p_preset,
+													   const String &p_ent_path) {
 	Error error{ OK };
 	const Vector<String> &osx_plugins{ p_editor_export_plugin->get_osx_plugin_files() };
 	for (int i = 0; i < osx_plugins.size(); ++i) {
@@ -1830,23 +1830,23 @@ void EditorExportPlatformOSX::_zip_folder_recursive(zipFile &p_zip, const String
 			zipfi.internal_fa = 0;
 
 			zipOpenNewFileInZip4(p_zip,
-					p_folder.plus_file(f).utf8().get_data(),
-					&zipfi,
-					nullptr,
-					0,
-					nullptr,
-					0,
-					nullptr,
-					Z_DEFLATED,
-					Z_DEFAULT_COMPRESSION,
-					0,
-					-MAX_WBITS,
-					DEF_MEM_LEVEL,
-					Z_DEFAULT_STRATEGY,
-					nullptr,
-					0,
-					0x0314, // "version made by", 0x03 - Unix, 0x14 - ZIP specification version 2.0, required to store Unix file permissions
-					0);
+								 p_folder.plus_file(f).utf8().get_data(),
+								 &zipfi,
+								 nullptr,
+								 0,
+								 nullptr,
+								 0,
+								 nullptr,
+								 Z_DEFLATED,
+								 Z_DEFAULT_COMPRESSION,
+								 0,
+								 -MAX_WBITS,
+								 DEF_MEM_LEVEL,
+								 Z_DEFAULT_STRATEGY,
+								 nullptr,
+								 0,
+								 0x0314, // "version made by", 0x03 - Unix, 0x14 - ZIP specification version 2.0, required to store Unix file permissions
+								 0);
 
 			String target = da->read_link(f);
 			zipWriteInFileInZip(p_zip, target.utf8().get_data(), target.utf8().size());
@@ -1875,23 +1875,23 @@ void EditorExportPlatformOSX::_zip_folder_recursive(zipFile &p_zip, const String
 			zipfi.internal_fa = 0;
 
 			zipOpenNewFileInZip4(p_zip,
-					p_folder.plus_file(f).utf8().get_data(),
-					&zipfi,
-					nullptr,
-					0,
-					nullptr,
-					0,
-					nullptr,
-					Z_DEFLATED,
-					Z_DEFAULT_COMPRESSION,
-					0,
-					-MAX_WBITS,
-					DEF_MEM_LEVEL,
-					Z_DEFAULT_STRATEGY,
-					nullptr,
-					0,
-					0x0314, // "version made by", 0x03 - Unix, 0x14 - ZIP specification version 2.0, required to store Unix file permissions
-					0);
+								 p_folder.plus_file(f).utf8().get_data(),
+								 &zipfi,
+								 nullptr,
+								 0,
+								 nullptr,
+								 0,
+								 nullptr,
+								 Z_DEFLATED,
+								 Z_DEFAULT_COMPRESSION,
+								 0,
+								 -MAX_WBITS,
+								 DEF_MEM_LEVEL,
+								 Z_DEFAULT_STRATEGY,
+								 nullptr,
+								 0,
+								 0x0314, // "version made by", 0x03 - Unix, 0x14 - ZIP specification version 2.0, required to store Unix file permissions
+								 0);
 
 			FileAccessRef fa = FileAccess::open(dir.plus_file(f), FileAccess::READ);
 			if (!fa) {

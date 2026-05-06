@@ -204,14 +204,14 @@ ResourceFormatPVR::ResourceFormatPVR() {
 #define BLK_X_2BPP 8
 #define BLK_X_4BPP 4
 
-#define WRAP_COORD(Val, Size) ((Val) & ((Size)-1))
+#define WRAP_COORD(Val, Size) ((Val) & ((Size) - 1))
 
 /*
 	Define an expression to either wrap or clamp large or small vals to the
 	legal coordinate range
 */
 #define LIMIT_COORD(Val, Size, p_tiled) \
-	((p_tiled) ? WRAP_COORD((Val), (Size)) : CLAMP((Val), 0, (Size)-1))
+	((p_tiled) ? WRAP_COORD((Val), (Size)) : CLAMP((Val), 0, (Size) - 1))
 
 struct PVRTCBlock {
 	//blocks are 64 bits
@@ -395,17 +395,17 @@ static void get_modulation_value(int x, int y, const int p_2bit, const int p_mod
 			mod_val = rep_vals0[p_modulation[y][x]];
 		} else if (p_modulation_modes[y][x] == 1) {
 			mod_val = (rep_vals0[p_modulation[y - 1][x]] +
-							  rep_vals0[p_modulation[y + 1][x]] +
-							  rep_vals0[p_modulation[y][x - 1]] +
-							  rep_vals0[p_modulation[y][x + 1]] + 2) /
+					   rep_vals0[p_modulation[y + 1][x]] +
+					   rep_vals0[p_modulation[y][x - 1]] +
+					   rep_vals0[p_modulation[y][x + 1]] + 2) /
 					4;
 		} else if (p_modulation_modes[y][x] == 2) {
 			mod_val = (rep_vals0[p_modulation[y][x - 1]] +
-							  rep_vals0[p_modulation[y][x + 1]] + 1) /
+					   rep_vals0[p_modulation[y][x + 1]] + 1) /
 					2;
 		} else {
 			mod_val = (rep_vals0[p_modulation[y - 1][x]] +
-							  rep_vals0[p_modulation[y + 1][x]] + 1) /
+					   rep_vals0[p_modulation[y + 1][x]] + 1) /
 					2;
 		}
 	} else {
@@ -573,8 +573,8 @@ static void decompress_pvrtc(PVRTCBlock *p_comp_img, const int p_2bit, const int
 					p_2bit, x, y,
 					BSig);
 
-			get_modulation_value(x, y, p_2bit, (const int(*)[16])p_modulation, (const int(*)[16])p_modulation_modes,
-					&Mod, &DoPT);
+			get_modulation_value(x, y, p_2bit, (const int (*)[16])p_modulation, (const int (*)[16])p_modulation_modes,
+								 &Mod, &DoPT);
 
 			for (i = 0; i < 4; i++) {
 				r_result[i] = ASig[i] * 8 + Mod * (BSig[i] - ASig[i]);

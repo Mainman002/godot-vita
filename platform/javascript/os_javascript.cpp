@@ -961,7 +961,7 @@ Error OS_JavaScript::initialize(const VideoMode &p_desired, int p_video_driver, 
 	if (gl_initialization_error) {
 		OS::get_singleton()->alert("Your browser does not support any of the supported WebGL versions.\n"
 								   "Please update your browser version.",
-				"Unable to initialize Video driver");
+								   "Unable to initialize Video driver");
 		return ERR_UNAVAILABLE;
 	}
 
@@ -989,10 +989,10 @@ Error OS_JavaScript::initialize(const VideoMode &p_desired, int p_video_driver, 
 	godot_js_display_fullscreen_cb(&OS_JavaScript::fullscreen_change_callback);
 	godot_js_display_window_blur_cb(&window_blur_callback);
 	godot_js_display_notification_cb(&OS_JavaScript::send_notification_callback,
-			MainLoop::NOTIFICATION_WM_MOUSE_ENTER,
-			MainLoop::NOTIFICATION_WM_MOUSE_EXIT,
-			MainLoop::NOTIFICATION_WM_FOCUS_IN,
-			MainLoop::NOTIFICATION_WM_FOCUS_OUT);
+									 MainLoop::NOTIFICATION_WM_MOUSE_ENTER,
+									 MainLoop::NOTIFICATION_WM_MOUSE_EXIT,
+									 MainLoop::NOTIFICATION_WM_FOCUS_IN,
+									 MainLoop::NOTIFICATION_WM_FOCUS_OUT);
 	godot_js_display_vk_cb(&input_text_callback);
 
 	visual_server->init();

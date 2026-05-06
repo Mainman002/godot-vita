@@ -1035,7 +1035,7 @@ void EditorFileSystem::get_changed_sources(List<String> *r_changed) {
 
 void EditorFileSystem::scan_changes() {
 	if (first_scan || // Prevent a premature changes scan from inhibiting the first full scan
-			scanning || scanning_changes || thread.is_started()) {
+		scanning || scanning_changes || thread.is_started()) {
 		scan_changes_pending = true;
 		set_process(true);
 		return;

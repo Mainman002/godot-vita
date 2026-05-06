@@ -67,7 +67,7 @@ String ProjectSettings::localize_path(const String &p_path) const {
 	String path = p_path.simplify_path();
 
 	if (resource_path.empty() || path.begins_with("res://") || path.begins_with("user://") ||
-			(path.is_abs_path() && !path.begins_with(resource_path))) {
+		(path.is_abs_path() && !path.begins_with(resource_path))) {
 		return path.simplify_path();
 	}
 

@@ -145,12 +145,12 @@ static void GLAPIENTRY _gl_debug_print(GLenum source, GLenum type, GLuint id, GL
 #endif // CAN_DEBUG
 
 typedef void (*DEBUGPROCARB)(GLenum source,
-		GLenum type,
-		GLuint id,
-		GLenum severity,
-		GLsizei length,
-		const char *message,
-		const void *userParam);
+							 GLenum type,
+							 GLuint id,
+							 GLenum severity,
+							 GLsizei length,
+							 const char *message,
+							 const void *userParam);
 
 typedef void (*DebugMessageCallbackARB)(DEBUGPROCARB callback, const void *userParam);
 
@@ -304,9 +304,9 @@ void RasterizerGLES2::set_current_render_target(RID p_render_target) {
 		// pending clear request. Do that first.
 		glBindFramebuffer(GL_FRAMEBUFFER, storage->frame.current_rt->fbo);
 		glClearColor(storage->frame.clear_request_color.r,
-				storage->frame.clear_request_color.g,
-				storage->frame.clear_request_color.b,
-				storage->frame.clear_request_color.a);
+					 storage->frame.clear_request_color.g,
+					 storage->frame.clear_request_color.b,
+					 storage->frame.clear_request_color.a);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 

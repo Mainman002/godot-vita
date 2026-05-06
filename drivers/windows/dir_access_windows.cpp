@@ -362,13 +362,13 @@ String DirAccessWindows::get_filesystem_type() const {
 	DWORD dwFileSystemFlags = 0;
 
 	if (::GetVolumeInformationW(unit.c_str(),
-				szVolumeName,
-				sizeof(szVolumeName),
-				&dwSerialNumber,
-				&dwMaxFileNameLength,
-				&dwFileSystemFlags,
-				szFileSystemName,
-				sizeof(szFileSystemName)) == TRUE) {
+								szVolumeName,
+								sizeof(szVolumeName),
+								&dwSerialNumber,
+								&dwMaxFileNameLength,
+								&dwFileSystemFlags,
+								szFileSystemName,
+								sizeof(szFileSystemName)) == TRUE) {
 		return String(szFileSystemName);
 	}
 

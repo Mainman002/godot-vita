@@ -84,7 +84,7 @@ void MultiRect::add_rect(RID p_canvas_item, const Rect2 &p_rect, RID p_texture, 
 
 	if (!is_empty()) {
 		if ((state != s) ||
-				(rects.size() >= MAX_RECTS)) {
+			(rects.size() >= MAX_RECTS)) {
 			flush();
 		} else {
 			new_common_data = false;

@@ -73,7 +73,7 @@ void rcFree(void* ptr);
 /// An implementation of operator new usable for placement new. The default one is part of STL (which we don't use).
 /// rcNewTag is a dummy type used to differentiate our operator from the STL one, in case users import both Recast
 /// and STL.
-struct rcNewTag {};
+struct rcNewTag{};
 inline void* operator new(size_t, const rcNewTag&, void* p) { return p; }
 inline void operator delete(void*, const rcNewTag&, void*) {}
 

@@ -235,8 +235,8 @@ static bool is_joypad(IOHIDDeviceRef p_device_ref) {
 		CFNumberGetValue((CFNumberRef)refCF, kCFNumberSInt32Type, &usage);
 	}
 	if ((usage != kHIDUsage_GD_Joystick &&
-				usage != kHIDUsage_GD_GamePad &&
-				usage != kHIDUsage_GD_MultiAxisController)) {
+		 usage != kHIDUsage_GD_GamePad &&
+		 usage != kHIDUsage_GD_MultiAxisController)) {
 		return false;
 	}
 	return true;
@@ -345,9 +345,9 @@ bool JoypadOSX::configure_joypad(IOHIDDeviceRef p_device_ref, joypad *p_joy) {
 	// Xbox controller hat values start at 1 rather than 0.
 	p_joy->offset_hat = vendor == 0x45e &&
 			(product_id == 0x0b05 ||
-					product_id == 0x02e0 ||
-					product_id == 0x02fd ||
-					product_id == 0x0b13);
+			 product_id == 0x02e0 ||
+			 product_id == 0x02fd ||
+			 product_id == 0x0b13);
 
 	return true;
 }

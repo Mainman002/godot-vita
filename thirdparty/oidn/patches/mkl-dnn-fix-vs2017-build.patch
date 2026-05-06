@@ -37,9 +37,9 @@ index 5177275452..057cc3c4c7 100644
 -        int perm_[MKLDNN_MAX_NDIMS];
 -        int iperm_[MKLDNN_MAX_NDIMS];
 -        dims_t blocks_;
-+        int perm_[MKLDNN_MAX_NDIMS] {};
-+        int iperm_[MKLDNN_MAX_NDIMS] {};
-+        dims_t blocks_ {};
++        int perm_[MKLDNN_MAX_NDIMS]{};
++        int iperm_[MKLDNN_MAX_NDIMS]{};
++        dims_t blocks_{};
 
          dim_t nelems_to_concat(const memory_desc_wrapper &data_d) const {
              const int ndims = data_d.ndims();

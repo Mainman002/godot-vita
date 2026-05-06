@@ -788,7 +788,7 @@ public:
 	wants animations for. If the curve node does not match one of these, std::range_error
 	will be thrown. */
 	AnimationCurveNode(uint64_t id, const ElementPtr element, const std::string &name, const Document &doc,
-			const char *const *target_prop_whitelist = nullptr, size_t whitelist_size = 0);
+					   const char *const *target_prop_whitelist = nullptr, size_t whitelist_size = 0);
 
 	virtual ~AnimationCurveNode();
 
@@ -1234,10 +1234,10 @@ public:
 	std::vector<const Connection *> GetConnectionsByDestinationSequenced(uint64_t dest, const char *classname) const;
 
 	std::vector<const Connection *> GetConnectionsBySourceSequenced(uint64_t source,
-			const char *const *classnames, size_t count) const;
+																	const char *const *classnames, size_t count) const;
 	std::vector<const Connection *> GetConnectionsByDestinationSequenced(uint64_t dest,
-			const char *const *classnames,
-			size_t count) const;
+																		 const char *const *classnames,
+																		 size_t count) const;
 
 	const std::vector<const AnimationStack *> &AnimationStacks() const;
 	const std::vector<uint64_t> &GetAnimationStackIDs() const {
@@ -1263,9 +1263,9 @@ public:
 private:
 	std::vector<const Connection *> GetConnectionsSequenced(uint64_t id, const ConnectionMap &) const;
 	std::vector<const Connection *> GetConnectionsSequenced(uint64_t id, bool is_src,
-			const ConnectionMap &,
-			const char *const *classnames,
-			size_t count) const;
+															const ConnectionMap &,
+															const char *const *classnames,
+															size_t count) const;
 	bool ReadHeader();
 	void ReadObjects();
 	void ReadPropertyTemplates();

@@ -53,6 +53,6 @@ namespace embree
 
     /*! BVH packet intersector. */
     template<int N, int K, int types, bool robust, typename PrimitiveIntersectorK>
-    class BVHNIntersectorKChunk : public BVHNIntersectorKHybrid<N, K, types, robust, PrimitiveIntersectorK, false> {};
+    class BVHNIntersectorKChunk : public BVHNIntersectorKHybrid<N, K, types, robust, PrimitiveIntersectorK, false>{};
   }
 }

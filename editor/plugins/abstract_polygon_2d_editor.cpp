@@ -568,7 +568,7 @@ void AbstractPolygon2DEditor::forward_canvas_draw_over_viewport(Control *p_overl
 			if (is_closed || i < n_points - 1) {
 				Vector2 p2;
 				if (j == edited_point.polygon &&
-						((wip_active && i == n_points - 1) || (((i + 1) % n_points) == edited_point.vertex))) {
+					((wip_active && i == n_points - 1) || (((i + 1) % n_points) == edited_point.vertex))) {
 					p2 = edited_point.pos;
 				} else {
 					p2 = points[(i + 1) % n_points] + offset;
@@ -712,7 +712,7 @@ AbstractPolygon2DEditor::PosVertex AbstractPolygon2DEditor::closest_edge_point(c
 
 		for (int i = 0; i < n_segments; i++) {
 			Vector2 segment[2] = { xform.xform(points[i] + offset),
-				xform.xform(points[(i + 1) % n_points] + offset) };
+								   xform.xform(points[(i + 1) % n_points] + offset) };
 
 			Vector2 cp = Geometry::get_closest_point_to_segment_2d(p_pos, segment);
 

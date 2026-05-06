@@ -284,8 +284,8 @@ class CommandQueueMT {
 
 	struct CommandBase {
 		virtual void call() = 0;
-		virtual void post(){};
-		virtual ~CommandBase(){};
+		virtual void post() {};
+		virtual ~CommandBase() {};
 	};
 
 	struct SyncCommand : public CommandBase {

@@ -64,10 +64,10 @@ public:
 		}
 
 		Point(Vector2 p_pos,
-				real_t p_left = 0,
-				real_t p_right = 0,
-				TangentMode p_left_mode = TANGENT_FREE,
-				TangentMode p_right_mode = TANGENT_FREE) {
+			  real_t p_left = 0,
+			  real_t p_right = 0,
+			  TangentMode p_left_mode = TANGENT_FREE,
+			  TangentMode p_right_mode = TANGENT_FREE) {
 			pos = p_pos;
 			left_tangent = p_left;
 			right_tangent = p_right;
@@ -81,10 +81,10 @@ public:
 	int get_point_count() const { return _points.size(); }
 
 	int add_point(Vector2 p_pos,
-			real_t left_tangent = 0,
-			real_t right_tangent = 0,
-			TangentMode left_mode = TANGENT_FREE,
-			TangentMode right_mode = TANGENT_FREE);
+				  real_t left_tangent = 0,
+				  real_t right_tangent = 0,
+				  TangentMode left_mode = TANGENT_FREE,
+				  TangentMode right_mode = TANGENT_FREE);
 
 	void remove_point(int p_index);
 	void clear_points();

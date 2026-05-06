@@ -129,7 +129,7 @@ public class GLUtils {
 	}
 
 	public static void printConfigs(EGL10 egl, EGLDisplay display,
-			EGLConfig[] configs) {
+									EGLConfig[] configs) {
 		int numConfigs = configs.length;
 		Log.v(TAG, String.format("%d configurations", numConfigs));
 		for (int i = 0; i < numConfigs; i++) {
@@ -139,7 +139,7 @@ public class GLUtils {
 	}
 
 	private static void printConfig(EGL10 egl, EGLDisplay display,
-			EGLConfig config) {
+									EGLConfig config) {
 		int[] value = new int[1];
 		for (int i = 0; i < ATTRIBUTES.length; i++) {
 			int attribute = ATTRIBUTES[i];

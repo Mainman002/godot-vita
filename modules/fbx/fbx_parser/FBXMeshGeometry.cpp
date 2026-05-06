@@ -96,7 +96,7 @@ Geometry::Geometry(uint64_t id, const ElementPtr element, const std::string &nam
 			skin = sk;
 		}
 		const BlendShape *bsp = ProcessSimpleConnection<BlendShape>(*con, false, "BlendShape -> Geometry",
-				element);
+																	element);
 		if (bsp) {
 			blendShapes.push_back(bsp);
 		}

@@ -1483,8 +1483,8 @@ Error Object::connect(const StringName &p_signal, Object *p_to_object, const Str
 			return OK;
 		} else {
 			ERR_FAIL_V_MSG(ERR_INVALID_PARAMETER,
-					vformat("Signal \"%s\" from \"%s\" is already connected to given method \"%s\" in \"%s\".",
-							p_signal, to_string(), p_to_method, p_to_object->to_string()));
+						   vformat("Signal \"%s\" from \"%s\" is already connected to given method \"%s\" in \"%s\".",
+								   p_signal, to_string(), p_to_method, p_to_object->to_string()));
 		}
 	}
 
@@ -1541,8 +1541,8 @@ void Object::_disconnect(const StringName &p_signal, Object *p_to_object, const 
 		bool signal_is_valid = ClassDB::has_signal(get_class_name(), p_signal) ||
 				(!script.is_null() && Ref<Script>(script)->has_script_signal(p_signal));
 		ERR_FAIL_COND_MSG(signal_is_valid,
-				vformat("Attempt to disconnect a nonexistent connection to signal '%s' in %s, with target '%s' in %s.",
-						p_signal, to_string(), p_to_method, p_to_object->to_string()));
+						  vformat("Attempt to disconnect a nonexistent connection to signal '%s' in %s, with target '%s' in %s.",
+								  p_signal, to_string(), p_to_method, p_to_object->to_string()));
 	}
 	ERR_FAIL_COND_MSG(!s, vformat("Disconnecting nonexistent signal '%s' in %s.", p_signal, to_string()));
 

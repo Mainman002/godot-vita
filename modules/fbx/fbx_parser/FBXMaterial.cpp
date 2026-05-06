@@ -196,12 +196,12 @@ Texture::Texture(uint64_t id, const ElementPtr element, const Document &doc, con
 
 	if (ModelUVTranslation) {
 		uvTrans = Vector2(ParseTokenAsFloat(GetRequiredToken(ModelUVTranslation, 0)),
-				ParseTokenAsFloat(GetRequiredToken(ModelUVTranslation, 1)));
+						  ParseTokenAsFloat(GetRequiredToken(ModelUVTranslation, 1)));
 	}
 
 	if (ModelUVScaling) {
 		uvScaling = Vector2(ParseTokenAsFloat(GetRequiredToken(ModelUVScaling, 0)),
-				ParseTokenAsFloat(GetRequiredToken(ModelUVScaling, 1)));
+							ParseTokenAsFloat(GetRequiredToken(ModelUVScaling, 1)));
 	}
 
 	if (Cropping) {

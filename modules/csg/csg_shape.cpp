@@ -258,7 +258,7 @@ void CSGShape::mikktGetTexCoord(const SMikkTSpaceContext *pContext, float fvTexc
 }
 
 void CSGShape::mikktSetTSpaceDefault(const SMikkTSpaceContext *pContext, const float fvTangent[], const float fvBiTangent[], const float fMagS, const float fMagT,
-		const tbool bIsOrientationPreserving, const int iFace, const int iVert) {
+									 const tbool bIsOrientationPreserving, const int iFace, const int iVert) {
 	ShapeUpdateSurface &surface = *((ShapeUpdateSurface *)pContext->m_pUserData);
 
 	int i = iFace * 3 + iVert;

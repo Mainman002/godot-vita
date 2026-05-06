@@ -63,10 +63,10 @@ bool gles3_available = true;
 	self.opaque = YES;
 	self.drawableProperties = [NSDictionary
 			dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:FALSE],
-			kEAGLDrawablePropertyRetainedBacking,
-			kEAGLColorFormatRGBA8,
-			kEAGLDrawablePropertyColorFormat,
-			nil];
+										 kEAGLDrawablePropertyRetainedBacking,
+										 kEAGLColorFormatRGBA8,
+										 kEAGLDrawablePropertyColorFormat,
+										 nil];
 	bool fallback_gl2 = false;
 	// Create a GL ES 3 context based on the gl driver from project settings
 	if (GLOBAL_GET("rendering/quality/driver/driver_name") == "GLES3") {

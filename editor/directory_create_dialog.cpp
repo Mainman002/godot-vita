@@ -52,7 +52,7 @@ String DirectoryCreateDialog::_validate_path(const String &p_path) const {
 	}
 
 	if (p_path.find("\\") != -1 || p_path.find(":") != -1 || p_path.find("*") != -1 ||
-			p_path.find("|") != -1 || p_path.find(">") != -1) {
+		p_path.find("|") != -1 || p_path.find(">") != -1) {
 		return TTR("Folder name contains invalid characters.");
 	}
 

@@ -355,7 +355,7 @@ void EditorExportPlatformAndroid::_check_for_changes_poll_thread(void *ud) {
 								d.description += "Chipset: " + p.get_slice("=", 1).strip_edges() + "\n";
 							} else if (p.begins_with("ro.opengles.version=")) {
 								uint32_t opengl = p.get_slice("=", 1).to_int();
-								d.description += "OpenGL: " + itos(opengl >> 16) + "." + itos((opengl >> 8) & 0xFF) + "." + itos((opengl)&0xFF) + "\n";
+								d.description += "OpenGL: " + itos(opengl >> 16) + "." + itos((opengl >> 8) & 0xFF) + "." + itos((opengl) & 0xFF) + "\n";
 							}
 						}
 
@@ -650,15 +650,15 @@ Vector<PluginConfigAndroid> EditorExportPlatformAndroid::get_enabled_plugins(con
 Error EditorExportPlatformAndroid::store_in_apk(APKExportData *ed, const String &p_path, const Vector<uint8_t> &p_data, int compression_method) {
 	zip_fileinfo zipfi = get_zip_fileinfo();
 	zipOpenNewFileInZip(ed->apk,
-			p_path.utf8().get_data(),
-			&zipfi,
-			nullptr,
-			0,
-			nullptr,
-			0,
-			nullptr,
-			compression_method,
-			Z_DEFAULT_COMPRESSION);
+						p_path.utf8().get_data(),
+						&zipfi,
+						nullptr,
+						0,
+						nullptr,
+						0,
+						nullptr,
+						compression_method,
+						Z_DEFAULT_COMPRESSION);
 
 	zipWriteInFileInZip(ed->apk, p_data.ptr(), p_data.size());
 	zipCloseFileInZip(ed->apk);
@@ -710,7 +710,7 @@ Error EditorExportPlatformAndroid::ignore_apk_file(void *p_userdata, const Strin
 
 Error EditorExportPlatformAndroid::copy_gradle_so(void *p_userdata, const SharedObject &p_so) {
 	ERR_FAIL_COND_V_MSG(!p_so.path.get_file().begins_with("lib"), FAILED,
-			"Android .so file names must start with \"lib\", but got: " + p_so.path);
+						"Android .so file names must start with \"lib\", but got: " + p_so.path);
 	Vector<String> abis = get_abis();
 	CustomExportData *export_data = (CustomExportData *)p_userdata;
 	bool exported = false;
@@ -731,7 +731,7 @@ Error EditorExportPlatformAndroid::copy_gradle_so(void *p_userdata, const Shared
 		}
 	}
 	ERR_FAIL_COND_V_MSG(!exported, FAILED,
-			"Cannot determine ABI for library \"" + p_so.path + "\". One of the supported ABIs must be used as a tag: " + String(" ").join(abis));
+						"Cannot determine ABI for library \"" + p_so.path + "\". One of the supported ABIs must be used as a tag: " + String(" ").join(abis));
 	return OK;
 }
 
@@ -1608,12 +1608,12 @@ void EditorExportPlatformAndroid::store_image(const String &export_path, const V
 }
 
 void EditorExportPlatformAndroid::_copy_icons_to_gradle_project(const Ref<EditorExportPreset> &p_preset,
-		const String &processed_splash_config_xml,
-		const Ref<Image> &splash_image,
-		const Ref<Image> &splash_bg_color_image,
-		const Ref<Image> &main_image,
-		const Ref<Image> &foreground,
-		const Ref<Image> &background) {
+																const String &processed_splash_config_xml,
+																const Ref<Image> &splash_image,
+																const Ref<Image> &splash_bg_color_image,
+																const Ref<Image> &main_image,
+																const Ref<Image> &foreground,
+																const Ref<Image> &background) {
 	// Store the splash configuration
 	if (!processed_splash_config_xml.empty()) {
 		print_verbose("Storing processed splash configuration: " + String("\n") + processed_splash_config_xml);
@@ -1651,7 +1651,7 @@ void EditorExportPlatformAndroid::_copy_icons_to_gradle_project(const Ref<Editor
 			print_verbose("Processing launcher adaptive icon foreground for dimension " + itos(launcher_adaptive_icon_foregrounds[i].dimensions) + " into " + launcher_adaptive_icon_foregrounds[i].export_path);
 			Vector<uint8_t> data;
 			_process_launcher_icons(launcher_adaptive_icon_foregrounds[i].export_path, foreground,
-					launcher_adaptive_icon_foregrounds[i].dimensions, data);
+									launcher_adaptive_icon_foregrounds[i].dimensions, data);
 			store_image(launcher_adaptive_icon_foregrounds[i], data);
 		}
 
@@ -1659,7 +1659,7 @@ void EditorExportPlatformAndroid::_copy_icons_to_gradle_project(const Ref<Editor
 			print_verbose("Processing launcher adaptive icon background for dimension " + itos(launcher_adaptive_icon_backgrounds[i].dimensions) + " into " + launcher_adaptive_icon_backgrounds[i].export_path);
 			Vector<uint8_t> data;
 			_process_launcher_icons(launcher_adaptive_icon_backgrounds[i].export_path, background,
-					launcher_adaptive_icon_backgrounds[i].dimensions, data);
+									launcher_adaptive_icon_backgrounds[i].dimensions, data);
 			store_image(launcher_adaptive_icon_backgrounds[i], data);
 		}
 	}
@@ -3312,15 +3312,15 @@ Error EditorExportPlatformAndroid::export_project_helper(const Ref<EditorExportP
 			zip_fileinfo zipfi = get_zip_fileinfo();
 
 			zipOpenNewFileInZip(unaligned_apk,
-					file.utf8().get_data(),
-					&zipfi,
-					nullptr,
-					0,
-					nullptr,
-					0,
-					nullptr,
-					uncompressed ? 0 : Z_DEFLATED,
-					Z_DEFAULT_COMPRESSION);
+								file.utf8().get_data(),
+								&zipfi,
+								nullptr,
+								0,
+								nullptr,
+								0,
+								nullptr,
+								uncompressed ? 0 : Z_DEFLATED,
+								Z_DEFAULT_COMPRESSION);
 
 			zipWriteInFileInZip(unaligned_apk, data.ptr(), data.size());
 			zipCloseFileInZip(unaligned_apk);
@@ -3368,15 +3368,15 @@ Error EditorExportPlatformAndroid::export_project_helper(const Ref<EditorExportP
 
 	zip_fileinfo zipfi = get_zip_fileinfo();
 	zipOpenNewFileInZip(unaligned_apk,
-			"assets/_cl_",
-			&zipfi,
-			nullptr,
-			0,
-			nullptr,
-			0,
-			nullptr,
-			0, // No compress (little size gain and potentially slower startup)
-			Z_DEFAULT_COMPRESSION);
+						"assets/_cl_",
+						&zipfi,
+						nullptr,
+						0,
+						nullptr,
+						0,
+						nullptr,
+						0, // No compress (little size gain and potentially slower startup)
+						Z_DEFAULT_COMPRESSION);
 	zipWriteInFileInZip(unaligned_apk, command_line_flags.ptr(), command_line_flags.size());
 	zipCloseFileInZip(unaligned_apk);
 
@@ -3446,16 +3446,16 @@ Error EditorExportPlatformAndroid::export_project_helper(const Ref<EditorExportP
 
 		zip_fileinfo fileinfo = get_zip_fileinfo();
 		zipOpenNewFileInZip2(final_apk,
-				file.utf8().get_data(),
-				&fileinfo,
-				extra,
-				info.size_file_extra + padding,
-				nullptr,
-				0,
-				nullptr,
-				method,
-				level,
-				1); // raw write
+							 file.utf8().get_data(),
+							 &fileinfo,
+							 extra,
+							 info.size_file_extra + padding,
+							 nullptr,
+							 0,
+							 nullptr,
+							 method,
+							 level,
+							 1); // raw write
 		zipWriteInFileInZip(final_apk, data.ptr(), data.size());
 		zipCloseFileInZipRaw(final_apk, info.uncompressed_size, info.crc);
 

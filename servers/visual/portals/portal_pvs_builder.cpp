@@ -127,9 +127,9 @@ bool PVSBuilder::load_pvs(String p_filename) {
 	int32_t pvs_size;
 
 	if (!((file->get_8() == 'p') &&
-				(file->get_8() == 'v') &&
-				(file->get_8() == 's') &&
-				(file->get_8() == ' '))) {
+		  (file->get_8() == 'v') &&
+		  (file->get_8() == 's') &&
+		  (file->get_8() == ' '))) {
 		goto failed;
 	}
 

@@ -88,7 +88,7 @@ String Occluder::get_configuration_warning() const {
 		Vector3 scale = tr.basis.get_scale();
 
 		if ((!Math::is_equal_approx(scale.x, scale.y, 0.01f)) ||
-				(!Math::is_equal_approx(scale.x, scale.z, 0.01f))) {
+			(!Math::is_equal_approx(scale.x, scale.z, 0.01f))) {
 			if (!warning.empty()) {
 				warning += "\n\n";
 			}

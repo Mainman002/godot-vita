@@ -47,7 +47,7 @@ bool VideoPlayer::mix(AudioFrame *p_buffer, int p_frames) {
 	// If it cannot, wait "wait_resampler_phase_limit" times.
 	// This mechanism contributes to smoother pause/unpause operation.
 	if (p_frames <= resampler.get_num_of_ready_frames() ||
-			wait_resampler_limit <= wait_resampler) {
+		wait_resampler_limit <= wait_resampler) {
 		wait_resampler = 0;
 		return resampler.mix(p_buffer, p_frames);
 	}

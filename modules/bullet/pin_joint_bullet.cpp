@@ -47,9 +47,9 @@ PinJointBullet::PinJointBullet(RigidBodyBullet *p_body_a, const Vector3 &p_pos_a
 		G_TO_B(p_pos_a * p_body_a->get_body_scale(), btPivotA);
 		G_TO_B(p_pos_b * p_body_b->get_body_scale(), btPivotB);
 		p2pConstraint = bulletnew(btPoint2PointConstraint(*p_body_a->get_bt_rigid_body(),
-				*p_body_b->get_bt_rigid_body(),
-				btPivotA,
-				btPivotB));
+														  *p_body_b->get_bt_rigid_body(),
+														  btPivotA,
+														  btPivotB));
 	} else {
 		btVector3 btPivotA;
 		G_TO_B(p_pos_a, btPivotA);

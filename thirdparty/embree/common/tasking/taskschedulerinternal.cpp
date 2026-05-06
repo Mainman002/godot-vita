@@ -325,7 +325,7 @@ namespace embree
   {
     Thread* thread = TaskScheduler::thread();
     if (thread == nullptr) return true;
-    while (thread->tasks.execute_local_internal(*thread,thread->task)) {};
+    while (thread->tasks.execute_local_internal(*thread,thread->task)){};
     return thread->scheduler->cancellingException == nullptr;
   }
 

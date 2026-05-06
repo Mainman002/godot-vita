@@ -259,7 +259,7 @@ const GodotWebXR = {
 		const oninputevent = GodotRuntime.get_func(p_on_input_event);
 		const onsimpleevent = GodotRuntime.get_func(p_on_simple_event);
 
-		const session_init = {};
+		const session_init ={};
 		if (required_features.length > 0) {
 			session_init['requiredFeatures'] = required_features;
 		}

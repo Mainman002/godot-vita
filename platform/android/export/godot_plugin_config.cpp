@@ -101,7 +101,7 @@ bool PluginConfigAndroid::is_plugin_config_valid(PluginConfigAndroid plugin_conf
 	if (valid_binary_type) {
 		valid_binary = !plugin_config.binary.empty() &&
 				(plugin_config.binary_type == PluginConfigAndroid::BINARY_TYPE_REMOTE ||
-						FileAccess::exists(plugin_config.binary));
+				 FileAccess::exists(plugin_config.binary));
 	}
 
 	bool valid_local_dependencies = true;

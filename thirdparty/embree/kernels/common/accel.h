@@ -24,7 +24,7 @@ namespace embree
       : bounds(empty), type(type) {}
 
     /*! notifies the acceleration structure about the deletion of some geometry */
-    virtual void deleteGeometry(size_t geomID) {};
+    virtual void deleteGeometry(size_t geomID){};
    
     /*! clears the acceleration structure data */
     virtual void clear() = 0;

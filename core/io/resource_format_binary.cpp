@@ -842,7 +842,7 @@ void ResourceInteractiveLoaderBinary::open(FileAccess *p_f) {
 	if (ver_format > FORMAT_VERSION || ver_major > VERSION_MAJOR) {
 		f->close();
 		ERR_FAIL_MSG(vformat("File '%s' can't be loaded, as it uses a format version (%d) or engine version (%d.%d) which are not supported by your engine version (%s).",
-				local_path, ver_format, ver_major, ver_minor, VERSION_BRANCH));
+							 local_path, ver_format, ver_major, ver_minor, VERSION_BRANCH));
 	}
 
 	type = get_unicode_string();
@@ -1117,8 +1117,8 @@ Error ResourceFormatLoaderBinary::rename_dependencies(const String &p_path, cons
 		memdelete(f);
 		memdelete(fw);
 		ERR_FAIL_V_MSG(ERR_FILE_UNRECOGNIZED,
-				vformat("File '%s' can't be loaded, as it uses a format version (%d) or engine version (%d.%d) which are not supported by your engine version (%s).",
-						local_path, ver_format, ver_major, ver_minor, VERSION_BRANCH));
+					   vformat("File '%s' can't be loaded, as it uses a format version (%d) or engine version (%d.%d) which are not supported by your engine version (%s).",
+							   local_path, ver_format, ver_major, ver_minor, VERSION_BRANCH));
 	}
 
 	// Since we're not actually converting the file contents, leave the version

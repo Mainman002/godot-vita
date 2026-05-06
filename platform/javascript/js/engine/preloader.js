@@ -59,7 +59,7 @@ const Preloader = /** @constructor */ function () { // eslint-disable-line no-un
 	}
 
 	const DOWNLOAD_ATTEMPTS_MAX = 4;
-	const loadingFiles = {};
+	const loadingFiles ={};
 	const lastProgress = { loaded: 0, total: 0 };
 	let progressFunc = null;
 

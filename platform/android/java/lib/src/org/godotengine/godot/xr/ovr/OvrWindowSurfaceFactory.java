@@ -49,7 +49,7 @@ public class OvrWindowSurfaceFactory implements GLSurfaceView.EGLWindowSurfaceFa
 
 	@Override
 	public EGLSurface createWindowSurface(EGL10 egl, EGLDisplay display, EGLConfig config,
-			Object nativeWindow) {
+										  Object nativeWindow) {
 		return egl.eglCreatePbufferSurface(display, config, SURFACE_ATTRIBS);
 	}
 

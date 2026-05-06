@@ -1445,16 +1445,16 @@ void EditorAudioMeterNotches::_draw_audio_notches() {
 	for (int i = 0; i < notches.size(); i++) {
 		AudioNotch n = notches[i];
 		draw_line(Vector2(0, (1.0f - n.relative_position) * (get_size().y - btm_padding - top_padding) + top_padding),
-				Vector2(line_length * EDSCALE, (1.0f - n.relative_position) * (get_size().y - btm_padding - top_padding) + top_padding),
-				notch_color,
-				Math::round(EDSCALE));
+				  Vector2(line_length * EDSCALE, (1.0f - n.relative_position) * (get_size().y - btm_padding - top_padding) + top_padding),
+				  notch_color,
+				  Math::round(EDSCALE));
 
 		if (n.render_db_value) {
 			draw_string(font,
-					Vector2((line_length + label_space) * EDSCALE,
-							(1.0f - n.relative_position) * (get_size().y - btm_padding - top_padding) + (font_height / 4) + top_padding),
-					String::num(Math::abs(n.db_value)) + "dB",
-					notch_color);
+						Vector2((line_length + label_space) * EDSCALE,
+								(1.0f - n.relative_position) * (get_size().y - btm_padding - top_padding) + (font_height / 4) + top_padding),
+						String::num(Math::abs(n.db_value)) + "dB",
+						notch_color);
 		}
 	}
 }

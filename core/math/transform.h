@@ -103,7 +103,7 @@ public:
 	_FORCE_INLINE_ Transform inverse_xform(const Transform &t) const {
 		Vector3 v = t.origin - origin;
 		return Transform(basis.transpose_xform(t.basis),
-				basis.xform(v));
+						 basis.xform(v));
 	}
 
 	void set(real_t xx, real_t xy, real_t xz, real_t yx, real_t yy, real_t yz, real_t zx, real_t zy, real_t zz, real_t tx, real_t ty, real_t tz) {

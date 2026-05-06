@@ -57,7 +57,7 @@ namespace embree
     namespace __internal_two_level_builder__ {
 
       template<int N, typename Mesh, typename Primitive>
-      struct MortonBuilder {};
+      struct MortonBuilder{};
       template<>
       struct MortonBuilder<4,TriangleMesh,Triangle4> {
         MortonBuilder () {}
@@ -120,7 +120,7 @@ namespace embree
       };
 
       template<int N, typename Mesh, typename Primitive>
-      struct SAHBuilder {};
+      struct SAHBuilder{};
       template<>
       struct SAHBuilder<4,TriangleMesh,Triangle4> {
         SAHBuilder () {}
@@ -183,7 +183,7 @@ namespace embree
       };
 
       template<int N, typename Mesh, typename Primitive>
-      struct RefitBuilder {};
+      struct RefitBuilder{};
       template<>
       struct RefitBuilder<4,TriangleMesh,Triangle4> {
         RefitBuilder () {}

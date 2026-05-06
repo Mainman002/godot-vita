@@ -149,7 +149,7 @@ void Physics2DServerSW::_shape_col_cbk(const Vector2 &p_point_A, const Vector2 &
 	if (cbk->valid_dir != Vector2()) {
 		if (cbk->valid_depth < 10e20) {
 			if (rel_length2 > cbk->valid_depth * cbk->valid_depth ||
-					(rel_length2 > CMP_EPSILON && cbk->valid_dir.dot(rel_dir.normalized()) < CMP_EPSILON)) {
+				(rel_length2 > CMP_EPSILON && cbk->valid_dir.dot(rel_dir.normalized()) < CMP_EPSILON)) {
 				cbk->invalid_by_dir++;
 				return;
 			}
@@ -1347,6 +1347,6 @@ Physics2DServerSW::Physics2DServerSW() {
 	flushing_queries = false;
 };
 
-Physics2DServerSW::~Physics2DServerSW(){
+Physics2DServerSW::~Physics2DServerSW() {
 
 };

@@ -47,10 +47,10 @@ real_t Triangulate::get_area(const Vector<Vector2> &contour) {
  * defined by A, B, C.
  */
 bool Triangulate::is_inside_triangle(real_t Ax, real_t Ay,
-		real_t Bx, real_t By,
-		real_t Cx, real_t Cy,
-		real_t Px, real_t Py,
-		bool include_edges) {
+									 real_t Bx, real_t By,
+									 real_t Cx, real_t Cy,
+									 real_t Px, real_t Py,
+									 bool include_edges) {
 	real_t ax, ay, bx, by, cx, cy, apx, apy, bpx, bpy, cpx, cpy;
 	real_t cCROSSap, bCROSScp, aCROSSbp;
 

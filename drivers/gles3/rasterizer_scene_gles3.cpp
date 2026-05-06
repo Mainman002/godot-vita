@@ -170,7 +170,7 @@ void RasterizerSceneGLES3::shadow_atlas_set_size(RID p_atlas, int p_size) {
 		glGenTextures(1, &shadow_atlas->depth);
 		glBindTexture(GL_TEXTURE_2D, shadow_atlas->depth);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadow_atlas->size, shadow_atlas->size, 0,
-				GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, nullptr);
+					 GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, nullptr);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -178,7 +178,7 @@ void RasterizerSceneGLES3::shadow_atlas_set_size(RID p_atlas, int p_size) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-				GL_TEXTURE_2D, shadow_atlas->depth, 0);
+							   GL_TEXTURE_2D, shadow_atlas->depth, 0);
 
 		glViewport(0, 0, shadow_atlas->size, shadow_atlas->size);
 		glClearDepth(0.0f);
@@ -681,7 +681,7 @@ bool RasterizerSceneGLES3::reflection_probe_instance_begin_render(RID p_instance
 		}
 
 		if (rpi->render_step < 0 && reflection_atlas->reflections[i].last_frame < storage->frame.count &&
-				(best_used == -1 || reflection_atlas->reflections[i].last_frame < best_used_frame)) {
+			(best_used == -1 || reflection_atlas->reflections[i].last_frame < best_used_frame)) {
 			best_used = i;
 			best_used_frame = reflection_atlas->reflections[i].last_frame;
 		}

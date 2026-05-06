@@ -108,10 +108,10 @@ void TokenizeError(const std::string &message, unsigned int line, unsigned int c
 // process a potential data token up to 'cur', adding it to 'output_tokens'.
 // ------------------------------------------------------------------------------------------------
 void ProcessDataToken(TokenList &output_tokens, const char *&start, const char *&end,
-		unsigned int line,
-		unsigned int column,
-		TokenType type = TokenType_DATA,
-		bool must_have_token = false) {
+					  unsigned int line,
+					  unsigned int column,
+					  TokenType type = TokenType_DATA,
+					  bool must_have_token = false) {
 	if (start && end) {
 		// sanity check:
 		// tokens should have no whitespace outside quoted text and [start,end] should
