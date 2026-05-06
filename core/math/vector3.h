@@ -411,10 +411,10 @@ void Vector3::normalize() {
 	if (lengthsq == 0) {
 		x = y = z = 0;
 	} else {
-		real_t length = Math::sqrt(lengthsq);
-		x /= length;
-		y /= length;
-		z /= length;
+		real_t inv_length = 1.0f / Math::sqrt(lengthsq);
+		x *= inv_length;
+		y *= inv_length;
+		z *= inv_length;
 	}
 }
 
@@ -442,7 +442,7 @@ Vector3 Vector3::slide(const Vector3 &p_normal) const {
 #ifdef MATH_CHECKS
 	ERR_FAIL_COND_V_MSG(!p_normal.is_normalized(), Vector3(), "The normal Vector3 must be normalized.");
 #endif
-	return *this - p_normal * this->dot(p_normal);
+	return *this - 2 * p_normal * this->dot(p_normal);
 }
 
 Vector3 Vector3::bounce(const Vector3 &p_normal) const {
