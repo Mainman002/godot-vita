@@ -117,7 +117,7 @@ private:
 	float physics_process_time;
 	float idle_process_time;
 	bool batch_loading_active = false;
-    Set<StringName> dirty_groups;
+	Set<StringName> dirty_groups;
 	bool accept_quit;
 	bool quit_on_go_back;
 
@@ -315,7 +315,7 @@ public:
 	void set_group(const StringName &p_group, const String &p_name, const Variant &p_value);
 
 	void set_batch_loading(bool p_enabled);
-    bool is_batch_loading() const;
+	bool is_batch_loading() const;
 
 	void flush_transform_notifications();
 

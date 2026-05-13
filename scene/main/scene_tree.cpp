@@ -153,11 +153,11 @@ void SceneTree::node_renamed(Node *p_node) {
 
 SceneTree::Group *SceneTree::add_to_group(const StringName &p_group, Node *p_node) {
 	if (batch_loading_active) {
-        // Instead of a full map re-hash, just append to a "dirty" list
-        // to be processed once when batch_loading is turned off.
-        dirty_groups.insert(p_group); 
-    }
-	
+		// Instead of a full map re-hash, just append to a "dirty" list
+		// to be processed once when batch_loading is turned off.
+		dirty_groups.insert(p_group);
+	}
+
 	Map<StringName, Group>::Element *E = group_map.find(p_group);
 	if (!E) {
 		E = group_map.insert(p_group, Group());
@@ -1141,9 +1141,9 @@ void SceneTree::_call_input_pause(const StringName &p_group, const StringName &p
 
 void SceneTree::_notify_group_pause(const StringName &p_group, int p_notification) {
 	if (batch_loading_active && p_notification == Node::NOTIFICATION_PROCESS) {
-        // Skip processing updates for this group during heavy load
-        return;
-    }
+		// Skip processing updates for this group during heavy load
+		return;
+	}
 
 	Map<StringName, Group>::Element *E = group_map.find(p_group);
 	if (!E) {
@@ -1306,29 +1306,29 @@ void SceneTree::get_nodes_in_group(const StringName &p_group, List<Node *> *p_li
 }
 
 void SceneTree::_flush_delete_queue() {
-    _THREAD_SAFE_METHOD_
-    uint64_t start_time = OS::get_singleton()->get_ticks_msec();
+	_THREAD_SAFE_METHOD_
+	uint64_t start_time = OS::get_singleton()->get_ticks_msec();
 
-    struct ObjectIDComparator {
-        _FORCE_INLINE_ bool operator()(const DeleteQueueElement &p, const DeleteQueueElement &q) const {
-            return (p.child_list_id < q.child_list_id); 
-        }
-    };
-    delete_queue.sort_custom<ObjectIDComparator>();
+	struct ObjectIDComparator {
+		_FORCE_INLINE_ bool operator()(const DeleteQueueElement &p, const DeleteQueueElement &q) const {
+			return (p.child_list_id < q.child_list_id);
+		}
+	};
+	delete_queue.sort_custom<ObjectIDComparator>();
 
-    while (delete_queue.size() > 0) {
-        int last_idx = delete_queue.size() - 1;
-        ObjectID id = delete_queue[last_idx].id;
-        Object *obj = ObjectDB::get_instance(id);
-        if (obj) {
-            memdelete(obj);
-        }
-        delete_queue.remove(last_idx); // Standard LocalVector removal
+	while (delete_queue.size() > 0) {
+		int last_idx = delete_queue.size() - 1;
+		ObjectID id = delete_queue[last_idx].id;
+		Object *obj = ObjectDB::get_instance(id);
+		if (obj) {
+			memdelete(obj);
+		}
+		delete_queue.remove(last_idx); // Standard LocalVector removal
 
-        if (OS::get_singleton()->get_ticks_msec() - start_time > 2) {
-            break; 
-        }
-    }
+		if (OS::get_singleton()->get_ticks_msec() - start_time > 2) {
+			break;
+		}
+	}
 }
 
 void SceneTree::set_batch_loading(bool p_enabled) {
@@ -1338,7 +1338,7 @@ void SceneTree::set_batch_loading(bool p_enabled) {
 	batch_loading_active = p_enabled;
 
 	if (!batch_loading_active) {
-		// When turning OFF, we flush all the groups that were 
+		// When turning OFF, we flush all the groups that were
 		// silenced during the load so they finally update.
 		for (Set<StringName>::Element *E = dirty_groups.front(); E; E = E->next()) {
 			make_group_changed(E->get());
