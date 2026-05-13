@@ -304,7 +304,7 @@ function write_base_object(f, obj) {
 
 function generate(f, docs) {
 	const globs = [];
-	const SYMBOLS ={};
+	const SYMBOLS = {};
 	docs.filter((d) => !d.ignore && d.kind !== 'package').forEach((d) => {
 		SYMBOLS[d.name] = d;
 		if (d.memberof) {

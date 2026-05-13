@@ -37,7 +37,7 @@ const GodotAudio = {
 		interval: 0,
 
 		init: function (mix_rate, latency, onstatechange, onlatencyupdate) {
-			const opts ={};
+			const opts = {};
 			// If mix_rate is 0, let the browser choose.
 			if (mix_rate) {
 				opts['sampleRate'] = mix_rate;
