@@ -152,6 +152,12 @@ void SceneTree::node_renamed(Node *p_node) {
 }
 
 SceneTree::Group *SceneTree::add_to_group(const StringName &p_group, Node *p_node) {
+	if (batch_loading_active) {
+        // Instead of a full map re-hash, just append to a "dirty" list
+        // to be processed once when batch_loading is turned off.
+        dirty_groups.insert(p_group); 
+    }
+	
 	Map<StringName, Group>::Element *E = group_map.find(p_group);
 	if (!E) {
 		E = group_map.insert(p_group, Group());
@@ -1134,6 +1140,11 @@ void SceneTree::_call_input_pause(const StringName &p_group, const StringName &p
 }
 
 void SceneTree::_notify_group_pause(const StringName &p_group, int p_notification) {
+	if (batch_loading_active && p_notification == Node::NOTIFICATION_PROCESS) {
+        // Skip processing updates for this group during heavy load
+        return;
+    }
+
 	Map<StringName, Group>::Element *E = group_map.find(p_group);
 	if (!E) {
 		return;
@@ -1295,29 +1306,49 @@ void SceneTree::get_nodes_in_group(const StringName &p_group, List<Node *> *p_li
 }
 
 void SceneTree::_flush_delete_queue() {
-	_THREAD_SAFE_METHOD_
+    _THREAD_SAFE_METHOD_
+    uint64_t start_time = OS::get_singleton()->get_ticks_msec();
 
-	// Sorting the delete queue by child count (in respect to their parent)
-	// is an optimization because nodes benefit immensely from being deleted
-	// in reverse order to their child count. This is partly due to ordered_remove(), and partly
-	// due to notifications being sent to children that are moved, further in the child list.
-	struct ObjectIDComparator {
-		_FORCE_INLINE_ bool operator()(const DeleteQueueElement &p, const DeleteQueueElement &q) const {
-			return (p.child_list_id > q.child_list_id);
-		}
-	};
+    struct ObjectIDComparator {
+        _FORCE_INLINE_ bool operator()(const DeleteQueueElement &p, const DeleteQueueElement &q) const {
+            return (p.child_list_id < q.child_list_id); 
+        }
+    };
+    delete_queue.sort_custom<ObjectIDComparator>();
 
-	delete_queue.sort_custom<ObjectIDComparator>();
+    while (delete_queue.size() > 0) {
+        int last_idx = delete_queue.size() - 1;
+        ObjectID id = delete_queue[last_idx].id;
+        Object *obj = ObjectDB::get_instance(id);
+        if (obj) {
+            memdelete(obj);
+        }
+        delete_queue.remove(last_idx); // Standard LocalVector removal
 
-	for (uint32_t e = 0; e < delete_queue.size(); e++) {
-		ObjectID id = delete_queue[e].id;
-		Object *obj = ObjectDB::get_instance(id);
-		if (obj) {
-			memdelete(obj);
-		}
+        if (OS::get_singleton()->get_ticks_msec() - start_time > 2) {
+            break; 
+        }
+    }
+}
+
+void SceneTree::set_batch_loading(bool p_enabled) {
+	if (batch_loading_active == p_enabled) {
+		return;
 	}
+	batch_loading_active = p_enabled;
 
-	delete_queue.clear();
+	if (!batch_loading_active) {
+		// When turning OFF, we flush all the groups that were 
+		// silenced during the load so they finally update.
+		for (Set<StringName>::Element *E = dirty_groups.front(); E; E = E->next()) {
+			make_group_changed(E->get());
+		}
+		dirty_groups.clear();
+	}
+}
+
+bool SceneTree::is_batch_loading() const {
+	return batch_loading_active;
 }
 
 void SceneTree::queue_delete(Object *p_object) {
@@ -2114,6 +2145,9 @@ void SceneTree::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("is_physics_interpolation_enabled"), &SceneTree::is_physics_interpolation_enabled);
 
 	ClassDB::bind_method(D_METHOD("queue_delete", "obj"), &SceneTree::queue_delete);
+
+	ClassDB::bind_method(D_METHOD("set_batch_loading", "enabled"), &SceneTree::set_batch_loading);
+	ClassDB::bind_method(D_METHOD("is_batch_loading"), &SceneTree::is_batch_loading);
 
 	MethodInfo mi;
 	mi.name = "call_group_flags";
