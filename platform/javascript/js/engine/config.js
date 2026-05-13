@@ -9,7 +9,7 @@
  *
  * @typedef {Object} EngineConfig
  */
-const EngineConfig ={}; // eslint-disable-line no-unused-vars
+const EngineConfig = {}; // eslint-disable-line no-unused-vars
 
 /**
  * @struct
@@ -231,7 +231,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 	 * @param {EngineConfig} opts
 	 */
 	Config.prototype.update = function (opts) {
-		const config = opts ||{};
+		const config = opts || {};
 		// NOTE: We must explicitly pass the default, accessing it via
 		// the key will fail due to closure compiler renames.
 		function parse(key, def) {
@@ -289,7 +289,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 					});
 				}
 				r = null;
-				return{};
+				return {};
 			},
 			'locateFile': function (path) {
 				if (path.endsWith('.worker.js')) {

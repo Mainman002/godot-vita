@@ -165,7 +165,7 @@ const Engine = (function () {
 						return Promise.reject(new Error('The engine must be initialized before it can be started'));
 					}
 
-					let config ={};
+					let config = {};
 					try {
 						config = me.config.getGodotConfig(function () {
 							me.rtenv = null;
