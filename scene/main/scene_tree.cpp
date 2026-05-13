@@ -617,7 +617,7 @@ bool SceneTree::iteration(float p_time) {
 	call_group_flags(GROUP_CALL_REALTIME, "_viewports", "update_worlds");
 	root_lock--;
 
-	_flush_delete_queue();
+	_flush_delete_queue(false);
 	_call_idle_callbacks();
 
 	return _quit;
@@ -684,7 +684,7 @@ bool SceneTree::idle(float p_time) {
 
 	root_lock--;
 
-	_flush_delete_queue();
+	_flush_delete_queue(false);
 
 	//go through timers
 
@@ -790,7 +790,7 @@ void SceneTree::process_tweens(float p_delta, bool p_physics) {
 }
 
 void SceneTree::finish() {
-	_flush_delete_queue();
+	_flush_delete_queue(true);
 
 	_flush_ugc();
 
@@ -807,7 +807,7 @@ void SceneTree::finish() {
 
 	// In case deletion of some objects was queued when destructing the `root`.
 	// E.g. if `queue_free()` was called for some node outside the tree when handling NOTIFICATION_PREDELETE for some node in the tree.
-	_flush_delete_queue();
+	_flush_delete_queue(true);
 
 	// Cleanup timers.
 	for (List<Ref<SceneTreeTimer>>::Element *E = timers.front(); E; E = E->next()) {
@@ -1305,10 +1305,16 @@ void SceneTree::get_nodes_in_group(const StringName &p_group, List<Node *> *p_li
 	}
 }
 
-void SceneTree::_flush_delete_queue() {
+void SceneTree::_flush_delete_queue(bool p_force) {
 	_THREAD_SAFE_METHOD_
+
+	if (delete_queue.size() == 0) {
+		return;
+	}
+
 	uint64_t start_time = OS::get_singleton()->get_ticks_msec();
 
+	// Sort only once per frame to keep deletion order predictable
 	struct ObjectIDComparator {
 		_FORCE_INLINE_ bool operator()(const DeleteQueueElement &p, const DeleteQueueElement &q) const {
 			return (p.child_list_id < q.child_list_id);
@@ -1316,16 +1322,20 @@ void SceneTree::_flush_delete_queue() {
 	};
 	delete_queue.sort_custom<ObjectIDComparator>();
 
+	// Use a standard while loop without recursion
 	while (delete_queue.size() > 0) {
 		int last_idx = delete_queue.size() - 1;
 		ObjectID id = delete_queue[last_idx].id;
+
 		Object *obj = ObjectDB::get_instance(id);
 		if (obj) {
 			memdelete(obj);
 		}
-		delete_queue.remove(last_idx); // Standard LocalVector removal
+		delete_queue.remove(last_idx);
 
-		if (OS::get_singleton()->get_ticks_msec() - start_time > 2) {
+		// On the Vita, we slice time.
+		// During shutdown (p_force), we MUST empty the whole thing.
+		if (!p_force && (OS::get_singleton()->get_ticks_msec() - start_time > 2)) {
 			break;
 		}
 	}

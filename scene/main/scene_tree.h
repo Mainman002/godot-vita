@@ -231,7 +231,7 @@ private:
 	Variant _call_group_flags(const Variant **p_args, int p_argcount, Variant::CallError &r_error);
 	Variant _call_group(const Variant **p_args, int p_argcount, Variant::CallError &r_error);
 
-	void _flush_delete_queue();
+	void _flush_delete_queue(bool p_force);
 	//optimization
 	friend class CanvasItem;
 	friend class Spatial;
