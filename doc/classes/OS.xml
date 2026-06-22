@@ -120,17 +120,17 @@
 				[b]Note:[/b] To execute a Unix shell built-in command, specify shell executable name in [code]path[/code], [code]-c[/code] as the first argument, and the desired command as the second argument.
 			</description>
 		</method>
-		<method name="flush_memory_assets">
-			<return type="void" />
-			<description>
-				Flushes the translation remaps and unreferenced resource caches to free up main memory.
-			</description>
-		</method>
 		<method name="find_scancode_from_string" qualifiers="const">
 			<return type="int" />
 			<argument index="0" name="string" type="String" />
 			<description>
 				Returns the scancode of the given string (e.g. "Escape").
+			</description>
+		</method>
+		<method name="flush_memory_assets">
+			<return type="void" />
+			<description>
+				Flushes the translation remaps and unreferenced resource caches to free up main memory.
 			</description>
 		</method>
 		<method name="get_audio_driver_count" qualifiers="const">
@@ -164,13 +164,13 @@
 				[codeblock]
 				var arguments = {}
 				for argument in OS.get_cmdline_args():
-				    if argument.find("=") &gt; -1:
-				        var key_value = argument.split("=")
-				        arguments[key_value[0].lstrip("--")] = key_value[1]
-				    else:
-				        # Options without an argument will be present in the dictionary,
-				        # with the value set to an empty string.
-				        arguments[argument.lstrip("--")] = ""
+					if argument.find("=") &gt; -1:
+						var key_value = argument.split("=")
+						arguments[key_value[0].lstrip("--")] = key_value[1]
+					else:
+						# Options without an argument will be present in the dictionary,
+						# with the value set to an empty string.
+						arguments[argument.lstrip("--")] = ""
 				[/codeblock]
 			</description>
 		</method>
@@ -441,7 +441,7 @@
 				[codeblock]
 				var refresh_rate = OS.get_screen_refresh_rate()
 				if refresh_rate &lt; 0:
-				    refresh_rate = 60.0
+					refresh_rate = 60.0
 				[/codeblock]
 			</description>
 		</method>
