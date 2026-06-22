@@ -1306,6 +1306,8 @@ void _OS::set_current_tablet_driver(const String &p_driver) {
 	OS::get_singleton()->set_current_tablet_driver(p_driver);
 }
 
+void _OS::flush_memory_assets() {}
+
 _OS *_OS::singleton = nullptr;
 
 void _OS::_bind_methods() {
@@ -1549,6 +1551,8 @@ void _OS::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_tablet_driver_name", "idx"), &_OS::get_tablet_driver_name);
 	ClassDB::bind_method(D_METHOD("get_current_tablet_driver"), &_OS::get_current_tablet_driver);
 	ClassDB::bind_method(D_METHOD("set_current_tablet_driver", "name"), &_OS::set_current_tablet_driver);
+
+	ClassDB::bind_method(D_METHOD("flush_memory_assets"), &_OS::flush_memory_assets);
 
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "tablet_driver"), "set_current_tablet_driver", "get_current_tablet_driver");
 

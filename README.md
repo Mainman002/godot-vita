@@ -4,7 +4,7 @@
 * [VPK Fixer](https://github.com/Mainman002/VPK-Fixer)
 
 ## Stable Build
-* [0.1.5](https://github.com/Mainman002/godot-vita/releases/tag/0.1.5)
+* [0.1.6](https://github.com/Mainman002/godot-vita/releases/tag/0.1.6)
 
 ---
 

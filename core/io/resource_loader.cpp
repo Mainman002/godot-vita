@@ -29,6 +29,7 @@
 /**************************************************************************/
 
 #include "resource_loader.h"
+#include "core/resource.h"
 
 #include "core/io/resource_importer.h"
 #include "core/os/file_access.h"
@@ -993,3 +994,22 @@ HashMap<String, Vector<String>> ResourceLoader::translation_remaps;
 HashMap<String, String> ResourceLoader::path_remaps;
 
 ResourceLoaderImport ResourceLoader::import = nullptr;
+
+void ResourceLoader::clear_cache() {
+	List<RES> to_clear;
+
+	// Query the ResourceCache for all currently tracked resources
+	ResourceCache::get_cached_resources(&to_clear);
+
+	for (List<RES>::Element *E = to_clear.front(); E; E = E->next()) {
+		RES r = E->get();
+
+		// In Godot 3.x, Reference objects use reference_get_count()
+		// If the count is 1, only the ResourceCache itself holds a pointer to it.
+		if (r.is_valid() && r->reference_get_count() <= 1) {
+			// Erasing its registered path instantly evicts it from the cache
+			// and safely frees up its memory allocations.
+			r->set_path("");
+		}
+	}
+}

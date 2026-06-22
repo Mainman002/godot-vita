@@ -201,6 +201,8 @@ public:
 	static void add_custom_loaders();
 	static void remove_custom_loaders();
 
+	static void clear_cache();
+
 	static void finalize();
 };
 
