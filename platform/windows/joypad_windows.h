@@ -76,11 +76,12 @@ private:
 		bool last_buttons[MAX_JOY_BUTTONS];
 		DWORD last_pad;
 
-		LPDIRECTINPUTDEVICE8 di_joy;
+		LPDIRECTINPUTDEVICE8 di_joy = nullptr;
 		List<LONG> joy_axis;
 		GUID guid;
 
 		dinput_gamepad() {
+			di_joy = nullptr;
 			id = -1;
 			last_pad = -1;
 			attached = false;
