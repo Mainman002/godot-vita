@@ -87,9 +87,7 @@ protected:
 	void _set_logger(CompositeLogger *p_logger);
 
 public:
-	void flush_memory_assets() {
-		OS::get_singleton()->flush_memory_assets();
-	}
+	void flush_memory_assets();
 
 	typedef void (*ImeCallback)(void *p_inp, String p_text, Point2 p_selection);
 	typedef bool (*HasServerFeatureCallback)(const String &p_feature);
