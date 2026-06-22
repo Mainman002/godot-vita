@@ -104,9 +104,7 @@ protected:
 	static _OS *singleton;
 
 public:
-	void flush_memory_assets() {
-		OS::get_singleton()->flush_memory_assets();
-	}
+	void flush_memory_assets();
 
 	enum VideoDriver {
 		VIDEO_DRIVER_GLES3,
