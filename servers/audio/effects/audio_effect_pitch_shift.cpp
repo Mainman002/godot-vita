@@ -161,8 +161,8 @@ void SMBPitchShift::PitchShift(float pitchShift, long numSampsToProcess, long ff
 
 			/* ***************** PROCESSING ******************* */
 			/* this does the actual pitch shifting */
-			memset(gSynMagn, 0, fftFrameSize*sizeof(float));
-			memset(gSynFreq, 0, fftFrameSize*sizeof(float));
+			memset(gSynMagn, 0, (size_t)fftFrameSize * sizeof(float));
+			memset(gSynFreq, 0, (size_t)fftFrameSize * sizeof(float));
 			for (k = 0; k <= fftFrameSize2; k++) {
 				index = k*pitchShift;
 				if (index <= fftFrameSize2) {
