@@ -120,6 +120,12 @@
 				[b]Note:[/b] To execute a Unix shell built-in command, specify shell executable name in [code]path[/code], [code]-c[/code] as the first argument, and the desired command as the second argument.
 			</description>
 		</method>
+		<method name="flush_memory_assets">
+			<return type="void" />
+			<description>
+				Flushes the translation remaps and unreferenced resource caches to free up main memory.
+			</description>
+		</method>
 		<method name="find_scancode_from_string" qualifiers="const">
 			<return type="int" />
 			<argument index="0" name="string" type="String" />

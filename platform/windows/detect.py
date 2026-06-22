@@ -492,3 +492,8 @@ def configure(env):
 
     else:  # MinGW
         configure_mingw(env)
+	
+    if "gcc" in env["CC"] or env["use_mingw"] or os.name == "posix":
+        env.Append(CCFLAGS=["-Wno-error=maybe-uninitialized"])
+        env.Append(CCFLAGS=["-Wno-stringop-overflow"])
+        env.Append(CCFLAGS=["-Wno-error=shadow"])
