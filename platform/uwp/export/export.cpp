@@ -1478,7 +1478,7 @@ public:
 
 				// Delete uwp_temp_path folder recursively
 				DirAccess *da = DirAccess::create(DirAccess::ACCESS_FILESYSTEM);
-				Error err = da->change_dir(uwp_temp_path);
+				err = da->change_dir(uwp_temp_path);
 				if (err == OK) {
 					err = da->erase_contents_recursive();
 					if (err != OK) {
