@@ -472,6 +472,11 @@ def configure(env):
 		env["ENV"] = os.environ  # this makes build less repeatable, but simplifies some things
 		env["ENV"]["TMP"] = os.environ["TMP"]
 
+	if "gcc" in env["CC"] or env["use_mingw"] or os.name == "posix":
+		env.Append(CCFLAGS=["-Wno-error=maybe-uninitialized"])
+		env.Append(CCFLAGS=["-Wno-stringop-overflow"])
+		env.Append(CCFLAGS=["-Wno-error=shadow"])
+
 	# First figure out which compiler, version, and target arch we're using
 	if os.getenv("VCINSTALLDIR") and not env["use_mingw"]:
 		# Manual setup of MSVC
@@ -492,8 +497,3 @@ def configure(env):
 
 	else:  # MinGW
 		configure_mingw(env)
-
-	if "gcc" in env["CC"] or env["use_mingw"] or os.name == "posix":
-		env.Append(CCFLAGS=["-Wno-error=maybe-uninitialized"])
-		env.Append(CCFLAGS=["-Wno-stringop-overflow"])
-		env.Append(CCFLAGS=["-Wno-error=shadow"])
